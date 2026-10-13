@@ -2,10 +2,10 @@ name = "ottothon-editor-auth"
 main = "index.js"
 compatibility_date = "2024-11-01"
 
-"vars": {
-    "POLICY_AUD": "d7362d8f61bae9470a4521f2e6ec9221aadd92fa277e5a720851c7e692b8a3f8",
-    "SITE_ORIGIN": "https://ottothon-syr.github.io",
-    "TEAM_DOMAIN": "ottothon.cloudflareaccess.com"
-  },
+[vars]
+# Fill these three in (see docs/ADMIN-SETUP.md). None of them are secret.
+TEAM_DOMAIN = "ottothon.cloudflareaccess.com"     # your Zero Trust team domain (with or without https://)
+POLICY_AUD  = "d7362d8f61bae9470a4521f2e6ec9221aadd92fa277e5a720851c7e692b8a3f8"       # shown on the Access application's Overview tab
+SITE_ORIGIN = "https://ottothon-syr.github.io"          # the website's origin(s): scheme and host only, no path. Several allowed, separated by commas
 
 # The GitHub bot token is a SECRET. Set it with:  npx wrangler secret put GITHUB_BOT_TOKEN

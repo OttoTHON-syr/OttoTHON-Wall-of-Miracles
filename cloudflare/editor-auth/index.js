@@ -52,18 +52,22 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.pathname !== '/auth') return page('<p>OttoTHON editor sign-in. Open the editor from the website’s /admin page.</p>');
-    if (!env.GITHUB_BOT_TOKEN || !env.TEAM_DOMAIN || !env.POLICY_AUD || !env.SITE_ORIGIN) return page('<p>This sign-in helper is not fully set up yet.</p>', 500);
+    const missing = ['GITHUB_BOT_TOKEN', 'TEAM_DOMAIN', 'POLICY_AUD', 'SITE_ORIGIN'].filter(k => !String(env[k] || '').trim());
+    if (missing.length) return page(`<p>This sign-in helper is not fully set up yet. Missing setting${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}. Add ${missing.length > 1 ? 'them' : 'it'} in the Worker's Settings, Variables and Secrets, then deploy again.</p>`, 500);
     let email;
     try { email = await verifyAccessJwt(request.headers.get('cf-access-jwt-assertion'), env); }
     catch (e) { return page('<p>Sign-in was refused. Close this window and try again, or ask an admin to add your Google email.</p>', 403); }
 
     // The editor (Decap CMS) opened this window. It expects this exact handshake:
     //   1. we say "authorizing:github"   2. it echoes that back   3. we send the token.
+    const origins = String(env.SITE_ORIGIN).split(',').map(o => o.trim().replace(/\/+$/, '')).filter(Boolean);
+    const wanted = url.searchParams.get('site_id');
+    const site = origins.find(o => { try { return new URL(o).hostname === wanted; } catch (e) { return false; } }) || origins[0];
     const msg = 'authorization:github:success:' + JSON.stringify({token: env.GITHUB_BOT_TOKEN, provider: 'github'});
     return page(`<!doctype html><meta charset="utf-8"><title>Signing in…</title><p>Signing in${email ? ' as ' + email.replace(/[<>&"]/g, '') : ''}…</p>
 <script>
 (function () {
-  var site = ${json(env.SITE_ORIGIN)}, msg = ${json(msg)};
+  var site = ${json(site)}, msg = ${json(msg)};
   window.addEventListener('message', function (e) {
     if (e.origin !== site || e.data !== 'authorizing:github') return;
     window.opener.postMessage(msg, site);

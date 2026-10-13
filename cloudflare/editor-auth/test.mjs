@@ -42,9 +42,18 @@ for (const [name, t] of Object.entries(bad)) {
 // TEAM_DOMAIN pasted with https:// and a trailing slash still works
 r = await worker.fetch(new Request('https://helper.example/auth', {headers: {'cf-access-jwt-assertion': await jwt()}}), {...env, TEAM_DOMAIN: 'https://team.cloudflareaccess.com/'});
 assert.equal(r.status, 200);
+// several allowed sites: picks the one matching site_id, and never an origin that is not in the list
+r = await worker.fetch(new Request('https://helper.example/auth?site_id=ottothon-syr.github.io', {headers: {'cf-access-jwt-assertion': await jwt()}}), {...env, SITE_ORIGIN: 'https://dalawton.github.io, https://ottothon-syr.github.io/'});
+html = await r.text(); assert.equal(r.status, 200); assert.ok(html.includes('var site = "https://ottothon-syr.github.io"'));
+r = await worker.fetch(new Request('https://helper.example/auth?site_id=evil.example', {headers: {'cf-access-jwt-assertion': await jwt()}}), {...env, SITE_ORIGIN: 'https://dalawton.github.io'});
+html = await r.text(); assert.ok(html.includes('var site = "https://dalawton.github.io"') && !html.includes('evil.example'));
 // misconfigured -> refuses
 r = await worker.fetch(new Request('https://helper.example/auth', {headers: {'cf-access-jwt-assertion': await jwt()}}), {...env, GITHUB_BOT_TOKEN: ''});
 assert.equal(r.status, 500);
+assert.ok((await r.text()).includes('Missing setting: GITHUB_BOT_TOKEN'));
+r = await worker.fetch(new Request('https://helper.example/auth'), {...env, POLICY_AUD: '', SITE_ORIGIN: undefined});
+assert.equal(r.status, 500); html = await r.text();
+assert.ok(html.includes('POLICY_AUD') && html.includes('SITE_ORIGIN') && !html.includes('ghp_SECRETBOTTOKEN'));
 // other paths show no token
 r = await call('/', await jwt()); assert.ok(!(await r.text()).includes('ghp_'));
 console.log('All sign-in helper tests passed.');
