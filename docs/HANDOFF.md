@@ -7,7 +7,7 @@ The editor lives at the same address plus **/admin/**.
 
 ## The weekly routine
 
-1. Open the editor and sign in with GitHub.
+1. Open the editor (the site address plus `/admin/`) and sign in with your Google account. The button says "Login with GitHub"; ignore that, it opens Google.
 2. **Why Wednesdays:** add this week's post (see below).
 3. **Events:** OttoTHON events from the campus calendar appear on their own every day. Add anything that is not on the campus calendar. Old events move to "Where we've been" on their own.
 4. Look at the open drafts. Publish what's ready, or ask someone to review it.
@@ -41,6 +41,8 @@ If anything looks wrong, don't publish. Delete the draft, or ask another admin.
 
 **Change any wording.** *Words, links and appearance*. Every sentence on every page is in there, grouped by page.
 
+**Add or remove an editor.** In Cloudflare Zero Trust, Access, Applications, edit the Allow policy and add or remove their Google email (see [ADMIN-SETUP.md](ADMIN-SETUP.md)).
+
 **Update the E-Board.** *E-Board*, then add, edit, or drag people into the order you want.
 
 ## The final test
@@ -58,14 +60,15 @@ If they can, the site is ready to hand off.
 - [ ] The GitHub repository belongs to an OttoTHON or university **organization**, not a personal account. (Repository, Settings, scroll to *Transfer*.)
 - [ ] At least **two** current members are organization owners.
 - [ ] Settings, Pages, Source is set to **GitHub Actions**.
-- [ ] The editor sign-in is set up and **two people have signed in successfully** ([ADMIN-SETUP.md](ADMIN-SETUP.md)). Write down who owns the sign-in helper account (see that guide).
+- [ ] The editor sign-in is set up and **two people have signed in successfully** ([ADMIN-SETUP.md](ADMIN-SETUP.md)). Write down who owns the bot GitHub account, the Cloudflare account, and the Google Cloud project.
+- [ ] The list of allowed editor emails in Cloudflare Access is current.
 - [ ] The Donate and Register links are filled in.
 - [ ] Every E-Board member has an intro line.
 - [ ] Someone other than you has run the site for a few weeks.
 - [ ] The three-task test above has been passed.
 - [ ] This list of accounts is saved where the next E-Board can find it: GitHub organization, sign-in helper account, any custom domain.
 
-**Cost:** nothing. GitHub Pages is free. The sign-in helper normally fits free tiers.
+**Cost:** nothing. GitHub Pages is free, and the sign-in helper and Cloudflare Access normally fit free tiers (check current limits).
 
 ## If the editor is down
 

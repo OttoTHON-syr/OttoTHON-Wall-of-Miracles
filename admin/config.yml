@@ -1,11 +1,11 @@
 # Decap CMS configuration. Docs: https://decapcms.org/docs/configuration-options/
-# Setup steps for sign-in are in docs/ADMIN-SETUP.md.
+# Setup steps for sign-in (editors use Google) are in docs/ADMIN-SETUP.md.
 
 backend:
   name: github
   repo: dalawton/OttoTHON-Wall-of-Miracles   # change if the repository moves (for example to an organization)
   branch: main
-  base_url: https://YOUR-OAUTH-PROXY.example  # TODO: see docs/ADMIN-SETUP.md. Sign-in does not work until this is set.
+  base_url: https://ottothon-editor-auth.daniellelawton8.workers.dev  # TODO: the address of cloudflare/editor-auth once deployed (docs/ADMIN-SETUP.md). No trailing slash.
 
 # Every change becomes a draft first, so someone can review before it goes live.
 publish_mode: editorial_workflow

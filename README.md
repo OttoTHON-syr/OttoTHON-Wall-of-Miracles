@@ -17,6 +17,7 @@ assets/img/           Logos
 assets/uploads/       Photos uploaded through the editor
 content/              ALL the words, stories, people and events, as JSON files
 admin/                The editor (Decap CMS). config.yml defines every form
+cloudflare/editor-auth/   Small sign-in helper that lets Google-signed-in editors use the editor (tested by test.mjs)
 scripts/validate-content.mjs   Checks content before each deploy
 scripts/sync-events.mjs        Copies OttoTHON events from the campus calendar feed (runs daily)
 .github/workflows/static.yml   Deploys to GitHub Pages
@@ -67,7 +68,7 @@ To try the editor locally without signing in, also run `npx decap-server` in a s
 
 Push to `main`. The workflow in `.github/workflows/static.yml` checks the content and publishes the site. One-time setting: **Settings > Pages > Build and deployment > Source: GitHub Actions**.
 
-The editor's sign-in needs a one-time setup. See [docs/ADMIN-SETUP.md](docs/ADMIN-SETUP.md). Until then, content can still be edited directly on GitHub (see [docs/HANDOFF.md](docs/HANDOFF.md)).
+The editor's sign-in (editors use a Google account, no GitHub needed) needs a one-time setup. See [docs/ADMIN-SETUP.md](docs/ADMIN-SETUP.md). Until then, content can still be edited directly on GitHub (see [docs/HANDOFF.md](docs/HANDOFF.md)).
 
 ## Privacy
 
