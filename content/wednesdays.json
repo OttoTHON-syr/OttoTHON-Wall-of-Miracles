@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "title": "Why I dance",
+      "author": "An E-Board member",
+      "date": "2026-10-07",
+      "body": "Replace this sample with a real post. Each week, one E-Board member shares a sentence or two about why they keep showing up.\n\nThis is a sample post. Write the real one from the Why Wednesdays tab.",
+      "published": false
+    },
+    {
+      "title": "Why I show up when it is hard",
+      "author": "An E-Board member",
+      "date": "2026-09-30",
+      "body": "This is a sample post. A real one might talk about the weeks when the to-do list wins and what brings the motivation back.",
+      "published": false
+    },
+    {
+      "title": "Why Wednesdays",
+      "author": "An E-Board member",
+      "date": "2026-09-23",
+      "body": "This is a sample post. Wednesdays are the middle of the week, which is a good time for a reminder of why we are all here.",
+      "published": false
+    }
+  ]
+}

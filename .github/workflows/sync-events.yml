@@ -1,0 +1,46 @@
+# Once a day, copies OttoTHON's events from the campus calendar feed into content/events-feed.json
+# and redeploys the site if anything changed. You can also run it any time:
+# Actions tab > "Sync OttoTHON events" > Run workflow.
+name: Sync OttoTHON events
+
+on:
+  schedule:
+    - cron: '17 9 * * *'   # 9:17 UTC, about 5am in Syracuse
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to save the synced file
+  actions: write    # to start the deploy (pushes made by this workflow do not start it on their own)
+
+concurrency:
+  group: sync-events
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node (no packages are installed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch events from the campus feed
+        run: node scripts/sync-events.mjs
+      - name: Check content
+        run: node scripts/validate-content.mjs
+      - name: Save and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(git status --porcelain content/events-feed.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add content/events-feed.json
+            git commit -m "Sync OttoTHON events from the campus feed"
+            git push
+            gh workflow run static.yml --ref main
+          else
+            echo "No changes to save."
+          fi

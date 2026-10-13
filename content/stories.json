@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "title": "A dance floor full of friends",
+      "category": "Community",
+      "date": "2026-10-07",
+      "summary": "Student teams filled the floor from the first hour to the last.",
+      "story": "Teams from across campus took turns holding the floor, trading dance moves and passing along the energy. By the final hour, nobody was sitting down and nobody was counting.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    },
+    {
+      "title": "The hallway of window art",
+      "category": "Hospital moments",
+      "date": "2026-09-16",
+      "summary": "Kids and volunteers decorated the windows together.",
+      "story": "On a quiet afternoon, volunteers brought paint markers and a pile of stencils. By the end of the visit, the whole row of windows was covered in daisies, rockets, and one very large dinosaur.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    },
+    {
+      "title": "One family’s first finale",
+      "category": "Family",
+      "date": "2026-08-26",
+      "summary": "A first visit to the finale turned into a family tradition.",
+      "story": "They arrived early, found seats near the front, and learned the whole morale dance in a single afternoon. By the end they were teaching it to the people sitting next to them.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    },
+    {
+      "title": "Greek life shows up",
+      "category": "Community",
+      "date": "2026-08-05",
+      "summary": "Chapters traded rivalries for one shared dance floor.",
+      "story": "Chapters that usually compete for banners spent the evening cheering for each other’s dance teams instead. The loudest cheer of the night was for a team that had never danced before.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    },
+    {
+      "title": "Care team conga line",
+      "category": "Hospital moments",
+      "date": "2026-07-15",
+      "summary": "Nurses, doctors, and dancers formed a conga line.",
+      "story": "It started with one song and one nurse who refused to sit out. Within a minute the line stretched around the corner, led by a very serious pediatrician with excellent footwork.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    },
+    {
+      "title": "Letters from the family room",
+      "category": "Family",
+      "date": "2026-06-24",
+      "summary": "Families wrote notes for the dancers on their feet.",
+      "story": "Cards and drawings arrived in the family room all week and were taped to the walls of the dance floor. Dancers read them during the quiet hours, and several of them still keep their favorite one.\n\nThis is a sample story. Replace it with a family-approved paragraph about a real moment.",
+      "photo": "",
+      "approved": false,
+      "published": false
+    }
+  ]
+}

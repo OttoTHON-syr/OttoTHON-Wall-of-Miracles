@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "title": "Register a Team",
+      "desc": "Rally your friends, club, or Greek chapter and register as a fundraising team. Every dollar you raise goes straight to Upstate Golisano.",
+      "label": "Register",
+      "link": "",
+      "published": true
+    },
+    {
+      "title": "Join a Committee",
+      "desc": "General body members work year-round on fundraising, morale, dancer relations, and more. No experience required, just heart.",
+      "label": "Apply",
+      "link": "",
+      "published": true
+    },
+    {
+      "title": "Donate Directly",
+      "desc": "Can’t dance? You can still support a team or make a direct gift to Upstate Golisano through our donation page.",
+      "label": "Donate",
+      "link": "",
+      "published": true
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "question": "Do I need a team to register?",
+      "answer": "",
+      "published": false
+    },
+    {
+      "question": "Is there a registration fee?",
+      "answer": "",
+      "published": false
+    },
+    {
+      "question": "Where does the money go?",
+      "answer": "100% of funds raised go directly to Upstate Golisano Children’s Hospital.",
+      "published": true
+    }
+  ]
+}

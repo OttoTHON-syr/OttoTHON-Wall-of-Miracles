@@ -1,0 +1,598 @@
+# Decap CMS configuration. Docs: https://decapcms.org/docs/configuration-options/
+# Setup steps for sign-in are in docs/ADMIN-SETUP.md.
+
+backend:
+  name: github
+  repo: dalawton/OttoTHON-Wall-of-Miracles   # change if the repository moves (for example to an organization)
+  branch: main
+  base_url: https://YOUR-OAUTH-PROXY.example  # TODO: see docs/ADMIN-SETUP.md. Sign-in does not work until this is set.
+
+# Every change becomes a draft first, so someone can review before it goes live.
+publish_mode: editorial_workflow
+
+# Run "npx decap-server" next to "python3 -m http.server" to edit locally without signing in.
+local_backend: true
+
+media_folder: assets/uploads
+public_folder: assets/uploads
+
+site_url: https://dalawton.github.io/OttoTHON-Wall-of-Miracles
+display_url: https://dalawton.github.io/OttoTHON-Wall-of-Miracles
+locale: en
+
+collections:
+  - name: kids
+    label: "Miracle kids"
+    description: "The kids on the Wall of Miracles wheel. Drag to reorder: the order here is the order on the wheel. Only enter a child once the family has approved, because this repository is public."
+    files:
+      - name: kids
+        label: "Miracle kids"
+        file: content/kids.json
+        fields:
+          - label: "Miracle kids"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - label: "Name"
+                name: "name"
+                widget: "string"
+                hint: "First name and last initial only, as the family approved."
+              - label: "With OttoTHON since"
+                name: "since"
+                widget: "string"
+                hint: "A year, for example 2022."
+                required: false
+              - label: "One-line intro"
+                name: "tagline"
+                widget: "string"
+                required: false
+              - label: "Story"
+                name: "story"
+                widget: "text"
+                hint: "Use the family-approved text. Leave out medical details and last names."
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                hint: "Use only photos the family approved."
+                required: false
+              - label: "Family consent and photo approval confirmed in writing"
+                name: "approved"
+                widget: "boolean"
+                hint: "This must be ticked or the entry stays hidden, even if “Show on the site” is on."
+                default: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: stories
+    label: "Success stories"
+    description: "Moments shared on the Wall of Miracles. Only enter a story once the family has approved."
+    files:
+      - name: stories
+        label: "Success stories"
+        file: content/stories.json
+        fields:
+          - label: "Success stories"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["Hospital moments", "Family", "Community"]
+                default: "Community"
+              - label: "Date of the moment"
+                name: "date"
+                widget: "datetime"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: "Short caption"
+                name: "summary"
+                widget: "string"
+                hint: "Shows on the card before someone opens the story."
+                required: false
+              - label: "Story"
+                name: "story"
+                widget: "text"
+                hint: "Use the family-approved text. Leave out medical details and last names."
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                hint: "Use only photos the family approved."
+                required: false
+              - label: "Family consent and photo approval confirmed in writing"
+                name: "approved"
+                widget: "boolean"
+                hint: "This must be ticked or the entry stays hidden, even if “Show on the site” is on."
+                default: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: wednesdays
+    label: "Why Wednesdays"
+    description: "Weekly posts from E-Board members. A future date schedules the post: it appears on that day."
+    files:
+      - name: wednesdays
+        label: "Why Wednesdays"
+        file: content/wednesdays.json
+        fields:
+          - label: "Why Wednesday posts"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Written by"
+                name: "author"
+                widget: "string"
+                hint: "Type the name exactly as it appears in Meet the team, so their photo shows."
+              - label: "Wednesday it goes live"
+                name: "date"
+                widget: "datetime"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: "Post"
+                name: "body"
+                widget: "text"
+                hint: "Leave a blank line between paragraphs."
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: board
+    label: "E-Board (Meet the team)"
+    description: "Drag to reorder."
+    files:
+      - name: board
+        label: "E-Board (Meet the team)"
+        file: content/board.json
+        fields:
+          - label: "E-Board members"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.role}})"
+            fields:
+              - label: "Name"
+                name: "name"
+                widget: "string"
+              - label: "Role"
+                name: "role"
+                widget: "string"
+              - label: "One-line intro"
+                name: "bio"
+                widget: "string"
+                hint: "Optional. Shows under their role."
+                required: false
+              - label: "Donate link"
+                name: "link"
+                widget: "string"
+                hint: "Optional. Paste the full web address (https://…). Adds a “Donate to …” button."
+                required: false
+              - label: "Photo"
+                name: "photo"
+                widget: "image"
+                hint: "Square photos crop best."
+                required: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: true
+  - name: events
+    label: "Events"
+    description: "Events you add by hand. OttoTHON events from the campus calendar are copied in automatically every day (you do not need to add those). To hide one of those, add it here with the same title and date and turn Show on the site off. Events move from Mark your calendar to Where we’ve been on their own after their date."
+    files:
+      - name: events
+        label: "Events"
+        file: content/events.json
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Event name"
+                name: "title"
+                widget: "string"
+              - label: "Date"
+                name: "date"
+                widget: "datetime"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: "Location and time"
+                name: "place"
+                widget: "string"
+                required: false
+              - label: "Description"
+                name: "desc"
+                widget: "text"
+                hint: "For a past event, say what happened."
+                required: false
+              - label: "Details link"
+                name: "link"
+                widget: "string"
+                hint: "Optional. Full web address (https://…)."
+                required: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: ways
+    label: "Ways to help"
+    description: "The cards at the top of Get involved. A button stays hidden until it has a link."
+    files:
+      - name: ways
+        label: "Ways to help"
+        file: content/ways.json
+        fields:
+          - label: "Ways to help"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Description"
+                name: "desc"
+                widget: "text"
+                required: false
+              - label: "Button label"
+                name: "label"
+                widget: "string"
+                hint: "For example Register, Apply, or Donate."
+                required: false
+              - label: "Button link"
+                name: "link"
+                widget: "string"
+                hint: "Full web address (https://…)."
+                required: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: true
+  - name: faq
+    label: "FAQ"
+    description: "A question stays hidden until it has an answer and “Show on the site” is on."
+    files:
+      - name: faq
+        label: "FAQ"
+        file: content/faq.json
+        fields:
+          - label: "Questions"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.question}}"
+            fields:
+              - label: "Question"
+                name: "question"
+                widget: "string"
+              - label: "Answer"
+                name: "answer"
+                widget: "text"
+                required: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: settings
+    label: "Words, links and appearance"
+    description: "Every sentence on the site that is not a story, profile, post, or event; the donate and register links; and the color theme."
+    files:
+      - name: settings
+        label: "Words, links and appearance"
+        file: content/settings.json
+        fields:
+          - label: "Links and contact"
+            name: "links"
+            widget: "object"
+            fields:
+              - label: "Donate link"
+                name: "donateUrl"
+                widget: "string"
+                hint: "Full web address (https://…). The Donate buttons stay hidden until this is filled in."
+                required: false
+              - label: "Register link (teams and marathon day)"
+                name: "registerUrl"
+                widget: "string"
+                hint: "Full web address (https://…)."
+                required: false
+              - label: "Contact email"
+                name: "email"
+                widget: "string"
+          - label: "Home page photos"
+            name: "photos"
+            widget: "object"
+            fields:
+              - label: "Home page photo (marathon day)"
+                name: "heroPhoto"
+                widget: "image"
+                hint: "Use only photos you have permission to share."
+                required: false
+              - label: "Wall of Miracles banner photo"
+                name: "wallPhoto"
+                widget: "image"
+                hint: "If empty, the site uses a Miracle Kid photo when one has been published."
+                required: false
+          - label: "Home page"
+            name: "home"
+            widget: "object"
+            fields:
+              - label: "Title"
+                name: "homeTitle"
+                widget: "string"
+              - label: "Subtitle"
+                name: "homeKicker"
+                widget: "string"
+              - label: "Intro"
+                name: "homeIntro"
+                widget: "text"
+              - label: "Photo caption"
+                name: "homeCaption"
+                widget: "string"
+              - label: "Mission headline"
+                name: "missionTitle"
+                widget: "string"
+              - label: "Mission text"
+                name: "missionBody"
+                widget: "text"
+              - label: "Total reveal note"
+                name: "revealNote"
+                widget: "text"
+                required: false
+              - label: "Wall of Miracles banner: quote"
+                name: "wallQuote"
+                widget: "string"
+              - label: "Wall of Miracles banner: title"
+                name: "wallTitle"
+                widget: "string"
+              - label: "Wall of Miracles banner: text"
+                name: "wallBody"
+                widget: "text"
+              - label: "Upcoming events title"
+                name: "upcomingTitle"
+                widget: "string"
+              - label: "Upcoming events intro"
+                name: "upcomingIntro"
+                widget: "text"
+          - label: "Home page numbers"
+            name: "stats"
+            widget: "list"
+            hint: "A number left blank is hidden. Do not add this year’s dollar total until reveal day."
+            summary: "{{fields.n}} {{fields.l}}"
+            fields:
+              - label: "Number"
+                name: "n"
+                widget: "string"
+                required: false
+              - label: "Label"
+                name: "l"
+                widget: "string"
+          - label: "Wall of Miracles page"
+            name: "wall"
+            widget: "object"
+            fields:
+              - label: "Page title"
+                name: "heroTitle"
+                widget: "string"
+              - label: "Page subtitle"
+                name: "heroSub"
+                widget: "text"
+              - label: "Success stories intro"
+                name: "storiesIntro"
+                widget: "text"
+              - label: "Why Wednesdays intro"
+                name: "wedIntro"
+                widget: "text"
+              - label: "“Why they do it” list"
+                name: "whyList"
+                widget: "text"
+                hint: "One per line."
+              - label: "Impact title"
+                name: "impactTitle"
+                widget: "string"
+              - label: "Impact intro"
+                name: "impactIntro"
+                widget: "text"
+          - label: "Wall of Miracles impact numbers"
+            name: "impact"
+            widget: "list"
+            hint: "A number left blank is hidden."
+            summary: "{{fields.n}} {{fields.l}}"
+            fields:
+              - label: "Number"
+                name: "n"
+                widget: "string"
+                required: false
+              - label: "Label"
+                name: "l"
+                widget: "string"
+          - label: "Meet the team page"
+            name: "team"
+            widget: "object"
+            fields:
+              - label: "Intro"
+                name: "boardIntro"
+                widget: "text"
+          - label: "Events page"
+            name: "events"
+            widget: "object"
+            fields:
+              - label: "Intro"
+                name: "eventsIntro"
+                widget: "text"
+              - label: "Main event name"
+                name: "mainTitle"
+                widget: "string"
+              - label: "Main event place"
+                name: "mainPlace"
+                widget: "string"
+              - label: "Main event description"
+                name: "mainDesc"
+                widget: "text"
+          - label: "Get involved page"
+            name: "involve"
+            widget: "object"
+            fields:
+              - label: "Intro"
+                name: "involveIntro"
+                widget: "text"
+              - label: "Marathon sign-up title"
+                name: "danceTitle"
+                widget: "string"
+              - label: "Marathon sign-up description"
+                name: "danceDesc"
+                widget: "text"
+              - label: "What’s included"
+                name: "included"
+                widget: "text"
+                hint: "One per line."
+          - label: "About page"
+            name: "about"
+            widget: "object"
+            fields:
+              - label: "Intro"
+                name: "aboutIntro"
+                widget: "string"
+              - label: "Our story"
+                name: "aboutBody"
+                widget: "text"
+              - label: "Who can participate: title"
+                name: "whoTitle"
+                widget: "string"
+              - label: "Who can participate: text"
+                name: "whoBody"
+                widget: "text"
+              - label: "Miracle Network: title"
+                name: "cmnTitle"
+                widget: "string"
+              - label: "Miracle Network: text"
+                name: "cmnBody"
+                widget: "text"
+              - label: "Partner: title"
+                name: "partnerTitle"
+                widget: "string"
+              - label: "Partner: text"
+                name: "partnerBody"
+                widget: "text"
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - label: "Tagline"
+                name: "ctaLine"
+                widget: "string"
+              - label: "About text"
+                name: "about"
+                widget: "text"
+              - label: "Small print"
+                name: "footer"
+                widget: "text"
+          - label: "Menu labels and section titles"
+            name: "nav"
+            widget: "object"
+            fields:
+              - label: "Home"
+                name: "home"
+                widget: "string"
+              - label: "Events"
+                name: "events"
+                widget: "string"
+              - label: "Wall of Miracles"
+                name: "wall"
+                widget: "string"
+              - label: "Get involved"
+                name: "involve"
+                widget: "string"
+              - label: "About"
+                name: "about"
+                widget: "string"
+              - label: "Meet the team"
+                name: "board"
+                widget: "string"
+              - label: "Success stories (section title)"
+                name: "stories"
+                widget: "string"
+              - label: "Why Wednesdays (section title)"
+                name: "wed"
+                widget: "string"
+          - label: "Appearance"
+            name: "theme"
+            widget: "object"
+            fields:
+              - label: "Color theme"
+                name: "palette"
+                widget: "select"
+                options:
+                  - label: "OttoTHON classic"
+                    value: "classic"
+                  - label: "Powder blue"
+                    value: "powder"
+                  - label: "Hydrangea"
+                    value: "hydrangea"
+                  - label: "Sea glass"
+                    value: "seaglass"
+                  - label: "Lavender mist"
+                    value: "lavender"
+                default: "classic"
+              - label: "Fonts"
+                name: "font"
+                widget: "select"
+                options:
+                  - label: "Lookbook serif"
+                    value: "lookbook"
+                  - label: "Soft rounded"
+                    value: "soft"
+                  - label: "Clean sans"
+                    value: "clean"
+                default: "lookbook"
+              - label: "Show daisy decorations"
+                name: "daisies"
+                widget: "boolean"
+                default: true
+              - label: "Success stories look like"
+                name: "storyLayout"
+                widget: "select"
+                options:
+                  - label: "A clothing rail you scroll sideways"
+                    value: "rail"
+                  - label: "A grid of hang tags"
+                    value: "grid"
+                default: "rail"
+              - label: "Wall of Miracles page sections"
+                name: "wallSections"
+                widget: "list"
+                hint: "Drag to reorder. Turn a section off to hide it. The kids wheel always stays at the top."
+                summary: "{{fields.key}}"
+                fields:
+                  - label: "Section"
+                    name: "key"
+                    widget: "select"
+                    options:
+                      - label: "Success stories"
+                        value: "stories"
+                      - label: "Why Wednesdays"
+                        value: "wed"
+                      - label: "Impact numbers"
+                        value: "impact"
+                  - label: "Show"
+                    name: "show"
+                    widget: "boolean"
+                    default: true

@@ -1,0 +1,100 @@
+// Checks everything in /content before the site is published. No dependencies.
+// Run it yourself:  node scripts/validate-content.mjs
+// The deploy workflow runs it too, so a typo in a content file can never take the live site down.
+import { readFileSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const errors = [], warnings = [];
+const err = m => errors.push(m), warn = m => warnings.push(m);
+
+const PALETTES = ['classic', 'powder', 'hydrangea', 'seaglass', 'lavender'];
+const FONTS = ['lookbook', 'soft', 'clean'];
+const SECTIONS = ['stories', 'wed', 'impact'];
+const CATEGORIES = ['Hospital moments', 'Family', 'Community'];
+
+function read(name) {
+  const path = join(root, 'content', `${name}.json`);
+  if (!existsSync(path)) { err(`content/${name}.json is missing.`); return null; }
+  try { return JSON.parse(readFileSync(path, 'utf8')); }
+  catch (e) { err(`content/${name}.json is not valid JSON (${e.message}). Undo the last edit to this file.`); return null; }
+}
+const isStr = v => typeof v === 'string';
+const urlOk = v => !v || /^(https?:\/\/\S+|mailto:\S+)$/i.test(v);
+const dateOk = v => /^\d{4}-\d{2}-\d{2}$/.test(v || '') && !Number.isNaN(Date.parse(v));
+function imageOk(where, v) {
+  if (!v) return;
+  if (!/^assets\/[\w\-. /]+$/.test(v) || v.includes('..')) return err(`${where}: image path "${v}" must start with assets/ (use the Upload button in the editor).`);
+  if (!existsSync(join(root, v))) err(`${where}: image "${v}" does not exist in the repository.`);
+}
+
+// ---- lists ----
+const LISTS = {
+  kids:       {req: ['name', 'story'], images: ['photo'], consent: true},
+  stories:    {req: ['title', 'story', 'date'], images: ['photo'], consent: true, dates: ['date']},
+  wednesdays: {req: ['title', 'author', 'body', 'date'], dates: ['date']},
+  board:      {req: ['name', 'role'], images: ['photo'], urls: ['link']},
+  events:     {req: ['title', 'date'], dates: ['date'], urls: ['link']},
+  ways:       {req: ['title'], urls: ['link']},
+  faq:        {req: ['question', 'answer']}
+};
+let unapproved = 0;
+for (const [name, rule] of Object.entries(LISTS)) {
+  const data = read(name); if (!data) continue;
+  if (!Array.isArray(data.items)) { err(`content/${name}.json must look like {"items": [ ... ]}.`); continue; }
+  data.items.forEach((x, i) => {
+    const where = `${name}[${i + 1}]${x && x.name ? ` "${x.name}"` : x && x.title ? ` "${x.title}"` : ''}`;
+    if (!x || typeof x !== 'object') return err(`${where}: not an entry.`);
+    if (typeof x.published !== 'boolean') err(`${where}: "published" must be true or false.`);
+    for (const f of rule.images || []) imageOk(`${where}.${f}`, x[f]);
+    for (const f of rule.urls || []) if (!urlOk(x[f])) err(`${where}.${f}: "${x[f]}" must start with https:// (or mailto:).`);
+    for (const f of rule.dates || []) if (x.published && !dateOk(x[f])) err(`${where}.${f}: "${x[f]}" is not a date like 2026-10-14.`);
+    if (x.published) for (const f of rule.req) if (!isStr(x[f]) || !x[f].trim()) err(`${where} is published but "${f}" is empty.`);
+    if (name === 'stories' && x.published && !CATEGORIES.includes(x.category)) warn(`${where}: category "${x.category}" is not one of ${CATEGORIES.join(', ')}.`);
+    if (rule.consent) {
+      if (typeof x.approved !== 'boolean') err(`${where}: "approved" must be true or false.`);
+      if (x.published && !x.approved) warn(`${where} is marked "show" but family approval is not ticked, so it stays hidden.`);
+      if (!x.approved) unapproved++;
+    }
+  });
+}
+if (unapproved) warn(`${unapproved} kid/story entries are not approved. This repository is public, so anything saved here can be read by anyone. Only enter a child's story after the family approves.`);
+
+// ---- settings ----
+const s = read('settings');
+if (s) {
+  const need = ['links', 'photos', 'home', 'wall', 'team', 'events', 'involve', 'about', 'footer', 'nav', 'theme'];
+  for (const k of need) if (!s[k] || typeof s[k] !== 'object') err(`content/settings.json is missing "${k}".`);
+  if (s.theme) {
+    if (!PALETTES.includes(s.theme.palette)) err(`settings.theme.palette must be one of: ${PALETTES.join(', ')}.`);
+    if (!FONTS.includes(s.theme.font)) err(`settings.theme.font must be one of: ${FONTS.join(', ')}.`);
+    for (const sec of s.theme.wallSections || []) if (!SECTIONS.includes(sec.key)) err(`settings.theme.wallSections has unknown section "${sec.key}".`);
+  }
+  if (s.links) {
+    for (const f of ['donateUrl', 'registerUrl']) if (!urlOk(s.links[f])) err(`settings.links.${f} must start with https://.`);
+    if (!s.links.donateUrl) warn('The Donate link is empty, so Donate buttons are hidden.');
+    if (!s.links.registerUrl) warn('The Register link is empty, so Register buttons are hidden.');
+  }
+  if (s.photos) for (const f of ['heroPhoto', 'wallPhoto']) imageOk(`settings.photos.${f}`, s.photos[f]);
+  for (const k of ['stats', 'impact']) if (!Array.isArray(s[k])) err(`settings.${k} must be a list.`);
+}
+
+// ---- synced events (written by scripts/sync-events.mjs; optional) ----
+if (existsSync(join(root, 'content', 'events-feed.json'))) {
+  const f = read('events-feed');
+  if (f) {
+    if (!Array.isArray(f.items)) err('content/events-feed.json must have an "items" list. Re-run the sync workflow.');
+    else f.items.forEach((x, i) => {
+      const where = `events-feed[${i + 1}] "${x && x.title}"`;
+      if (!x || !isStr(x.title) || !x.title.trim()) err(`${where}: missing title.`);
+      else if (!dateOk(x.date)) err(`${where}: bad date "${x.date}".`);
+      else if (x.link && !/^https:\/\//.test(x.link)) err(`${where}: link must start with https://.`);
+    });
+  }
+}
+
+for (const w of warnings) console.warn('warning:', w);
+for (const e of errors) console.error('error:  ', e);
+console.log(errors.length ? `\n${errors.length} problem(s) found. The site was NOT published.` : `\nContent is valid (${warnings.length} warning(s)).`);
+process.exit(errors.length ? 1 : 0);
