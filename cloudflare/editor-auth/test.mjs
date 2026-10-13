@@ -3,7 +3,7 @@ import worker from './index.js';
 const verifyAccessJwt = worker.verifyAccessJwt;
 import assert from 'node:assert/strict';
 
-const env = {TEAM_DOMAIN: 'team.cloudflareaccess.com', POLICY_AUD: 'aud-123', SITE_ORIGIN: 'https://dalawton.github.io', GITHUB_BOT_TOKEN: 'ghp_SECRETBOTTOKEN'};
+const env = {TEAM_DOMAIN: 'team.cloudflareaccess.com', POLICY_AUD: 'aud-123', SITE_ORIGIN: 'https://ottothon-syr.github.io', GITHUB_BOT_TOKEN: 'ghp_SECRETBOTTOKEN'};
 const b64u = b => Buffer.from(b).toString('base64url');
 const pair = await crypto.subtle.generateKey({name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256'}, true, ['sign', 'verify']);
 const other = await crypto.subtle.generateKey({name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256'}, true, ['sign', 'verify']);
@@ -22,7 +22,7 @@ const call = (path, token) => worker.fetch(new Request('https://helper.example' 
 let r = await call('/auth', await jwt());
 let html = await r.text();
 assert.equal(r.status, 200); assert.ok(html.includes('ghp_SECRETBOTTOKEN')); assert.ok(html.includes('authorizing:github'));
-assert.ok(html.includes('https://dalawton.github.io')); assert.equal(r.headers.get('cache-control'), 'no-store');
+assert.ok(html.includes('https://ottothon-syr.github.io')); assert.equal(r.headers.get('cache-control'), 'no-store');
 assert.equal(await verifyAccessJwt(await jwt(), env), 'editor@gmail.com');
 
 // everything else is refused, and never leaks the token

@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: dalawton/OttoTHON-Wall-of-Miracles   # change if the repository moves (for example to an organization)
+  repo: ottothon-syr/OttoTHON-Wall-of-Miracles   # change if the repository moves (for example to an organization)
   branch: main
   base_url: https://ottothon-editor-auth.daniellelawton8.workers.dev  # TODO: the address of cloudflare/editor-auth once deployed (docs/ADMIN-SETUP.md). No trailing slash.
 
@@ -16,8 +16,8 @@ local_backend: true
 media_folder: assets/uploads
 public_folder: assets/uploads
 
-site_url: https://dalawton.github.io/OttoTHON-Wall-of-Miracles
-display_url: https://dalawton.github.io/OttoTHON-Wall-of-Miracles
+site_url: https://ottothon-syr.github.io/OttoTHON-Wall-of-Miracles
+display_url: https://ottothon-syr.github.io/OttoTHON-Wall-of-Miracles
 locale: en
 
 collections:

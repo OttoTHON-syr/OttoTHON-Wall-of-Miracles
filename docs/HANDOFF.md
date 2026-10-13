@@ -2,7 +2,7 @@
 
 You can run the whole site from a web page, about 10 to 15 minutes a week. You never open a code editor.
 
-The site lives at **https://dalawton.github.io/OttoTHON-Wall-of-Miracles/** (update this line if the address changes).
+The site lives at **https://ottothon-syr.github.io/OttoTHON-Wall-of-Miracles/** (update this line if the address changes).
 The editor lives at the same address plus **/admin/**.
 
 ## The weekly routine
