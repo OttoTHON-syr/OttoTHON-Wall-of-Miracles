@@ -5,7 +5,7 @@
       "bio": "",
       "name": "Carly Antolick",
       "published": true,
-      "photo": "assets/uploads/carly-antolick.jpg",
+      "photo": "assets/uploads/carly-anatolick.jpg",
       "role": "Executive Director",
       "focus": "left",
       "link": "",
@@ -77,7 +77,7 @@
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
-      "photo": "",
+      "photo": "assets/uploads/rayna-gross.jpg",
       "published": true
     },
     {
@@ -125,14 +125,16 @@
       "published": true,
       "name": "Dani Lawton",
       "role": "Fundraising Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/dani-lawton.jpg"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Sara Woodside",
       "role": "Fundraising Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/sara-woodside.jpg"
     },
     {
       "tier": "team",
@@ -164,14 +166,16 @@
       "published": true,
       "name": "Ella Dimitriadis",
       "role": "General Recruitment Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/ella-dimitriadis.jpg"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Ryan Ludwig",
       "role": "General Recruitment Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/ryan-ludwig.jpg"
     },
     {
       "tier": "team",
@@ -185,7 +189,8 @@
       "published": true,
       "name": "Erica Cuciti",
       "role": "General Body Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/erica-cuciti.jpg"
     },
     {
       "tier": "team",
@@ -193,7 +198,7 @@
       "name": "Carmen Lee-Bennett",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/carmen-lb.jpg",
+      "photo": "assets/uploads/carmen-lee-bennett.jpg",
       "focus": "left"
     },
     {
@@ -201,7 +206,8 @@
       "published": true,
       "name": "Jay Slaven",
       "role": "First-Year Recruitment Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/jay-slaven.jpg"
     },
     {
       "tier": "team",
@@ -215,14 +221,16 @@
       "published": true,
       "name": "Avery Fox",
       "role": "Visual Media Chair",
-      "team": "Communications Team"
+      "team": "Communications Team",
+      "photo": "assets/uploads/avery-fox.jpg"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Lizzy Weiler",
       "role": "Graphic Design Chair",
-      "team": "Communications Team"
+      "team": "Communications Team",
+      "photo": "assets/uploads/lizzy-weiler.jpg"
     },
     {
       "tier": "team",
@@ -245,7 +253,8 @@
       "published": true,
       "name": "London Goodman",
       "role": "Alumni Relations Chair",
-      "team": "Communications Team"
+      "team": "Communications Team",
+      "photo": "assets/uploads/london-goodman.jpg"
     }
   ]
 }
