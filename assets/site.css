@@ -280,29 +280,39 @@ body.nodaisy .flowers{display:none}
 .dir-grid{display:grid;gap:34px 26px;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:56px}
 .person{position:relative;display:grid;align-items:center;background:color-mix(in srgb,var(--soft) 45%,var(--card));border-radius:18px;box-shadow:0 8px 18px var(--shadow)}
 .person::after{content:"";position:absolute;inset:8px;border:2px dashed color-mix(in srgb,var(--mid) 75%,transparent);border-radius:12px;pointer-events:none}
-.person.exec{grid-template-columns:300px minmax(0,1fr);gap:20px 44px;padding:44px 48px}
-.person.dir{grid-template-columns:300px minmax(0,1fr);gap:16px 28px;padding:34px 30px}
-.person .who-text h3{font-size:1.6rem}
+.person.exec{grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:20px 52px;padding:48px 52px}
+.person.dir{grid-template-columns:minmax(0,1fr);justify-items:center;align-content:start;text-align:center;gap:20px;padding:44px 30px 36px}
+.person.dir .polo{max-width:340px}
+.person.dir .who-text h3{font-size:1.85rem}
+.person.dir .p-btns{justify-content:center}
+.person,.polo,.who-text{min-width:0}
+.who-text{overflow-wrap:break-word}
+.person .who-text h3{font-size:1.6rem;line-height:1.2}
+.p-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.polo.member .p-btns{justify-content:center}
 .person.exec .who-text h3{font-size:2.3rem}
 .person .role{color:var(--ink2);font-weight:700;margin:2px 0 10px}
 .person.exec .role{font-size:1.2rem}
 .person .bio{font-size:1rem}
-.person .who-text .btn{margin-top:10px}
+.person .who-text .p-btns .btn{margin-top:0}
 .person.exec .who-text{padding-right:min(34%,280px)}
 
 .polo{position:relative;margin:0;background:#fff;padding:12px 12px 12px;border-radius:3px;box-shadow:0 12px 26px var(--shadow);transform:rotate(var(--pr,0deg));width:100%}
-.polo-img{position:relative;aspect-ratio:5/4;background:var(--soft);overflow:hidden;display:grid;place-items:center}
-.polo-img img{width:100%;height:100%;object-fit:cover;object-position:50% 22%}
-.polo-ph{position:relative;display:block;width:62%;aspect-ratio:1}
+.polo-img{position:relative;aspect-ratio:var(--ratio,1/1);background:var(--soft);overflow:hidden}
+.polo-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--fx,50%) 25%}
+.polo-ph{position:absolute;left:50%;top:50%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%)}
 .polo-ph .daisy{position:absolute;inset:0}
 .polo-ph .ini{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:2.4rem;color:#28456A}
 body.nodaisy .polo-ph .daisy{display:none}
-.polo.member{padding-bottom:0}
+body.frame-portrait{--ratio:4/5}
+body.frame-square{--ratio:1/1}
+body.frame-landscape{--ratio:4/3}
+.polo.member{padding-bottom:0;max-width:270px;margin-left:auto;margin-right:auto}
 .polo.member figcaption{padding:14px 8px 18px;text-align:center;color:#28456A}
 .polo.member h3{font-size:1.3rem;color:#28456A}
 .polo.member .role{color:#4C6B8F;font-weight:700;font-size:.95rem;margin:2px 0 0}
 .polo.member .bio{color:#28456A;font-size:.92rem;margin:8px 0 0}
-.polo.member .btn{margin-top:10px;border-color:#28456A;color:#28456A}
+.polo.member .btn{border-color:#28456A;color:#28456A}
 
 /* washi tape */
 .washi{position:absolute;z-index:3;top:-15px;left:50%;width:112px;height:32px;margin-left:-56px;transform:translateX(var(--tx,0)) rotate(var(--tr,-4deg));opacity:.93;pointer-events:none;
@@ -316,7 +326,7 @@ body.nodaisy .polo-ph .daisy{display:none}
 
 /* daisy bouquet */
 .bq{position:absolute;pointer-events:none;height:auto;z-index:1}
-.bq.in-card{right:34px;bottom:14px;width:min(14%,200px);transform:rotate(4deg)}
+.bq.in-card{right:34px;bottom:14px;width:min(24%,230px);transform:rotate(4deg)}
 .flourish{display:flex;align-items:flex-end;justify-content:center;gap:clamp(16px,6vw,70px);margin-top:30px}
 .flourish .bq{position:static;width:clamp(70px,12vw,130px);flex:none}
 .flourish .bq.flip{transform:scaleX(-1) rotate(-4deg)}
@@ -326,14 +336,16 @@ body.nodaisy .polo-ph .daisy{display:none}
 .team-h{font-size:1.6rem}
 .team-lead{color:var(--ink2);margin:2px 0 22px}
 .team-grid{display:grid;gap:36px 26px;grid-template-columns:repeat(3,minmax(0,1fr));padding-top:10px}
-@media(max-width:900px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.person.exec{grid-template-columns:260px minmax(0,1fr);padding:36px 32px}.bq.in-card{width:20%}}
+@media(max-width:900px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.person.exec{grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:20px 36px;padding:36px 32px}.bq.in-card{width:20%}}
+@media(max-width:1000px){.dir-grid{grid-template-columns:minmax(0,1fr)}.person.dir .polo{max-width:300px}}
 @media(max-width:720px){
   .person.exec,.person.dir{grid-template-columns:minmax(0,1fr);text-align:center;justify-items:center}
-  .person.exec .polo,.person.dir .polo{max-width:260px}
+  .person.exec .polo{max-width:300px}
+  .person.dir .polo{max-width:280px}
   .person.exec .who-text{padding-right:0}
   .bq.in-card{display:none}
   .dir-grid{grid-template-columns:1fr}
 }
-@media(max-width:480px){.team-grid{grid-template-columns:minmax(0,1fr);max-width:340px;margin:0 auto}}
+@media(max-width:480px){.team-grid{grid-template-columns:minmax(0,1fr);max-width:340px;margin:0 auto}.polo.member{max-width:250px}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

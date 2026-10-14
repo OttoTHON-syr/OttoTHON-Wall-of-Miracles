@@ -48,6 +48,8 @@ function applyTheme() {
   let el = document.getElementById('theme'); if (!el) { el = document.createElement('style'); el.id = 'theme'; document.head.appendChild(el); }
   el.textContent = paletteCSS(PAL[d.palette] || PAL.classic) + `:root{--display:${(FONTS[d.font] || FONTS.lookbook).display};--body:${(FONTS[d.font] || FONTS.lookbook).body}}`;
   document.body.classList.toggle('nodaisy', !d.daisies);
+  ['portrait', 'square', 'landscape'].forEach(f => document.body.classList.remove('frame-' + f));
+  document.body.classList.add('frame-' + (['portrait', 'square', 'landscape'].includes(d.photoFrame) ? d.photoFrame : 'square'));
 }
 (function () { // the daisy, drawn once and reused everywhere
   let petals = '';
@@ -144,6 +146,8 @@ const tierOf = b => ['executive', 'director', 'team'].includes(b.tier) ? b.tier
   : /executive director/i.test(b.role || '') ? 'executive' : /director/i.test(b.role || '') ? 'director' : 'team';
 const BOUQUET = 'assets/img/daisy-bouquet.png';
 const bouquet = cls => S.design.daisies ? `<img class="bq ${cls}" src="${BOUQUET}" alt="" aria-hidden="true">` : '';
+const FOCUS = {left: '22%', center: '50%', right: '78%'};
+const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 const TAPE_TILT = [-5, 3, -3, 6, -6, 2], FRAME_TILT = [-1.2, 1, -.6, 1.4, -1, .7];
 // A taped-down photo: white frame, washi tape on top, a daisy placeholder until a photo is added.
 function tapedPhoto(b, i, extra = '') {
@@ -152,11 +156,20 @@ function tapedPhoto(b, i, extra = '') {
     ? `<span class="washi w${n % 4} left" style="--tr:-38deg"></span><span class="washi w${(n + 1) % 4} right" style="--tr:36deg"></span>`
     : `<span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg;--tx:${[0, -18, 14, 0, 18, -12][n]}px"></span>`;
   const inner = img ? `<img src="${esc(img)}" alt="">` : `<span class="polo-ph">${daisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
-  return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
+  return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg;--fx:${FOCUS[b.focus] || '50%'}">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
 }
 function personText(b) {
-  const link = safeUrl(b.link);
-  return `<h3>${draftChip(b, 'board')}${esc(b.name)}</h3><p class="role">${esc(b.role)}</p>${b.bio ? `<p class="bio">${esc(b.bio)}</p>` : ''}${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Donate to ${esc(String(b.name).split(' ')[0])}</a>` : ''}`;
+  const link = safeUrl(b.link), bio = String(b.bio || '').trim(), name = String(b.name || '').trim();
+  // an email typed into "intro" still works: it becomes the email button instead of showing as text
+  const mail = [String(b.email || '').trim(), bio].find(x => EMAIL.test(x)) || '';
+  const intro = EMAIL.test(bio) ? '' : bio;
+  // The button says "Email <first name>". It follows the name automatically unless a custom label is set.
+  const label = String(b.emailLabel || '').trim() || `Email ${name.split(/\s+/)[0] || ''}`.trim();
+  const buttons = [
+    mail ? `<a class="btn sm" href="mailto:${esc(mail)}" title="${esc(mail)}" aria-label="${esc(label)}: ${esc(mail)}">${esc(label)}</a>` : '',
+    link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Donate to ${esc(name.split(/\s+/)[0] || '')}</a>` : ''
+  ].join('');
+  return `<h3>${draftChip(b, 'board')}${esc(name)}</h3><p class="role">${esc(b.role)}</p>${intro ? `<p class="bio">${esc(intro)}</p>` : ''}${buttons ? `<div class="p-btns">${buttons}</div>` : ''}`;
 }
 // exec / director: tinted card with the taped photo beside the text
 function personCard(b, cls, i) {
@@ -315,7 +328,7 @@ async function init() {
     S = {
       kids: toItems(kids, 'k'), stories: toItems(stories, 's'), wed: toItems(wed, 'w'), board: toItems(board, 'b'),
       events: mergeEvents(toItems(events, 'e'), feed), ways: toItems(ways, 'a'), faq: toItems(faq, 'f'),
-      design: {palette: g('theme').palette, font: g('theme').font, daisies: g('theme').daisies !== false, storyLayout: g('theme').storyLayout || 'rail',
+      design: {photoFrame: g('theme').photoFrame, palette: g('theme').palette, font: g('theme').font, daisies: g('theme').daisies !== false, storyLayout: g('theme').storyLayout || 'rail',
         sections: (g('theme').wallSections || []).filter(x => ['stories', 'wed', 'impact'].includes(x.key))},
       text: Object.assign({}, g('home'), g('wall'), g('team'), g('events'), g('involve'), g('about'), g('footer'), {
         donateUrl: g('links').donateUrl || '', registerUrl: g('links').registerUrl || '', email: g('links').email || '',

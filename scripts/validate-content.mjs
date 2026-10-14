@@ -68,6 +68,8 @@ if (board && Array.isArray(board.items)) {
     if (!x) return;
     const where = `board[${i + 1}]${x.name ? ` "${x.name}"` : ''}`;
     if (x.tier !== undefined && !['executive', 'director', 'team'].includes(x.tier)) err(`${where}: "tier" must be executive, director, or team.`);
+    if (x.email && !/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(x.email)) err(`${where}: email "${x.email}" does not look like an email address.`);
+    if (x.focus && !['left', 'center', 'right'].includes(x.focus)) err(`${where}: "focus" must be left, center, or right.`);
     if (x.published && x.tier === 'team' && !String(x.team || '').trim()) warn(`${where} is a team member with no team, so they are listed under "More of the team".`);
   });
 }
@@ -80,6 +82,7 @@ if (s) {
   if (s.theme) {
     if (!PALETTES.includes(s.theme.palette)) err(`settings.theme.palette must be one of: ${PALETTES.join(', ')}.`);
     if (!FONTS.includes(s.theme.font)) err(`settings.theme.font must be one of: ${FONTS.join(', ')}.`);
+    if (s.theme.photoFrame && !['square', 'portrait', 'landscape'].includes(s.theme.photoFrame)) err('settings.theme.photoFrame must be square, portrait, or landscape.');
     for (const sec of s.theme.wallSections || []) if (!SECTIONS.includes(sec.key)) err(`settings.theme.wallSections has unknown section "${sec.key}".`);
   }
   if (s.links) {
