@@ -1,4 +1,36 @@
 {
+  "photos": {
+    "heroPhoto": "",
+    "wallPhoto": ""
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "wall": "Wall of Miracles",
+    "involve": "Get Involved",
+    "about": "About",
+    "board": "Meet the Team",
+    "stories": "Success Stories",
+    "wed": "Why Wednesdays"
+  },
+  "impact": [
+    {
+      "n": "",
+      "l": "families supported"
+    },
+    {
+      "n": "",
+      "l": "child life programs funded"
+    },
+    {
+      "n": "10",
+      "l": "hours danced on marathon day"
+    },
+    {
+      "n": "",
+      "l": "student orgs participating"
+    }
+  ],
   "theme": {
     "palette": "classic",
     "font": "lookbook",
@@ -19,39 +51,6 @@
       }
     ]
   },
-  "nav": {
-    "home": "Home",
-    "events": "Events",
-    "wall": "Wall of Miracles",
-    "involve": "Get involved",
-    "about": "About",
-    "board": "Meet the team",
-    "stories": "Success stories",
-    "wed": "Why Wednesdays"
-  },
-  "links": {
-    "donateUrl": "",
-    "registerUrl": "",
-    "email": "ottothon@gmail.com"
-  },
-  "photos": {
-    "heroPhoto": "",
-    "wallPhoto": ""
-  },
-  "home": {
-    "homeTitle": "Welcome to OttoTHON",
-    "homeKicker": "The Largest Student-Run Philanthropy Event at Syracuse University",
-    "homeIntro": "OttoTHON is a community and family that supports one another as we seek to raise funds and awareness for children at Upstate Golisano Children’s Hospital.",
-    "homeCaption": "10 hours. one mission.",
-    "missionTitle": "Kids can’t wait.",
-    "missionBody": "Since 2014, OttoTHON has raised over $1 million for Upstate Golisano Children’s Hospital. Every dollar funds emotional and financial support for patients and families during and after treatment. No family should face it alone.",
-    "revealNote": "Push totals get announced live all season. The grand total is a surprise until reveal day.",
-    "wallQuote": "from treatments to triumphs, this is why we dance.",
-    "wallTitle": "Meet the kids we’re dancing for",
-    "wallBody": "Every Miracle Kid and Success Story on our wall is shared with their family’s full permission. Get to know who your donation supports.",
-    "upcomingTitle": "What’s next",
-    "upcomingIntro": "From team bonding nights to fundraising pushes, here’s what’s on the calendar."
-  },
   "wall": {
     "heroTitle": "Wall of Miracles",
     "heroSub": "The Wall of Miracles celebrates the kids and families supported by OttoTHON and Upstate Golisano Children’s Hospital. Every milestone, every story, is a reminder of why we dance.",
@@ -60,21 +59,6 @@
     "whyList": "for the kids\nfor the families\nfor the community\nfor a better tomorrow",
     "impactTitle": "The impact",
     "impactIntro": "Not the dollars, yet. We hold this year’s final fundraising total until reveal day. Here’s what your support has already gone toward."
-  },
-  "team": {
-    "boardIntro": "Every member of our executive board brings a different reason for showing up. Read their Why Wednesdays on the Wall of Miracles."
-  },
-  "events": {
-    "eventsIntro": "Fundraising pushes, team bonding nights, and the big day itself: here’s everything on the OttoTHON calendar this year.",
-    "mainTitle": "OttoTHON: The Main Event",
-    "mainPlace": "Schine Student Center, Goldstein Auditorium",
-    "mainDesc": "Our dance marathon, the culmination of a full year of fundraising. Food, performances, games, and the moment we finally reveal the total."
-  },
-  "involve": {
-    "involveIntro": "Whether you dance for the whole marathon, join a committee, or just spread the word, there’s a place for you at OttoTHON.",
-    "danceTitle": "Register for the marathon",
-    "danceDesc": "Sign up solo or with a team for our Dance Marathon at Schine’s Goldstein Auditorium. Registration covers food, entertainment, and full access to everything, and it counts toward service hour requirements.",
-    "included": "food all day\nlive performances\ngames and activities\ntime with Miracle Kids\nthe big reveal"
   },
   "about": {
     "aboutIntro": "Who we are, who can join, and who we dance with.",
@@ -86,10 +70,30 @@
     "partnerTitle": "Upstate Golisano Children’s Hospital",
     "partnerBody": "Upstate Golisano Children’s Hospital is our local Children’s Miracle Network hospital, right here in Central New York. Every dollar OttoTHON raises goes directly toward the emotional and financial support of the patients and families treated there."
   },
+  "events": {
+    "eventsIntro": "Fundraising pushes, team bonding nights, and the big day itself: here’s everything on the OttoTHON calendar this year.",
+    "mainTitle": "OttoTHON: The Main Event",
+    "mainPlace": "Schine Student Center, Goldstein Auditorium",
+    "mainDesc": "Our dance marathon, the culmination of a full year of fundraising. Food, performances, games, and the moment we finally reveal the total."
+  },
+  "links": {
+    "donateUrl": "",
+    "registerUrl": "",
+    "email": "ottothon@gmail.com"
+  },
   "footer": {
     "ctaLine": "same mission. bigger impact.",
     "about": "OttoTHON is a community and family that supports one another as we raise funds and awareness for children at Upstate Golisano Children’s Hospital.",
     "footer": "Photos and stories are shared with family permission."
+  },
+  "involve": {
+    "involveIntro": "Whether you dance for the whole marathon, join a committee, or just spread the word, there’s a place for you at OttoTHON.",
+    "danceTitle": "Register for the marathon",
+    "danceDesc": "Sign up solo or with a team for our Dance Marathon at Schine’s Goldstein Auditorium. Registration covers food, entertainment, and full access to everything, and it counts toward service hour requirements.",
+    "included": "food all day\nlive performances\ngames and activities\ntime with Miracle Kids\nthe big reveal"
+  },
+  "team": {
+    "boardIntro": "Every member of our executive board brings a different reason for showing up. Read their Why Wednesdays on the Wall of Miracles."
   },
   "stats": [
     {
@@ -109,22 +113,18 @@
       "l": "hours danced, every marathon"
     }
   ],
-  "impact": [
-    {
-      "n": "",
-      "l": "families supported"
-    },
-    {
-      "n": "",
-      "l": "child life programs funded"
-    },
-    {
-      "n": "10",
-      "l": "hours danced on marathon day"
-    },
-    {
-      "n": "",
-      "l": "student orgs participating"
-    }
-  ]
+  "home": {
+    "homeCaption": "10 hours. one mission.",
+    "missionTitle": "Kids can’t wait.",
+    "wallBody": "Every Miracle Kid and Success Story on our wall is shared with their family’s full permission. Get to know who your donation supports.",
+    "homeIntro": "OttoTHON is a community and family that supports one another as we seek to raise funds and awareness for children at Upstate Golisano Children’s Hospital.",
+    "missionBody": "Since 2014, OttoTHON has raised over $1 million for Upstate Golisano Children’s Hospital. Every dollar funds emotional and financial support for patients and families during and after treatment. No family should face it alone.",
+    "wallTitle": "Meet the kids we’re dancing for",
+    "upcomingIntro": "From team bonding nights to fundraising pushes, here’s what’s on the calendar.",
+    "wallQuote": "from treatments to triumphs, this is why we dance.",
+    "homeKicker": "The Largest Student-Run Philanthropy Event at Syracuse University",
+    "homeTitle": "Welcome to OttoTHON",
+    "upcomingTitle": "What’s next",
+    "revealNote": "Push totals get announced live all season. The grand total is a surprise until reveal day."
+  }
 }
