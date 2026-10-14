@@ -316,7 +316,7 @@ body.nodaisy .polo-ph .daisy{display:none}
 
 /* daisy bouquet */
 .bq{position:absolute;pointer-events:none;height:auto;z-index:1}
-.bq.in-card{right:34px;bottom:14px;width:min(24%,230px);transform:rotate(4deg)}
+.bq.in-card{right:34px;bottom:14px;width:min(14%,200px);transform:rotate(4deg)}
 .flourish{display:flex;align-items:flex-end;justify-content:center;gap:clamp(16px,6vw,70px);margin-top:30px}
 .flourish .bq{position:static;width:clamp(70px,12vw,130px);flex:none}
 .flourish .bq.flip{transform:scaleX(-1) rotate(-4deg)}
