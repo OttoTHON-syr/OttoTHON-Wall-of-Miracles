@@ -1,14 +1,15 @@
 {
   "items": [
     {
-      "name": "Carly Antolick",
-      "role": "Executive Director",
       "tier": "executive",
-      "team": "",
       "bio": "ottothon@gmail.com",
-      "link": "",
+      "name": "Carly Antolick",
+      "published": true,
       "photo": "assets/uploads/carly-antolick.jpg",
-      "published": true
+      "role": "Executive Director",
+      "focus": "left",
+      "link": "",
+      "team": ""
     },
     {
       "name": "Isabelle Reed",
