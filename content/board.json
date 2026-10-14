@@ -13,44 +13,52 @@
       "team": ""
     },
     {
+      "tier": "director",
+      "bio": "",
       "name": "Isabelle Reed",
-      "role": "Communication Director",
-      "tier": "director",
-      "team": "Communications Team",
-      "bio": "ottothon.communications@gmail.com",
-      "link": "",
+      "published": true,
       "photo": "assets/uploads/isabelle-reed.jpg",
-      "published": true
+      "role": "Communication Director",
+      "focus": "left",
+      "link": "",
+      "email": "ottothon.communications@gmail.com",
+      "team": "Communications Team"
     },
     {
+      "tier": "director",
+      "bio": "",
       "name": "Margaux Epter",
-      "role": "Finance Director",
-      "tier": "director",
-      "team": "Finance Team",
-      "bio": "ottothon.internalfinance@gmail.com",
-      "link": "",
+      "published": true,
       "photo": "assets/uploads/margaux-epter.jpg",
-      "published": true
+      "role": "Finance Director",
+      "focus": "left",
+      "link": "",
+      "email": "ottothon.internalfinance@gmail.com",
+      "team": "Finance Team"
     },
     {
+      "tier": "director",
+      "bio": "",
       "name": "Aaron Lenner",
-      "role": "Membership Director",
-      "tier": "director",
-      "team": "Membership Team",
-      "bio": "ottothon.membership@gmail.com",
-      "link": "",
+      "published": true,
       "photo": "assets/uploads/aaron-lenner.jpg",
-      "published": true
+      "role": "Membership Director",
+      "focus": "left",
+      "link": "",
+      "email": "ottothon.membership@gmail.com",
+      "team": "Membership Team"
     },
     {
-      "name": "Abi Handel",
-      "role": "Internal Events Director",
       "tier": "director",
-      "team": "Internal Events Team",
-      "bio": "internal.ottothon@gmail.com",
-      "link": "",
+      "bio": "",
+      "name": "Abi Handel",
+      "published": true,
       "photo": "assets/uploads/abi-handel.jpg",
-      "published": true
+      "role": "Internal Events Director",
+      "emailLabel": "internal.ottothon@gmail.com",
+      "focus": "left",
+      "link": "",
+      "team": "Internal Events Team"
     },
     {
       "name": "Zahra Jarrell",
@@ -73,24 +81,26 @@
       "published": true
     },
     {
-      "name": "Maddie Poynter",
-      "role": "Family and Hospital Relations Chair",
       "tier": "team",
-      "team": "Internal Events Team",
       "bio": "",
-      "link": "",
+      "name": "Maddie Poynter",
+      "published": true,
       "photo": "assets/uploads/maddie-poynter.jpg",
-      "published": true
+      "role": "Family and Hospital Relations Chair",
+      "focus": "left",
+      "link": "",
+      "team": "Internal Events Team"
     },
     {
-      "name": "Maggie Armstrong",
-      "role": "Morale Chair",
       "tier": "team",
-      "team": "Internal Events Team",
       "bio": "",
-      "link": "",
+      "name": "Maggie Armstrong",
+      "published": true,
       "photo": "assets/uploads/maggie-armstrong.jpg",
-      "published": true
+      "role": "Morale Chair",
+      "focus": "left",
+      "link": "",
+      "team": "Internal Events Team"
     },
     {
       "tier": "team",
@@ -98,7 +108,8 @@
       "name": "Maggie Poulin",
       "role": "Morale Chair",
       "team": "Internal Events Team",
-      "photo": "assets/uploads/maggie-poulin.jpg"
+      "photo": "assets/uploads/maggie-poulin.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
@@ -106,7 +117,8 @@
       "name": "Andrei Livingston",
       "role": "Analytics Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/andrei-livingston.jpg"
+      "photo": "assets/uploads/andrei-livingston.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
@@ -135,7 +147,8 @@
       "name": "Anastasia Romanyk",
       "role": "Community Relations Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/anastasia-romanyk.jpg"
+      "photo": "assets/uploads/anastasia-romanyk.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
@@ -143,7 +156,8 @@
       "name": "Kate Schmidt",
       "role": "Community Relations Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/kate-schmidt.jpg"
+      "photo": "assets/uploads/kate-schmidt.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
@@ -179,7 +193,8 @@
       "name": "Carmen Lee-Bennett",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/carmen-lb.jpg"
+      "photo": "assets/uploads/carmen-lb.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
@@ -215,7 +230,8 @@
       "name": "Gabi Robayo",
       "role": "Graphic Design Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/gabi-robayo.jpg"
+      "photo": "assets/uploads/gabi-robayo.jpg",
+      "focus": "left"
     },
     {
       "tier": "team",
