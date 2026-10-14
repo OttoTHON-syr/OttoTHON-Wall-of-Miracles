@@ -77,7 +77,7 @@
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
-      "photo": "",
+      "photo": "assets/uploads/maddie-poynter.jpg",
       "published": true
     },
     {
@@ -87,7 +87,7 @@
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
-      "photo": "",
+      "photo": "assets/uploads/maggie-armstrong.jpg",
       "published": true
     },
     {
@@ -95,14 +95,16 @@
       "published": true,
       "name": "Maggie Poulin",
       "role": "Morale Chair",
-      "team": "Internal Events Team"
+      "team": "Internal Events Team",
+      "photo": "assets/uploads/maggie-poulin.jpg"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Andrei Livingston",
       "role": "Analytics Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/andrei-livingston.jpg"
     },
     {
       "tier": "team",
@@ -130,14 +132,16 @@
       "published": true,
       "name": "Anastasia Romanyk",
       "role": "Community Relations Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/anastasia-romanyk.jpg"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Kate Schmidt",
       "role": "Community Relations Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/kate-schmidt.jpg"
     },
     {
       "tier": "team",
@@ -172,7 +176,8 @@
       "published": true,
       "name": "Carmen Lee-Bennett",
       "role": "First-Year Recruitment Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/carmen-lb.jpg"
     },
     {
       "tier": "team",
@@ -207,7 +212,8 @@
       "published": true,
       "name": "Gabi Robayo",
       "role": "Graphic Design Chair",
-      "team": "Communications Team"
+      "team": "Communications Team",
+      "photo": "assets/uploads/gabi-robayo.jpg"
     },
     {
       "tier": "team",
