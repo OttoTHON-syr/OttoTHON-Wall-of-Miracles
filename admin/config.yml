@@ -154,7 +154,7 @@ collections:
                 default: false
   - name: board
     label: "E-Board (Meet the team)"
-    description: "Drag to reorder."
+    description: "Drag to reorder within each group. The Executive Director is shown full width, Directors in two columns, and everyone else in three columns under their team."
     files:
       - name: board
         label: "E-Board (Meet the team)"
@@ -171,6 +171,22 @@ collections:
               - label: "Role"
                 name: "role"
                 widget: "string"
+              - label: "Where they appear on the page"
+                name: "tier"
+                widget: "select"
+                options:
+                  - label: "Executive Director (full-width card at the top)"
+                    value: "executive"
+                  - label: "Director (two-column grid)"
+                    value: "director"
+                  - label: "Team member (three-column grid, grouped by team)"
+                    value: "team"
+                default: "team"
+              - label: "Team"
+                name: "team"
+                widget: "string"
+                hint: "For team members: the team they belong to, typed the same way for everyone on it, for example Finance Team. For a director: the team they lead, so that team appears under them. Leave empty for the Executive Director."
+                required: false
               - label: "One-line intro"
                 name: "bio"
                 widget: "string"
@@ -184,7 +200,7 @@ collections:
               - label: "Photo"
                 name: "photo"
                 widget: "image"
-                hint: "Square photos crop best."
+                hint: "Portrait (tall) photos work best. The photo is cropped to a 4 by 5 frame, so keep faces near the middle."
                 required: false
               - label: "Show on the site"
                 name: "published"

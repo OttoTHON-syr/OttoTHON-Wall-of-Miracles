@@ -43,7 +43,7 @@ If anything looks wrong, don't publish. Delete the draft, or ask another admin.
 
 **Add or remove an editor.** In Cloudflare Zero Trust, Access, Applications, edit the Allow policy and add or remove their Google email (see [ADMIN-SETUP.md](ADMIN-SETUP.md)).
 
-**Update the E-Board.** *E-Board*, then add, edit, or drag people into the order you want.
+**Update the E-Board.** *E-Board*, then add, edit, or drag people into the order you want. For each person choose where they appear: **Executive Director** (full-width card at the top), **Director** (two-column grid), or **Team member** (three-column grid under their team). For team members type the team name the same way for everyone on it, for example *Finance Team*. For a director, type the team they lead so that team appears under them.
 
 ## The final test
 

@@ -138,12 +138,48 @@ function wedHTML() {
       ${why.length ? `<div class="why-box"><h3>Why they do it</h3><ul class="why-list">${why.map(w => `<li>${daisy()}${esc(w)}</li>`).join('')}</ul></div>` : ''}</div>
     </div></div></section>`;
 }
+// Meet the team: Executive Director full width, Directors in two columns,
+// everyone else grouped by team in three columns.
+const tierOf = b => ['executive', 'director', 'team'].includes(b.tier) ? b.tier
+  : /executive director/i.test(b.role || '') ? 'executive' : /director/i.test(b.role || '') ? 'director' : 'team';
+const BOUQUET = 'assets/img/daisy-bouquet.png';
+const bouquet = cls => S.design.daisies ? `<img class="bq ${cls}" src="${BOUQUET}" alt="" aria-hidden="true">` : '';
+const TAPE_TILT = [-5, 3, -3, 6, -6, 2], FRAME_TILT = [-1.2, 1, -.6, 1.4, -1, .7];
+// A taped-down photo: white frame, washi tape on top, a daisy placeholder until a photo is added.
+function tapedPhoto(b, i, extra = '') {
+  const img = imgOk(b.photo), n = i % 6, wide = extra.includes('corners');
+  const tape = wide
+    ? `<span class="washi w${n % 4} left" style="--tr:-38deg"></span><span class="washi w${(n + 1) % 4} right" style="--tr:36deg"></span>`
+    : `<span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg;--tx:${[0, -18, 14, 0, 18, -12][n]}px"></span>`;
+  const inner = img ? `<img src="${esc(img)}" alt="">` : `<span class="polo-ph">${daisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
+  return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
+}
+function personText(b) {
+  const link = safeUrl(b.link);
+  return `<h3>${draftChip(b, 'board')}${esc(b.name)}</h3><p class="role">${esc(b.role)}</p>${b.bio ? `<p class="bio">${esc(b.bio)}</p>` : ''}${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Donate to ${esc(String(b.name).split(' ')[0])}</a>` : ''}`;
+}
+// exec / director: tinted card with the taped photo beside the text
+function personCard(b, cls, i) {
+  return `<article class="person ${cls}">${tapedPhoto(b, i, cls === 'exec' ? 'corners' : '')}<div class="who-text">${personText(b)}</div>${cls === 'exec' ? bouquet('in-card') : ''}</article>`;
+}
+// team member: the name sits on the photo's white border, like a real polaroid
+function memberCard(b, i) {
+  return tapedPhoto(b, i, 'member cap').replace('__CAP__', `<figcaption>${personText(b)}</figcaption>`);
+}
 function boardHTML() {
   const T = S.text, list = live('board');
+  const execs = list.filter(b => tierOf(b) === 'executive'), dirs = list.filter(b => tierOf(b) === 'director'), rest = list.filter(b => tierOf(b) === 'team');
+  // team groups: a director's team comes first (in director order), then any other teams as they appear
+  const key = t => String(t || '').trim().toLowerCase(), groups = {}, order = [];
+  const group = (name, lead) => { const k = key(name) || 'more'; if (!groups[k]) { groups[k] = {name: String(name || '').trim() || 'More of the team', lead: '', members: []}; order.push(k); } if (lead && !groups[k].lead) groups[k].lead = lead; return groups[k]; };
+  dirs.forEach(d => { if (key(d.team)) group(d.team, d.name); });
+  rest.forEach(m => group(m.team).members.push(m));
+  const teams = order.map(k => groups[k]).filter(g => g.members.length);
   return `<section class="sec" id="board"><div class="sec-in">${secHead(T.nav.board, T.boardIntro)}
-    <div class="labels">${list.map(b => `<article class="label"><div class="who">${daisy()}<span class="ph">${photoOrInitial(b.name, b.photo)}</span></div>
-      <h3>${draftChip(b, 'board')}${esc(b.name)}</h3><p class="role">${esc(b.role)}</p>${b.bio ? `<p>${esc(b.bio)}</p>` : ''}${safeUrl(b.link) ? `<a class="btn sm" style="margin-top:12px" href="${esc(safeUrl(b.link))}" target="_blank" rel="noopener">Donate to ${esc(b.name.split(' ')[0])}</a>` : ''}</article>`).join('')}</div>
-    <p class="team-link"><a class="btn" href="wall-of-miracles.html#wed">Read their Why Wednesdays</a></p></div></section>`;
+    ${execs.length ? `<div class="exec-wrap">${execs.map((b, i) => personCard(b, 'exec', i)).join('')}</div>` : ''}
+    ${dirs.length ? `<div class="dir-grid">${dirs.map((b, i) => personCard(b, 'dir', i + 1)).join('')}</div>` : ''}
+    ${teams.map((g, gi) => `<div class="team-block"><h3 class="team-h">${esc(g.name)}</h3>${g.lead ? `<p class="team-lead">Led by ${esc(g.lead)}</p>` : ''}<div class="team-grid">${g.members.map((b, i) => memberCard(b, i + gi)).join('')}</div></div>`).join('')}
+    <div class="flourish">${bouquet('flip')}<a class="btn" href="wall-of-miracles.html#wed">Read their Why Wednesdays</a>${bouquet('')}</div></div></section>`;
 }
 function impactHTML() {
   const T = S.text, st = (T.impact || []).filter(x => x.n && x.l);

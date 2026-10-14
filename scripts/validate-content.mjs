@@ -61,6 +61,17 @@ for (const [name, rule] of Object.entries(LISTS)) {
 }
 if (unapproved) warn(`${unapproved} kid/story entries are not approved. This repository is public, so anything saved here can be read by anyone. Only enter a child's story after the family approves.`);
 
+// ---- board layout fields ----
+const board = read('board');
+if (board && Array.isArray(board.items)) {
+  board.items.forEach((x, i) => {
+    if (!x) return;
+    const where = `board[${i + 1}]${x.name ? ` "${x.name}"` : ''}`;
+    if (x.tier !== undefined && !['executive', 'director', 'team'].includes(x.tier)) err(`${where}: "tier" must be executive, director, or team.`);
+    if (x.published && x.tier === 'team' && !String(x.team || '').trim()) warn(`${where} is a team member with no team, so they are listed under "More of the team".`);
+  });
+}
+
 // ---- settings ----
 const s = read('settings');
 if (s) {
