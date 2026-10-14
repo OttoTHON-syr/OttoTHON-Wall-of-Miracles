@@ -54,7 +54,7 @@
       "name": "Zahra Jarrell",
       "role": "Events and Operations Chair",
       "tier": "team",
-      "team": "Internal Events",
+      "team": "Internal Events Team",
       "bio": "",
       "link": "",
       "photo": "",
@@ -64,31 +64,164 @@
       "name": "Rayna Gross",
       "role": "Events and Operations Chair",
       "tier": "team",
-      "team": "Internal Events",
+      "team": "Internal Events Team",
       "bio": "",
       "link": "",
       "photo": "",
       "published": true
     },
     {
-      "name": "Sample name",
-      "role": "Sample role",
-      "tier": "team",
-      "team": "Membership Team",
-      "bio": "",
-      "link": "",
-      "photo": "",
-      "published": false
-    },
-    {
-      "name": "Sample name",
-      "role": "Sample role",
+      "name": "Maddie Poynter",
+      "role": "Family and Hospital Relations Chair",
       "tier": "team",
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
       "photo": "",
-      "published": false
+      "published": true
+    },
+    {
+      "name": "Maggie Armstrong",
+      "role": "Morale Chair",
+      "tier": "team",
+      "team": "Internal Events Team",
+      "bio": "",
+      "link": "",
+      "photo": "",
+      "published": true
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Maggie Poulin",
+      "role": "Morale Chair",
+      "team": "Internal Events Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Andrei Livingston",
+      "role": "Analytics Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Dani Lawton",
+      "role": "Fundraising Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Sara Woodside",
+      "role": "Fundraising Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Wray Zhou",
+      "role": "Partnership Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Anastasia Romanyk",
+      "role": "Community Relations Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Kate Schmidt",
+      "role": "Community Relations Chair",
+      "team": "Finance Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Ella Dimitriadis",
+      "role": "General Recruitment Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Ryan Ludwig",
+      "role": "General Recruitment Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Lulu Boone",
+      "role": "Team Captain Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Erica Cuciti",
+      "role": "General Body Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Carmen Lee-Bennett",
+      "role": "First-Year Recruitment Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Jay Slaven",
+      "role": "First-Year Recruitment Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Brynn Wisniewski",
+      "role": "First-Year Recruitment Chair",
+      "team": "Membership Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Avery Fox",
+      "role": "Visual Media Chair",
+      "team": "Communications Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Lizzy Weiler",
+      "role": "Graphic Design Chair",
+      "team": "Communications Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Gabi Robayo",
+      "role": "Graphic Design Chair",
+      "team": "Communications Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "Adam Paliana",
+      "role": "Social Media Chair",
+      "team": "Communications Team"
+    },
+    {
+      "tier": "team",
+      "published": true,
+      "name": "London Goodman",
+      "role": "Alumni Relations Chair",
+      "team": "Communications Team"
     }
   ]
 }
