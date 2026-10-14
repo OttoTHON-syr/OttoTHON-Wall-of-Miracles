@@ -1,40 +1,40 @@
 {
   "items": [
     {
-      "name": "Mia R.",
+      "name": "TODO",
       "since": "2022",
-      "tagline": "Keeper of the best hallway dance moves",
-      "story": "Mia has one rule: nobody walks the hallway without at least one spin. She taught her whole dance line a signature move, and it now shows up at every OttoTHON rehearsal.",
+      "tagline": "one-line intro",
+      "story": "this can be updated. there is also a toggle that confirms family consent and photo approval confirmed in writing. Can be revoked at anytime. ",
       "photo": "",
-      "approved": false,
-      "published": false
+      "approved": true,
+      "published": true
     },
     {
-      "name": "Jonah T.",
+      "name": "TOOD1",
       "since": "2021",
-      "tagline": "Self-appointed DJ of the playroom",
-      "story": "Jonah keeps a running list of song requests from everyone on his floor. His favorite moment of the year is when the whole room sings the same chorus at once.",
+      "tagline": "one line intro",
+      "story": "this can be updated. there is also a toggle that confirms family consent and photo approval confirmed in writing. Can be revoked at anytime.",
       "photo": "",
-      "approved": false,
-      "published": false
+      "approved": true,
+      "published": true
     },
     {
-      "name": "Priya S.",
+      "name": "TODO2",
       "since": "2023",
-      "tagline": "Sticker collector and high-five champion",
-      "story": "Priya greets every volunteer with a sticker and a high five, in that order. She says the stickers are for good luck, and the high fives are for energy.",
+      "tagline": "one line intro",
+      "story": "this can be updated. there is also a toggle that confirms family consent and photo approval confirmed in writing. Can be revoked at anytime.",
       "photo": "",
-      "approved": false,
-      "published": false
+      "approved": true,
+      "published": true
     },
     {
-      "name": "Eli W.",
+      "name": "TODO3",
       "since": "2020",
-      "tagline": "Inventor of the world’s longest handshake",
-      "story": "Eli’s handshake has eleven steps and a dramatic finish. Dancers line up to learn it, and he grades them on form.",
+      "tagline": "one line intro (optional)",
+      "story": "this can be updated. there is also a toggle that confirms family consent and photo approval confirmed in writing. Can be revoked at anytime.",
       "photo": "",
-      "approved": false,
-      "published": false
+      "approved": true,
+      "published": true
     },
     {
       "name": "Sofia M.",
