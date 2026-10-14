@@ -281,7 +281,7 @@ body.nodaisy .flowers{display:none}
 .person{position:relative;display:grid;align-items:center;background:color-mix(in srgb,var(--soft) 45%,var(--card));border-radius:18px;box-shadow:0 8px 18px var(--shadow)}
 .person::after{content:"";position:absolute;inset:8px;border:2px dashed color-mix(in srgb,var(--mid) 75%,transparent);border-radius:12px;pointer-events:none}
 .person.exec{grid-template-columns:300px minmax(0,1fr);gap:20px 44px;padding:44px 48px}
-.person.dir{grid-template-columns:210px minmax(0,1fr);gap:16px 28px;padding:34px 30px}
+.person.dir{grid-template-columns:300px minmax(0,1fr);gap:16px 28px;padding:34px 30px}
 .person .who-text h3{font-size:1.6rem}
 .person.exec .who-text h3{font-size:2.3rem}
 .person .role{color:var(--ink2);font-weight:700;margin:2px 0 10px}
