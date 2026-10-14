@@ -2,13 +2,14 @@
   "items": [
     {
       "tier": "executive",
-      "bio": "ottothon@gmail.com",
+      "bio": "",
       "name": "Carly Antolick",
       "published": true,
       "photo": "assets/uploads/carly-antolick.jpg",
       "role": "Executive Director",
       "focus": "left",
       "link": "",
+      "email": "ottothon@gmail.com",
       "team": ""
     },
     {
