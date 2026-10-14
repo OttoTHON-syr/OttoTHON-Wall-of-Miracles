@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-14T03:04:18.025Z",
+  "syncedAt": "2026-10-14T14:31:26.694Z",
   "source": "https://cuseactivities.syr.edu/events.rss",
   "items": [
     {
@@ -99,6 +99,18 @@
       "host": "OttoTHON at Syracuse University"
     },
     {
+      "id": "https://cuseactivities.syr.edu/event/12887348",
+      "title": "OLP Meetings",
+      "date": "2026-11-08",
+      "start": "2026-11-08T22:00:00.000Z",
+      "end": "2026-11-08T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887348",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
       "id": "https://cuseactivities.syr.edu/event/12761101",
       "title": "OttoTHON Full-Team Meeting",
       "date": "2026-11-15",
@@ -108,6 +120,18 @@
       "place": "HALL OF LANGUAGES 207",
       "desc": "The OttoTHON Executive Board, OLPs, General Body, Team Captains and other general members will meet biweekly to discuss the organization's events, fundraisers, membership and communications. Please consider joining us!",
       "link": "https://cuseactivities.syr.edu/event/12761101",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
+      "id": "https://cuseactivities.syr.edu/event/12887349",
+      "title": "OLP Meetings",
+      "date": "2026-11-15",
+      "start": "2026-11-15T22:00:00.000Z",
+      "end": "2026-11-15T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887349",
       "host": "OttoTHON at Syracuse University"
     },
     {
@@ -123,6 +147,18 @@
       "host": "OttoTHON at Syracuse University"
     },
     {
+      "id": "https://cuseactivities.syr.edu/event/12887350",
+      "title": "OLP Meetings",
+      "date": "2026-11-22",
+      "start": "2026-11-22T22:00:00.000Z",
+      "end": "2026-11-22T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887350",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
       "id": "https://cuseactivities.syr.edu/event/12771649",
       "title": "OttoTHON Executive Board Meeting",
       "date": "2026-11-29",
@@ -132,6 +168,18 @@
       "place": "HALL OF LANGUAGES 111",
       "desc": "OttoTHON's Executive Board meets biweekly to discuss organization events, planning, and upcoming fundraisers.",
       "link": "https://cuseactivities.syr.edu/event/12771649",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
+      "id": "https://cuseactivities.syr.edu/event/12887351",
+      "title": "OLP Meetings",
+      "date": "2026-11-29",
+      "start": "2026-11-29T22:00:00.000Z",
+      "end": "2026-11-29T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887351",
       "host": "OttoTHON at Syracuse University"
     },
     {
@@ -159,6 +207,18 @@
       "host": "OttoTHON at Syracuse University"
     },
     {
+      "id": "https://cuseactivities.syr.edu/event/12887352",
+      "title": "OLP Meetings",
+      "date": "2026-12-06",
+      "start": "2026-12-06T22:00:00.000Z",
+      "end": "2026-12-06T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887352",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
       "id": "https://cuseactivities.syr.edu/event/12771648",
       "title": "OttoTHON Executive Board Meeting",
       "date": "2026-12-13",
@@ -168,6 +228,18 @@
       "place": "HALL OF LANGUAGES 111",
       "desc": "OttoTHON's Executive Board meets biweekly to discuss organization events, planning, and upcoming fundraisers.",
       "link": "https://cuseactivities.syr.edu/event/12771648",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
+      "id": "https://cuseactivities.syr.edu/event/12887353",
+      "title": "OLP Meetings",
+      "date": "2026-12-13",
+      "start": "2026-12-13T22:00:00.000Z",
+      "end": "2026-12-13T23:00:00.000Z",
+      "timeLabel": "5:00 PM – 6:00 PM",
+      "place": "HALL OF LANGUAGES 105",
+      "desc": "Weekly OttoTHON Leadership Program meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12887353",
       "host": "OttoTHON at Syracuse University"
     }
   ]
