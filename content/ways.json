@@ -4,7 +4,7 @@
       "title": "Register a Team",
       "desc": "Rally your friends, club, or Greek chapter and register as a fundraising team. Every dollar you raise goes straight to Upstate Golisano.",
       "label": "Register",
-      "link": "",
+      "link": "https://events.dancemarathon.com/index.cfm?fuseaction=register.start&eventID=7327&success=donordrive.event",
       "published": true
     },
     {
@@ -12,13 +12,13 @@
       "desc": "General body members work year-round on fundraising, morale, dancer relations, and more. No experience required, just heart.",
       "label": "Apply",
       "link": "",
-      "published": true
+      "published": false
     },
     {
       "title": "Donate Directly",
       "desc": "Can’t dance? You can still support a team or make a direct gift to Upstate Golisano through our donation page.",
       "label": "Donate",
-      "link": "",
+      "link": "https://events.dancemarathon.com/ottothon2027#",
       "published": true
     }
   ]
