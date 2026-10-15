@@ -25,6 +25,12 @@ const urlOk = v => !v || /^(https?:\/\/\S+|mailto:\S+)$/i.test(v);
 const dateOk = v => /^\d{4}-\d{2}-\d{2}$/.test(v || '') && !Number.isNaN(Date.parse(v));
 function imageOk(where, v) {
   if (!v) return;
+  if (v.includes('#')) {   // the editor's focus box adds "#focus=45,25" to the photo path
+    const [path, frag] = v.split('#');
+    const m = /^focus=(\d{1,3}(?:\.\d+)?),(\d{1,3}(?:\.\d+)?)$/.exec(frag);
+    if (!m || +m[1] > 100 || +m[2] > 100) err(`${where}: the photo focus "#${frag}" is not valid. Use the focus box in the editor, or remove everything from the # onward.`);
+    v = path;
+  }
   if (!/^assets\/[\w\-. /]+$/.test(v) || v.includes('..')) return err(`${where}: image path "${v}" must start with assets/ (use the Upload button in the editor).`);
   if (!existsSync(join(root, v))) err(`${where}: image "${v}" does not exist in the repository.`);
 }
@@ -48,6 +54,8 @@ for (const [name, rule] of Object.entries(LISTS)) {
     if (!x || typeof x !== 'object') return err(`${where}: not an entry.`);
     if (typeof x.published !== 'boolean') err(`${where}: "published" must be true or false.`);
     for (const f of rule.images || []) imageOk(`${where}.${f}`, x[f]);
+    if (rule.images && x.focus && !/^(\s*(left|right|top|bottom|center|middle)[\s,/-]*)+$/i.test(x.focus) && !/^\s*\d{1,3}(\.\d+)?\s*[, ]\s*\d{1,3}(\.\d+)?\s*$/.test(x.focus)) err(`${where}.focus: "${x.focus}" is not understood. Use words like left, right, top, bottom, or two numbers like 45,25.`);
+    if (rule.images && x.focus && /^\s*\d/.test(x.focus)) { const m = String(x.focus).match(/\d+(\.\d+)?/g) || []; if (m.some(n => Number(n) > 100)) err(`${where}.focus: numbers must be between 0 and 100.`); }
     if (rule.images) for (const f of ['focusX', 'focusY']) if (x[f] !== undefined && x[f] !== '' && x[f] !== null && !(Number.isFinite(Number(x[f])) && Number(x[f]) >= 0 && Number(x[f]) <= 100)) err(`${where}.${f}: "${x[f]}" must be a number from 0 to 100.`);
     for (const f of rule.urls || []) if (!urlOk(x[f])) err(`${where}.${f}: "${x[f]}" must start with https:// (or mailto:).`);
     for (const f of rule.dates || []) if (x.published && !dateOk(x[f])) err(`${where}.${f}: "${x[f]}" is not a date like 2026-10-14.`);
@@ -76,7 +84,6 @@ if (board && Array.isArray(board.items)) {
     const where = `board[${i + 1}]${x.name ? ` "${x.name}"` : ''}`;
     if (x.tier !== undefined && !['executive', 'director', 'team'].includes(x.tier)) err(`${where}: "tier" must be executive, director, or team.`);
     if (x.email && !/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(x.email)) err(`${where}: email "${x.email}" does not look like an email address.`);
-    if (x.focus && !['left', 'center', 'right'].includes(x.focus)) err(`${where}: "focus" must be left, center, or right.`);
     if (x.published && x.tier === 'team' && !String(x.team || '').trim()) warn(`${where} is a team member with no team, so they are listed under "More of the team".`);
   });
 }

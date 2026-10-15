@@ -18,7 +18,7 @@ assets/uploads/       Photos uploaded through the editor
 content/              ALL the words, stories, people and events, as JSON files
 admin/                The editor (Decap CMS). config.yml defines every form
 cloudflare/editor-auth/   Small sign-in helper that lets Google-signed-in editors use the editor (tested by test.mjs)
-admin/focus.html     Photo Focus Tool: drag a box over a photo to choose which part shows (runs in the browser)
+admin/focus-widget.js   Adds the draggable photo focus box to the editor's photo fields
 scripts/validate-content.mjs   Checks content before each deploy
 scripts/sync-events.mjs        Copies OttoTHON events from the campus calendar feed (runs daily)
 .github/workflows/static.yml   Deploys to GitHub Pages

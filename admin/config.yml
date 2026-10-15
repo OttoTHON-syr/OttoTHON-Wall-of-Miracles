@@ -53,27 +53,9 @@ collections:
                 hint: "Use the family-approved text. Leave out medical details and last names."
               - label: "Photo"
                 name: "photo"
-                widget: "image"
-                hint: "Use only photos the family approved."
+                widget: "focusimage"
+                hint: "Choose the photo, then drag the box that appears over the part that should always stay in view. Use only photos the family approved."
                 required: false
-              - label: "Photo focus: left to right"
-                name: "focusX"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
-              - label: "Photo focus: top to bottom"
-                name: "focusY"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Family consent and photo approval confirmed in writing"
                 name: "approved"
                 widget: "boolean"
@@ -122,27 +104,9 @@ collections:
                 hint: "Use the family-approved text. Leave out medical details and last names."
               - label: "Photo"
                 name: "photo"
-                widget: "image"
-                hint: "Use only photos the family approved."
+                widget: "focusimage"
+                hint: "Choose the photo, then drag the box that appears over the part that should always stay in view. Use only photos the family approved."
                 required: false
-              - label: "Photo focus: left to right"
-                name: "focusX"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
-              - label: "Photo focus: top to bottom"
-                name: "focusY"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Family consent and photo approval confirmed in writing"
                 name: "approved"
                 widget: "boolean"
@@ -245,27 +209,9 @@ collections:
                 required: false
               - label: "Photo"
                 name: "photo"
-                widget: "image"
-                hint: "Any shape works. The photo is cropped to the frame chosen under Appearance, so keep faces toward the middle (or use Photo focus below)."
+                widget: "focusimage"
+                hint: "Choose a photo, then drag the box that appears over the part that should always stay in view."
                 required: false
-              - label: "Photo focus: left to right"
-                name: "focusX"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
-              - label: "Photo focus: top to bottom"
-                name: "focusY"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Show on the site"
                 name: "published"
                 widget: "boolean"
@@ -326,27 +272,9 @@ collections:
                 required: false
               - label: "Photo or flyer"
                 name: "photo"
-                widget: "image"
-                hint: "Optional. Shows as a taped-down photo on the card. Use only photos you have permission to share."
+                widget: "focusimage"
+                hint: "Optional. Choose the photo, then drag the box over the part that should always stay in view. Use only photos you have permission to share."
                 required: false
-              - label: "Photo focus: left to right"
-                name: "focusX"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
-              - label: "Photo focus: top to bottom"
-                name: "focusY"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                step: 1
-                required: false
-                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Show as the big Next up ticket"
                 name: "featured"
                 widget: "boolean"

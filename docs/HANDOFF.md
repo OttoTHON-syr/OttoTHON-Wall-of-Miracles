@@ -43,7 +43,7 @@ If anything looks wrong, don't publish. Delete the draft, or ask another admin.
 
 **Add or remove an editor.** In Cloudflare Zero Trust, Access, Applications, edit the Allow policy and add or remove their Google email (see [ADMIN-SETUP.md](ADMIN-SETUP.md)).
 
-**Choose which part of a photo shows.** Photos are cropped to fit their frame, and sometimes someone gets cut off. Open the Photo Focus Tool at the site address plus `/admin/focus.html`, choose the same photo, and drag the box over the part that should show. Copy the two numbers into **Photo focus: left to right** and **Photo focus: top to bottom** on that person, kid, story or event, then publish. Leaving them empty uses the middle (a little above the middle for people, so faces stay in frame).
+**Choose which part of a photo shows.** Photos are cropped to fit their frame, and sometimes someone gets cut off. In the editor, after you choose a photo, a box appears on top of it. Drag the box over the part that should always stay in view (usually the face), then save and publish. You can pick the frame shape (square, portrait or landscape) to see what each crop keeps, and **Reset to the middle** puts it back. You can also click the photo to move the box there, or use the arrow keys.
 
 **Update the E-Board.** *E-Board*, then add, edit, or drag people into the order you want. For each person choose where they appear: **Executive Director** (full-width card at the top), **Director** (two-column grid), or **Team member** (three-column grid under their team). For team members type the team name the same way for everyone on it, for example *Finance Team*. For a director, type the team they lead so that team appears under them.
 

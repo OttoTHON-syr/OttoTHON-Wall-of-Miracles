@@ -70,9 +70,26 @@ const notLive = () => false;
 
 // Photo focus: where the crop is centred, as percentages (0 = left/top edge, 100 = right/bottom edge).
 // focusX / focusY come from the Photo Focus Tool. Older entries used focus = left | center | right.
-const FOCUS = {left: '22%', center: '50%', right: '78%'};
+const FOCUS = {left: '22%', center: '50%', right: '78%'};   // older entries
 const pct = v => (v === '' || v == null || Number.isNaN(+v)) ? null : Math.min(100, Math.max(0, +v));
-const pos = (item, dy = 25) => { const it = item || {}; const x = pct(it.focusX) ?? (FOCUS[it.focus] ? parseFloat(FOCUS[it.focus]) : 50), y = pct(it.focusY) ?? dy; return `object-position:${x}% ${y}%`; };
+// Reads the "Photo focus" box: words (left, right, top, bottom, top left, ...) or two numbers like 45,25.
+function parseFocus(text) {
+  const t = String(text || '').trim().toLowerCase();
+  if (!t) return null;
+  const nums = t.match(/^(\d{1,3}(?:\.\d+)?)\s*[, ]\s*(\d{1,3}(?:\.\d+)?)$/);
+  if (nums) return [pct(nums[1]), pct(nums[2])];
+  const w = t.split(/[\s,\/-]+/);
+  const has = x => w.includes(x);
+  const x = has('left') ? 10 : has('right') ? 90 : null, y = has('top') ? 5 : has('bottom') ? 95 : null;
+  return (x == null && y == null && !has('center') && !has('middle')) ? null : [x, y];
+}
+// Photo focus: where the crop is centred (0 = left/top edge, 100 = right/bottom edge).
+const pos = (item, dy = 25) => {
+  const it = item || {}, f = parseFocus(it.focus);
+  const x = (f && f[0] != null ? f[0] : null) ?? pct(it.focusX) ?? (FOCUS[it.focus] ? parseFloat(FOCUS[it.focus]) : 50);
+  const y = (f && f[1] != null ? f[1] : null) ?? pct(it.focusY) ?? dy;
+  return `object-position:${x}% ${y}%`;
+};
 const photoOrInitial = (name, photo, item) => photo ? `<img src="${esc(imgOk(photo))}" alt="" style="${pos(item)}">` : `<span class="ini">${esc((name || '?').trim().charAt(0).toUpperCase())}</span>`;
 const medal = (name, photo, item) => `<span class="med-in">${daisy()}<span class="ph">${photoOrInitial(name, photo, item)}</span></span>`;
 const secHead = (title, intro) => `<header class="sec-head">${daisy('h-daisy')}<div><h2>${esc(title)}</h2><p>${esc(intro)}</p></div></header>`;
@@ -392,7 +409,13 @@ function mergeEvents(manual, feed) {
       desc: f.desc || '', link: /^https:\/\//.test(f.link || '') ? f.link : ''}));
   return [...manual, ...synced];
 }
-const toItems = (o, prefix) => ((o && o.items) || []).map((x, i) => ({...x, id: prefix + i, status: x.published === true ? 'published' : 'draft'}));
+// A photo path may end in "#focus=45,25" (written by the editor's focus box). Split it into the path and a focus value.
+function splitPhoto(x) {
+  if (typeof x.photo !== 'string' || !x.photo.includes('#')) return x;
+  const [src, frag] = x.photo.split('#'), m = /(?:^|&)focus=(\d{1,3}(?:\.\d+)?),(\d{1,3}(?:\.\d+)?)/.exec(frag || '');
+  return {...x, photo: src, ...(m ? {focus: `${m[1]},${m[2]}`} : {})};
+}
+const toItems = (o, prefix) => ((o && o.items) || []).map((x, i) => ({...splitPhoto(x), id: prefix + i, status: x.published === true ? 'published' : 'draft'}));
 async function init() {
   const app = document.getElementById('app');
   try {
