@@ -33,6 +33,15 @@
   var Control = createClass({
     getInitialState: function () { return {disp: null, live: null, ratio: 1, broken: false, open: false}; },
 
+    // Decap asks the field whether it needs to redraw. Its own photo field says yes when a photo was just chosen in the
+    // media library ("mediaPaths" changed). Without this, choosing from the library would never reach the entry.
+    shouldComponentUpdate: function (nextProps, nextState) {
+      if (nextState !== undefined && nextState !== this.state) return true;     // our own box, buttons and dragging
+      var p = this.props, n = nextProps;
+      return p.value !== n.value || p.getAsset !== n.getAsset || p.mediaPaths !== n.mediaPaths || p.field !== n.field ||
+        p.isDisabled !== n.isDisabled || p.isFetching !== n.isFetching || p.parentIds !== n.parentIds || p.metadata !== n.metadata;
+    },
+
     componentDidMount: function () {
       var self = this;
       this.onResize = function () { self.measure(); };
