@@ -506,4 +506,29 @@ details.recap p{margin:0}
 .foot .logos a.gplate{display:inline-block}
 .foot .logos a.gplate:hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 60%,transparent)}
 
+
+/* reflections, and links between past events and success stories */
+.reflect{margin:4px 0 0;padding:12px 14px;background:color-mix(in srgb,#fff 60%,transparent);border-left:4px solid var(--acc,var(--mid));border-radius:0 12px 12px 0;font-family:var(--hand);color:#28456A}
+.reflect p{margin:0 0 6px;font-size:1.02rem}
+.reflect footer{font-weight:700;font-size:.9rem;text-align:right}
+.reflect-label{display:block;font-family:system-ui,sans-serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#4C6B8F;margin-bottom:4px}
+details.reflect-more summary{cursor:pointer;list-style:none}
+details.reflect-more summary::-webkit-details-marker{display:none}
+details.reflect-more summary b{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+details.reflect-more[open] summary{display:none}
+.ev-stories{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.9rem}
+.ev-stories>span{font-weight:700}
+.story-link{border:2px solid #28456A;background:transparent;color:#28456A;border-radius:999px;padding:3px 12px;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;text-align:left}
+.story-link:hover,.story-link:focus-visible{background:color-mix(in srgb,#fff 55%,transparent)}
+.pastc,.evc{scroll-margin-top:90px}
+.from-event{margin-top:22px;padding-top:16px;border-top:2px dashed var(--line)}
+.from-event h4{font-family:var(--hand-title);font-size:1.3rem;margin:0 0 12px}
+.fe{margin:0 0 12px}
+.fe-link{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border:2px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);background:var(--bg)}
+.fe-link:hover,.fe-link:focus-visible{border-color:var(--ink)}
+.fe-date{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.75rem;color:var(--ink2)}
+.fe-place{color:var(--ink2);font-size:.92rem}
+.from-event .reflect{margin-top:8px;color:var(--ink);background:var(--soft)}
+.from-event .reflect-label{color:var(--ink2)}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

@@ -303,6 +303,27 @@ collections:
                 widget: "text"
                 hint: "For a past event, say what happened."
                 required: false
+              - label: "Reflection"
+                name: "reflection"
+                widget: "text"
+                required: false
+                hint: "Optional. A short personal reflection on the event, in your own words: what it meant, what you will remember. Shows on the event card and on any linked story."
+              - label: "Reflection written by"
+                name: "reflectionBy"
+                widget: "string"
+                required: false
+                hint: "For example Carly, Executive Director."
+              - label: "Related success stories"
+                name: "stories"
+                widget: "relation"
+                collection: "stories"
+                file: "stories"
+                search_fields: ["items.*.title"]
+                display_fields: ["items.*.title"]
+                value_field: "items.*.title"
+                multiple: true
+                required: false
+                hint: "Optional. Pick the success stories that came out of this event. The event card links to each story, and each story links back to the event. If you rename a story later, pick it again here."
               - label: "Photo or flyer"
                 name: "photo"
                 widget: "focusimage"
@@ -371,6 +392,27 @@ collections:
                 widget: "text"
                 hint: "A sentence or two: who came, what you did, what it meant. Long recaps get a Read more link."
                 required: false
+              - label: "Reflection"
+                name: "reflection"
+                widget: "text"
+                required: false
+                hint: "Optional. A short personal reflection on the event, in your own words: what it meant, what you will remember. Shows on the event card and on any linked story."
+              - label: "Reflection written by"
+                name: "reflectionBy"
+                widget: "string"
+                required: false
+                hint: "For example Carly, Executive Director."
+              - label: "Related success stories"
+                name: "stories"
+                widget: "relation"
+                collection: "stories"
+                file: "stories"
+                search_fields: ["items.*.title"]
+                display_fields: ["items.*.title"]
+                value_field: "items.*.title"
+                multiple: true
+                required: false
+                hint: "Optional. Pick the success stories that came out of this event. The event card links to each story, and each story links back to the event. If you rename a story later, pick it again here."
               - label: "Photo"
                 name: "photo"
                 widget: "focusimage"

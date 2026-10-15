@@ -5,8 +5,8 @@
    ===================================================================== */
 'use strict';
 const IMG = {logo: 'assets/img/ottothon-logo.jpg', golisano: 'assets/img/golisano-logo.svg'};
-const NEWDAISY = 'assts/img/stemless-daisy.png';
-const newDaisy = cls => S.design.daisies ? `<img class="bq ${cls}" src="${NEWDAISY}" alt="" aria-hidden="true">` : '';
+const NEWDAISY = 'assets/img/stemless-daisy.png';
+const newDaisy = (cls = '') => S.design.daisies ? `<img class="daisy ${cls}" src="${NEWDAISY}" alt="" aria-hidden="true">` : '';
 const imgOk = u => /^(assets\/[\w\-. \/]+|https:\/\/)/i.test(u || '') && !/\.\./.test(u) ? u : '';
 document.body.insertAdjacentHTML('afterbegin', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs"></defs></svg>');
 let S;
@@ -263,6 +263,22 @@ function evPhoto(e, i) {
   const img = imgOk(e.photo), n = i % 6;
   return `<figure class="polo ev-polo" style="--pr:${FRAME_TILT[n]}deg"><span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg"></span><div class="polo-img">${img ? `<img src="${esc(img)}" alt="" style="${pos(e, 50)}">` : `<span class="polo-ph">${daisy()}</span>`}</div></figure>`;
 }
+// ---------- past events <-> success stories, and reflections ----------
+const norm = t => String(t || '').trim().toLowerCase();
+const evId = e => 'ev-' + (e.date || '') + '-' + norm(e.title).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
+const storiesFor = e => { const want = (Array.isArray(e.stories) ? e.stories : []).map(norm); return live('stories').filter(s => want.includes(norm(s.title))); };
+const eventsForStory = s => live('events').filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date || '') && Array.isArray(e.stories) && e.stories.some(x => norm(x) === norm(s.title))).sort(byDate);
+function reflectHTML(e, full) {
+  const t = String(e.reflection || '').trim(); if (!t) return '';
+  const by = String(e.reflectionBy || '').trim();
+  const body = !full && t.length > 240
+    ? `<details class="reflect-more"><summary><span class="teaser">${esc(t.slice(0, 220).replace(/\s+\S*$/, ''))}… </span><b>Read more</b></summary>${paras(t)}</details>` : paras(t);
+  return `<blockquote class="reflect"><span class="reflect-label">A reflection</span>${body}${by ? `<footer>— ${esc(by)}</footer>` : ''}</blockquote>`;
+}
+function fromEventHTML(s) {
+  const evs = eventsForStory(s); if (!evs.length) return '';
+  return `<div class="from-event"><h4>From the event</h4>${evs.map(e => `<div class="fe"><a class="fe-link" href="events.html#${evId(e)}"><span class="fe-date">${fmt(e.date)}</span><strong>${esc(e.title)}</strong>${e.place ? `<span class="fe-place">${esc(e.place)}</span>` : ''}<span class="n-foot">See the event <span aria-hidden="true">→</span></span></a>${reflectHTML(e, true)}</div>`).join('')}</div>`;
+}
 function eventsHTML() {
   const T = S.text, td = today(), list = live('events').filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date || ''));
   const up = list.filter(e => !e.archive && e.date >= td).sort((a, b) => a.date.localeCompare(b.date)), past = list.filter(e => e.archive || e.date < td).sort(byDate);
@@ -277,7 +293,7 @@ function eventsHTML() {
         <button class="btn cal-btn" data-act="ics" data-id="${next.id}">${ICON.cal}Add to Calendar</button></div></article>`;
   })();
   const card = (e, i) => { const c = catOf(e), q = parts(e), link = safeUrl(e.link), img = imgOk(e.photo);
-    return `<article class="evc cat-${c}${img ? ' has-img' : ''}">${img ? evPhoto(e, i + 1) : ''}
+    return `<article class="evc cat-${c}${img ? ' has-img' : ''}" id="${evId(e)}">${img ? evPhoto(e, i + 1) : ''}
       <div class="evc-body">${chip(c)}<h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${rows(e)}${e.desc ? `<p class="ev-desc">${esc(e.desc)}</p>` : ''}
         <div class="ev-actions"><button class="btn sm" data-act="ics" data-id="${e.id}">Add to calendar</button>${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Details</a>` : ''}</div></div>
       <div class="cal"><span class="washi w${(i + 2) % 4}" style="--tr:${TAPE_TILT[(i + 3) % 6]}deg"></span><b>${q.mo}</b><strong>${q.day}</strong>${daisy('cal-daisy')}</div></article>`; };
@@ -288,8 +304,10 @@ function eventsHTML() {
     return `<details class="recap"><summary><span class="teaser">${esc(teaser)}… </span><b>Read more</b></summary><p>${esc(x)}</p></details>`;
   };
   const pastCard = (e, i) => { const c = catOf(e), q = parts(e), link = safeUrl(e.link), img = imgOk(e.photo);
-    return `<article class="pastc cat-${c}${img ? ' has-img' : ''}">${img ? evPhoto(e, i) : ''}<div class="pastc-top"><span class="pdate">${q.mo} ${q.day}</span>${chip(c)}</div>
-      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}
+    const ss = storiesFor(e);
+    return `<article class="pastc cat-${c}${img ? ' has-img' : ''}" id="${evId(e)}">${img ? evPhoto(e, i) : ''}<div class="pastc-top"><span class="pdate">${q.mo} ${q.day}</span>${chip(c)}</div>
+      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}${reflectHTML(e, false)}
+      ${ss.length ? `<div class="ev-stories"><span>Read the ${ss.length > 1 ? 'stories' : 'story'}:</span>${ss.map(x => `<button type="button" class="story-link" data-act="story" data-id="${x.id}">${esc(x.title)}</button>`).join('')}</div>` : ''}
       ${link ? `<div class="ev-actions"><a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">See more</a></div>` : ''}</article>`; };
   const PAST_FIRST = 6, shownPast = ui.pastAll ? past : past.slice(0, PAST_FIRST);
   const pastHTML = [...new Set(past.map(e => e.date.slice(0, 4)))].map(y => {
@@ -415,7 +433,7 @@ function newsHTML(s) {
 function openStory(id) {
   const s = S.stories.find(x => x.id === id); if (!s) return;
   $('#dlg-body').innerHTML = `<div class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="" style="${pos(s, 50)}">` : daisy()}</div>
-    <span class="chip">${esc(s.category)}</span> ${sampleChip(s)}<h3 id="dlg-title">${esc(s.title)}</h3><p class="hint" style="margin-top:0">${fmt(s.date)}</p>${paras(s.story)}${newsHTML(s)}
+    <span class="chip">${esc(s.category)}</span> ${sampleChip(s)}<h3 id="dlg-title">${esc(s.title)}</h3><p class="hint" style="margin-top:0">${fmt(s.date)}</p>${paras(s.story)}${fromEventHTML(s)}${newsHTML(s)}
     <div class="dlg-btns"><button class="btn primary" data-act="closedlg">Close</button></div>`;
   $('#dlg').showModal();
 }
@@ -497,8 +515,10 @@ async function init() {
     };
     ['stories', 'wed', 'impact'].forEach(k => { if (!S.design.sections.some(x => x.key === k)) S.design.sections.push({key: k, show: true}); });
     document.body.insertAdjacentHTML('beforeend', '<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg-in" id="dlg-body"></div></dialog>');
-    document.getElementById('dlg').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+    document.getElementById('dlg').addEventListener('click', e => { if (e.target === e.currentTarget || e.target.closest('.fe-link')) document.getElementById('dlg').close(); });
+    window.addEventListener('hashchange', () => { if (/^#ev-/.test(location.hash)) { ui.pastAll = true; renderPublic(); const el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) el.scrollIntoView(); } });
     applyTheme();
+    if (/^#ev-/.test(location.hash)) ui.pastAll = true;
     renderPublic();
     if (location.hash.length > 1) { const el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) el.scrollIntoView(); }
   } catch (err) {

@@ -83,9 +83,15 @@ for (const [name, rule] of Object.entries(LISTS)) {
 if (unapproved) warn(`${unapproved} kid/story entries are not approved. This repository is public, so anything saved here can be read by anyone. Only enter a child's story after the family approves.`);
 
 // ---- event categories ----
+const storyTitles = new Set((((read('stories') || {}).items) || []).map(s => String((s && s.title) || '').trim().toLowerCase()));
 for (const fname of ['events', 'past-events']) {
 const evs = read(fname);
 if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
+  if (x && x.stories !== undefined) {
+    if (!Array.isArray(x.stories) || x.stories.some(t => typeof t !== 'string')) err(`${fname}[${i + 1}] "${x.title}": "stories" must be a list of story titles.`);
+    else x.stories.forEach(t => { if (!storyTitles.has(t.trim().toLowerCase())) warn(`${fname}[${i + 1}] "${x.title}": the linked story "${t}" was not found. If you renamed it, pick it again.`); });
+  }
+  for (const f of ['reflection', 'reflectionBy']) if (x && x[f] !== undefined && typeof x[f] !== 'string') err(`${fname}[${i + 1}] "${x.title}": "${f}" must be text.`);
   if (x && x.category && !['fundraiser', 'meeting', 'social', 'community', 'other'].includes(x.category)) err(`${fname}[${i + 1}] "${x.title}": category must be fundraiser, meeting, social, community, or other.`);
 });
 }
