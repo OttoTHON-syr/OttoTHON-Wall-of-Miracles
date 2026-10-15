@@ -1,31 +1,21 @@
 {
   "items": [
     {
-      "title": "Sample: Paint & Sip Night",
-      "date": "2026-02-22",
-      "category": "social",
-      "place": "Schine Student Center",
-      "desc": "Write a sentence or two about what happened, who came, and what it meant. Add a photo if you have permission to share one.",
-      "photo": "",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Sample: Valentine's Fundraiser",
-      "date": "2026-02-14",
-      "category": "fundraiser",
-      "place": "Marshall Street",
-      "desc": "Past events show newest first, grouped by year. Delete these samples once you have added real ones.",
-      "photo": "",
-      "link": "",
-      "published": false
-    },
-    {
+      "photos": [
+        {
+          "photo": "assets/uploads/padels4.jpg#focus=50,100",
+          "caption": "Our Winners!"
+        },
+        {
+          "photo": "assets/uploads/padels2.jpg"
+        }
+      ],
+      "asStory": true,
       "place": "Flanagan Gym",
       "reflection": "Paddles for a Purpose was OttoTHON's first-ever pickleball tournament. Held in a round-robin style competition accompanied by a fun-filled raffle generously donated by our sponsors, we were proud to raise $2,089 in support of Upstate Golisano Children's Hospital!",
       "published": true,
       "date": "2026-09-13",
-      "desc": "",
+      "desc": "Join us for our first OttoTHON Pickleball Tournament benefiting Upstate Golisano Children's Hospital, hosted by both OttoTHON and Student Government Association (SGA)!",
       "photo": "assets/uploads/Paddles-for-a-purpose.jpg",
       "stories": [
         "Paddles for a Purpose"
