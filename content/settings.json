@@ -75,7 +75,8 @@
     "eventsIntro": "Fundraising pushes, team bonding nights, and the big day itself: here’s everything on the OttoTHON calendar this year.",
     "mainTitle": "OttoTHON: The Main Event",
     "mainPlace": "Schine Student Center, Goldstein Auditorium",
-    "mainDesc": "Our dance marathon, the culmination of a full year of fundraising. Food, performances, games, and the moment we finally reveal the total."
+    "mainDesc": "Our dance marathon, the culmination of a full year of fundraising. Food, performances, games, and the moment we finally reveal the total.",
+    "nextLabel": "STEP RIGHT UP"
   },
   "links": {
     "donateUrl": "https://events.dancemarathon.com/ottothon2027#",
