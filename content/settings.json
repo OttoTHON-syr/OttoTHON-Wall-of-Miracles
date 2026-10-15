@@ -1,7 +1,7 @@
 {
   "photos": {
     "heroPhoto": "",
-    "wallPhoto": ""
+    "wallPhoto": "assets/uploads/full-team.jpg"
   },
   "nav": {
     "home": "Home",
@@ -49,7 +49,8 @@
         "key": "impact",
         "show": true
       }
-    ]
+    ],
+    "photoFrame": "square"
   },
   "wall": {
     "heroTitle": "Wall of Miracles",
