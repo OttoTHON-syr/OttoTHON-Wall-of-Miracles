@@ -1,0 +1,49 @@
+# Phone and camera photos are often 5-8 MB each. That makes the site slow and the editor sluggish.
+# Whenever photos are added under assets/uploads, this shrinks any big one to a web size
+# (longest side 1600 px) and redeploys. Small photos are left alone, so running it twice changes nothing.
+name: Shrink new photos
+
+on:
+  push:
+    branches: ["main"]
+    paths: ["assets/uploads/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to save the smaller photos
+  actions: write    # to start the deploy (pushes made by this workflow do not start it on their own)
+
+concurrency:
+  group: shrink-photos
+  cancel-in-progress: false
+
+jobs:
+  shrink:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Shrink big photos
+        run: |
+          command -v mogrify >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick; }
+          shopt -s nullglob nocaseglob
+          for f in assets/uploads/*.jpg assets/uploads/*.jpeg assets/uploads/*.png; do
+            if [ "$(stat -c%s "$f")" -gt 800000 ]; then
+              echo "Shrinking $f"
+              mogrify -auto-orient -strip -resize '1600x1600>' -quality 82 "$f"
+            fi
+          done
+      - name: Save and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(git status --porcelain assets/uploads)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets/uploads
+            git commit -m "Shrink large photos"
+            git push
+            gh workflow run static.yml --ref main
+          else
+            echo "No big photos to shrink."
+          fi

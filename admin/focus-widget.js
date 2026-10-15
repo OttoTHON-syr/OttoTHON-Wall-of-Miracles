@@ -31,7 +31,7 @@
   function imageWidget() { try { return CMS.getWidget('image') || {}; } catch (e) { return {}; } }
 
   var Control = createClass({
-    getInitialState: function () { return {disp: null, live: null, ratio: 1, broken: false}; },
+    getInitialState: function () { return {disp: null, live: null, ratio: 1, broken: false, open: false}; },
 
     componentDidMount: function () {
       var self = this;
@@ -63,7 +63,7 @@
     onPhoto: function (next) {
       var n = next == null ? '' : String(next);
       if (n === this.current().src) return;           // same photo: keep the focus
-      this.setState({live: null, disp: null, broken: false});
+      this.setState({live: null, disp: null, broken: false, open: !!n});
       this.props.onChange(n);
     },
     commit: function (x, y) {
@@ -136,6 +136,15 @@
         g && g.mx <= 1 ? 'In this frame the photo is only trimmed at the top and bottom, so the box moves up and down.' :
         g && g.my <= 1 ? 'In this frame the photo is only trimmed at the sides, so the box moves left and right.' : '';
 
+      var btn = {padding: '4px 12px', borderRadius: '999px', border: '2px solid #28456A', background: 'transparent', color: '#28456A', cursor: 'pointer', font: 'inherit', fontSize: '13px'};
+      if (!st.open) {
+        // closed: no big photo is loaded, so lists with many people stay fast
+        return h('div', null, picker,
+          h('div', {style: {marginTop: '10px', display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap'}},
+            h('button', {type: 'button', 'aria-expanded': false, onClick: function () { self.setState({open: true}); }, style: btn}, c.set ? 'Change photo focus' : 'Set photo focus'),
+            h('span', {style: {fontSize: '13px', opacity: 0.75}}, c.set ? 'Focus is set.' : 'Using the middle of the photo.')));
+      }
+
       return h('div', null, picker,
         h('div', {style: {marginTop: '14px'}},
           h('p', {style: {margin: '0 0 8px', fontWeight: 600}}, 'Drag the box over the part of the photo that should always stay in view'),
@@ -144,14 +153,15 @@
             FRAMES.map(function (f) {
               var on = Math.abs(st.ratio - f[1]) < 0.001;
               return h('button', {key: f[0], type: 'button', 'aria-pressed': on, onClick: function () { self.setState({ratio: f[1]}); },
-                style: {padding: '4px 12px', borderRadius: '999px', border: '2px solid #28456A', background: on ? '#28456A' : 'transparent', color: on ? '#fff' : '#28456A', cursor: 'pointer', font: 'inherit', fontSize: '13px'}}, f[0]);
+                style: assign({}, btn, {background: on ? '#28456A' : 'transparent', color: on ? '#fff' : '#28456A'})}, f[0]);
             }),
-            c.set ? h('button', {type: 'button', onClick: this.reset, style: {padding: '4px 12px', borderRadius: '999px', border: '2px solid #888', background: 'transparent', cursor: 'pointer', font: 'inherit', fontSize: '13px'}}, 'Reset to the middle') : null),
+            c.set ? h('button', {type: 'button', onClick: this.reset, style: assign({}, btn, {border: '2px solid #888', color: 'inherit'})}, 'Reset to the middle') : null,
+            h('button', {type: 'button', onClick: function () { self.setState({open: false, disp: null, broken: false}); }, style: assign({}, btn, {border: '2px solid #888', color: 'inherit'})}, 'Done')),
           st.broken
             ? h('p', {style: {margin: '8px 0', padding: '8px 12px', background: '#fff3cd', borderRadius: '6px', fontSize: '13px'}}, 'The photo preview is not available yet. Save or publish the photo once, then come back to place the box.')
             : h('div', {ref: function (el) { self.wrapEl = el; }, onPointerDown: this.onWrapDown,
                 style: {position: 'relative', display: 'inline-block', maxWidth: '100%', lineHeight: 0, overflow: 'hidden', borderRadius: '6px', touchAction: 'none', userSelect: 'none', WebkitUserSelect: 'none'}},
-              h('img', {ref: function (el) { self.imgEl = el; }, src: this.imageUrl(c.src), alt: 'The photo', onLoad: this.onImgLoad, onError: this.onImgError, draggable: false,
+              h('img', {ref: function (el) { self.imgEl = el; }, src: this.imageUrl(c.src), alt: 'The photo', onLoad: this.onImgLoad, onError: this.onImgError, draggable: false, decoding: 'async',
                 style: {display: 'block', maxWidth: '100%', maxHeight: '380px', height: 'auto', width: 'auto'}}),
               box),
           tip ? h('p', {style: {margin: '8px 0 0', fontSize: '13px', opacity: 0.8}}, tip) : null));

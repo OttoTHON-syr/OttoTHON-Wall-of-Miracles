@@ -45,6 +45,8 @@ If anything looks wrong, don't publish. Delete the draft, or ask another admin.
 
 **Choose which part of a photo shows.** Photos are cropped to fit their frame, and sometimes someone gets cut off. In the editor, after you choose a photo, a box appears on top of it. Drag the box over the part that should always stay in view (usually the face), then save and publish. You can pick the frame shape (square, portrait or landscape) to see what each crop keeps, and **Reset to the middle** puts it back. You can also click the photo to move the box there, or use the arrow keys.
 
+**Photo sizes.** Phone and camera photos are huge (5 to 8 MB). You don't need to resize them: about a minute after you publish, a background job ("Shrink new photos" in the Actions tab) shrinks any big photo to a web size and redeploys. If the editor or the site feels slow after adding many photos, check that this job ran.
+
 **Update the E-Board.** *E-Board*, then add, edit, or drag people into the order you want. For each person choose where they appear: **Executive Director** (full-width card at the top), **Director** (two-column grid), or **Team member** (three-column grid under their team). For team members type the team name the same way for everyone on it, for example *Finance Team*. For a director, type the team they lead so that team appears under them.
 
 ## The final test
