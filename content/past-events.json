@@ -18,6 +18,7 @@
       "desc": "Join us for our first OttoTHON Pickleball Tournament benefiting Upstate Golisano Children's Hospital, hosted by both OttoTHON and Student Government Association (SGA)!",
       "photo": "assets/uploads/Paddles-for-a-purpose.jpg",
       "stories": [],
+      "approved": true,
       "title": "Paddles for a Purpose",
       "category": "fundraiser"
     },
@@ -40,6 +41,7 @@
       "date": "2026-03-28",
       "desc": "OttoTHON is a Dance Marathon fundraiser that lasts from 11 AM - 10 PM! All of the funds raised will benefit the children and families at Upstate Golisano Children's Hospital. The day will consist of food, dancing, fundraising, games, a parade to the hospital, guest speakers, interactions with kids from the hospital, and more!\n\nAll participation at this event will count for any service hour requirements needed on campus/in Greek Life.",
       "photo": "assets/uploads/26-total.jpg",
+      "approved": true,
       "title": "OttoTHON 2026",
       "link": "",
       "articles": [
@@ -53,44 +55,48 @@
       "category": "fundraiser"
     },
     {
-      "category": "fundraiser",
       "asStory": false,
-      "published": true,
-      "title": "Back to School Poster Sale with Global Prints",
       "place": "Shaw Quad",
+      "published": true,
+      "date": "2026-09-14",
       "desc": "New year, new walls! Stop by the Quad and stock up on posters, prints, and dorm room decor to kick off the semester right. OttoTHON has teamed up with Global Prints to bring you a huge selection at prices that won't break your student budget. Swing by between classes, grab your favorites, and help support OttoTHON's mission for Upstate Golisano Children's Hospital while you're at it!",
       "photo": "https://se-images.campuslabs.com/clink/images/689ee082-a3ea-43c2-b1bf-be164f5470a08b0213c6-2ad1-4bd4-9424-10a9f5f92f94.png?preset=med-w#focus=0,25",
-      "date": "2026-09-14"
+      "approved": true,
+      "title": "Back to School Poster Sale with Global Prints",
+      "category": "fundraiser"
     },
     {
-      "category": "fundraiser",
       "asStory": false,
+      "place": "Schine Outdoor Terrace",
       "published": true,
-      "title": "Dare Week - Pie an E-Board Member",
       "date": "2026-09-24",
-      "place": "Schine Outdoor Terrace",
       "desc": "OttoTHON tabled to promote their \"Dare Week\" awareness-raising push for Upstate Golisano Children's Hospital through \"Pie an E-Board Member\" and other challenges.",
-      "photo": "assets/uploads/pie4.png#focus=50,58"
+      "photo": "assets/uploads/pie4.png#focus=50,58",
+      "approved": true,
+      "title": "Dare Week - Pie an E-Board Member",
+      "category": "fundraiser"
     },
     {
-      "category": "community",
       "asStory": true,
-      "published": true,
-      "title": "Miracle Week - Candlelight Vigil",
-      "date": "2026-10-05",
       "place": "Hendricks Chapel Steps",
+      "published": true,
+      "date": "2026-10-05",
       "desc": "Tonight, we gather to honor the children whose lives were taken too soon and to hold their families, loved ones, and memories close to our hearts.\n\nEach candle represents a life that mattered, a story that deserves to be remembered, and a light that will never be forgotten. 🩵\n\nJoin us for our Candlelight Vigil as we remember, honor, and celebrate the lives of these incredible children.",
-      "photo": "assets/uploads/candlelight-vigil.jpeg#focus=0,25"
+      "photo": "assets/uploads/candlelight-vigil.jpeg#focus=0,25",
+      "approved": true,
+      "title": "Miracle Week - Candlelight Vigil",
+      "category": "community"
     },
     {
-      "category": "fundraiser",
       "asStory": false,
-      "published": true,
-      "title": "Miracle Week - Pie-a-Friend",
-      "date": "2026-10-06",
       "place": "Schine Outdoor Terrace",
+      "published": true,
+      "date": "2026-10-06",
       "desc": "Come Pie a friend or a member of OttoTHON to raise awareness for Children's Health!",
-      "photo": "assets/uploads/pie2.png#focus=50,63"
+      "photo": "assets/uploads/pie2.png#focus=50,63",
+      "approved": true,
+      "title": "Miracle Week - Pie-a-Friend",
+      "category": "fundraiser"
     },
     {
       "photos": [],
@@ -101,6 +107,7 @@
       "date": "2026-10-07",
       "desc": "The big week is just starting! Join us October 7th from 5–7 PM in HOL 207 for our Miracle Week Hype Room! 🩵\n\nWe’ll be raising funds, playing games, bringing the energy, and kicking off an unforgettable week together.✨\n\nYou won’t want to miss the opening act, we will see you there",
       "photo": "assets/uploads/hype-room-total.jpeg",
+      "approved": true,
       "title": "Miracle Week - Hype Room",
       "category": "fundraiser"
     }
