@@ -55,30 +55,33 @@
       "published": true,
       "photo": "assets/uploads/abi-handel.jpg#focus=0,25",
       "role": "Internal Events Director",
-      "emailLabel": "internal.ottothon@gmail.com",
+      "emailLabel": "",
       "focus": "left",
       "link": "",
+      "email": "internal.ottothon@gmail.com",
       "team": "Internal Events Team"
     },
     {
-      "name": "Zahra Jarrell",
-      "role": "Events and Operations Chair",
       "tier": "team",
-      "team": "Internal Events Team",
       "bio": "",
-      "link": "",
+      "name": "Zahra Jarrell",
+      "published": true,
       "photo": "assets/uploads/zahra-jarrell.jpg#focus=0,25",
-      "published": true
+      "role": "Events and Operations Chair",
+      "link": "",
+      "email": "ottothon.operations@gmail.com",
+      "team": "Internal Events Team"
     },
     {
-      "name": "Rayna Gross",
-      "role": "Events and Operations Chair",
       "tier": "team",
-      "team": "Internal Events Team",
       "bio": "",
-      "link": "",
+      "name": "Rayna Gross",
+      "published": true,
       "photo": "assets/uploads/rayna-gross.jpg#focus=0,25",
-      "published": true
+      "role": "Events and Operations Chair",
+      "link": "",
+      "email": "ottothon.operations@gmail.com",
+      "team": "Internal Events Team"
     },
     {
       "tier": "team",
@@ -89,6 +92,7 @@
       "role": "Family and Hospital Relations Chair",
       "focus": "left",
       "link": "",
+      "email": "ottothon.hospitalrelations@gmail.com",
       "team": "Internal Events Team"
     },
     {
@@ -100,6 +104,7 @@
       "role": "Morale Chair",
       "focus": "left",
       "link": "",
+      "email": "ottothon.morale@gmail.com",
       "team": "Internal Events Team"
     },
     {
@@ -109,7 +114,8 @@
       "role": "Morale Chair",
       "team": "Internal Events Team",
       "photo": "assets/uploads/maggie-poulin.jpg#focus=0,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.morale@gmail.com"
     },
     {
       "tier": "team",
@@ -118,7 +124,8 @@
       "role": "Analytics Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/andrei-livingston.jpg#focus=0,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.analytics@gmail.com"
     },
     {
       "tier": "team",
@@ -126,7 +133,8 @@
       "name": "Dani Lawton",
       "role": "Fundraising Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/dani-lawton.jpg#focus=0,25"
+      "photo": "assets/uploads/dani-lawton.jpg#focus=0,25",
+      "email": "ottothon.fundraising@gmail.com"
     },
     {
       "tier": "team",
@@ -134,7 +142,8 @@
       "name": "Sara Woodside",
       "role": "Fundraising Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/sara-woodside.jpg#focus=0,25"
+      "photo": "assets/uploads/sara-woodside.jpg#focus=0,25",
+      "email": "ottothon.fundraising@gmail.com"
     },
     {
       "tier": "team",
@@ -142,7 +151,8 @@
       "name": "Wray Zhou",
       "role": "Partnership Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/wray-zhou.jpg#focus=0,25"
+      "photo": "assets/uploads/wray-zhou.jpg#focus=0,25",
+      "email": "ottothon.sponsorship@gmail.com"
     },
     {
       "tier": "team",
@@ -151,7 +161,8 @@
       "role": "Community Relations Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/anastasia-romanyk.jpg#focus=0,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.communityrelations@gmail.com"
     },
     {
       "tier": "team",
@@ -160,7 +171,8 @@
       "role": "Community Relations Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/kate-schmidt.jpg#focus=0,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.communityrelations@gmail.com"
     },
     {
       "tier": "team",
@@ -168,7 +180,8 @@
       "name": "Ella Dimitriadis",
       "role": "General Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/ella-dimitriadis.jpg#focus=0,25"
+      "photo": "assets/uploads/ella-dimitriadis.jpg#focus=0,25",
+      "email": "ottothon.recruitment@gmail.com"
     },
     {
       "tier": "team",
@@ -176,7 +189,8 @@
       "name": "Ryan Ludwig",
       "role": "General Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/ryan-ludwig.jpg#focus=0,25"
+      "photo": "assets/uploads/ryan-ludwig.jpg#focus=0,25",
+      "email": "ottothon.recruitment@gmail.com"
     },
     {
       "tier": "team",
@@ -184,7 +198,8 @@
       "name": "Lulu Boone",
       "role": "Team Captain Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/lulu-boone.jpg#focus=0,25"
+      "photo": "assets/uploads/lulu-boone.jpg#focus=0,25",
+      "email": "ottothon.teamcaptains@gmail.com"
     },
     {
       "tier": "team",
@@ -192,7 +207,8 @@
       "name": "Erica Cuciti",
       "role": "General Body Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/erica-cuciti.jpg#focus=0,25"
+      "photo": "assets/uploads/erica-cuciti.jpg#focus=0,25",
+      "email": "ottothon.generalbody@gmail.com"
     },
     {
       "tier": "team",
@@ -201,7 +217,8 @@
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
       "photo": "assets/uploads/carmen-lee-bennett.jpg#focus=8,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.freshmanrecruit@gmail.com"
     },
     {
       "tier": "team",
@@ -209,14 +226,16 @@
       "name": "Jay Slaven",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/jay-slaven.jpg#focus=0,25"
+      "photo": "assets/uploads/jay-slaven.jpg#focus=0,25",
+      "email": "ottothon.freshmanrecruit@gmail.com"
     },
     {
       "tier": "team",
       "published": true,
       "name": "Brynn Wisniewski",
       "role": "First-Year Recruitment Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "email": "ottothon.freshmanrecruit@gmail.com"
     },
     {
       "tier": "team",
@@ -224,7 +243,8 @@
       "name": "Avery Fox",
       "role": "Visual Media Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/avery-fox.jpg#focus=0,25"
+      "photo": "assets/uploads/avery-fox.jpg#focus=0,25",
+      "email": "ottothon.visualmedia@gmail.com"
     },
     {
       "tier": "team",
@@ -232,7 +252,8 @@
       "name": "Lizzy Weiler",
       "role": "Graphic Design Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/lizzy-weiler.jpg#focus=0,25"
+      "photo": "assets/uploads/lizzy-weiler.jpg#focus=0,25",
+      "email": "ottothon.marketing@gmail.com"
     },
     {
       "tier": "team",
@@ -241,7 +262,8 @@
       "role": "Graphic Design Chair",
       "team": "Communications Team",
       "photo": "assets/uploads/gabi-robayo.jpg#focus=0,25",
-      "focus": "left"
+      "focus": "left",
+      "email": "ottothon.marketing@gmail.com"
     },
     {
       "tier": "team",
@@ -249,7 +271,8 @@
       "name": "Adam Paliana",
       "role": "Social Media Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/adam-paliana.jpg#focus=0,25"
+      "photo": "assets/uploads/adam-paliana.jpg#focus=0,25",
+      "email": "ottothon.socialmedia@gmail.com"
     },
     {
       "tier": "team",
@@ -257,7 +280,8 @@
       "name": "London Goodman",
       "role": "Alumni Relations Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/london-goodman.jpg#focus=0,25"
+      "photo": "assets/uploads/london-goodman.jpg#focus=0,25",
+      "email": "alumnirelations.ottothon@gmail.com"
     }
   ]
 }
