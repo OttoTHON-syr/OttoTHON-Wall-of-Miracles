@@ -36,11 +36,11 @@ For a TV or online clip, paste a **YouTube or Vimeo** link in **Video**. It show
 
 **Add a past event (to show under "Where we've been").** In the editor open **Past events**, then *Add*. Fill in the name, the date it happened, the type, the place, and a sentence or two about **what happened**. Add a photo if you have permission to share one (then drag the box to choose the crop). Turn **Show on the site** on and publish. Past events appear on the Events page newest first, grouped by year. The first six show, with a **Show all** button for the rest, and long recaps get a **Read more** link. You never have to move events yourself: anything added under **Events** moves to Where we've been on its own once its date passes. Use **Past events** for older events that were never on the site, or when you want a photo and recap.
 
-**Add a reflection to a past event (and optionally show it as a success story).** Open a past event (under **Past events**, or an older item under **Events**). Press **Add reflection** and fill in:
-- **Reflection** and **Written by**: what the event meant, in your own words, and who wrote it. You can press Add reflection again for more than one (for example from different people).
-- **Photos**: press **Add photo** as many times as you like, and drag the box to choose each crop. Add a caption if you want one.
-- **Also show as a success story**: turn this on to make the reflection (with its photos) appear on the Wall of Miracles too, linked back to the event. There is nothing else to set up. Only turn it on if everyone pictured, and the families of any children, has approved.
-On the Events page the event card gets a **Read the reflection** button that opens the reflections and photo gallery. A reflection shown as a story appears among the success stories, titled with the event's name and the writer's first name.
+**Turn an event into a success story.** Open a past event (under **Past events**, or an older item under **Events**) and turn on **Also show as a success story**. The event then also appears on the Wall of Miracles, with its name, what happened, its photos, and a **reflection**. Fill in:
+- **What happened** (the event's description): the story's main text.
+- **Reflection** and **Reflection written by**: a short personal note about what the event meant, for example from the Executive Director or a dancer. It shows in the story as "A reflection".
+- **Photo** (the cover) and **Story photos**: press **Add photo** as many times as you like, and drag the box to choose each crop. Add a caption if you want one.
+There is nothing else to set up. The event card gets a **Read the story** button, and the story links back to the event. Only turn it on if everyone pictured, and the families of any children, has approved.
 
 **Add more photos to a success story.** Open the story under **Success stories**. After the main photo, press **Add photo** under **More photos** as often as you like. The story's popup shows them as a taped-down gallery.
 

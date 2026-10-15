@@ -318,44 +318,6 @@ collections:
                 widget: "text"
                 hint: "For a past event, say what happened."
                 required: false
-              - label: "Reflections"
-                name: "reflections"
-                widget: "list"
-                label_singular: "reflection"
-                required: false
-                summary: "{{fields.by}} {{fields.text}}"
-                hint: "Optional. Press Add reflection to share what this event meant, in your own words. You can add more than one (for example from different people), each with its own photos."
-                fields:
-                  - label: "Reflection"
-                    name: "text"
-                    widget: "text"
-                    hint: "What the event meant, and what you will remember."
-                  - label: "Written by"
-                    name: "by"
-                    widget: "string"
-                    required: false
-                    hint: "For example Carly, Executive Director."
-                  - label: "Photos"
-                    name: "photos"
-                    widget: "list"
-                    label_singular: "photo"
-                    required: false
-                    summary: "{{fields.caption}}"
-                    hint: "Optional. Add as many photos as you like. Use only photos that everyone pictured has approved."
-                    fields:
-                      - label: "Photo"
-                        name: "photo"
-                        widget: "focusimage"
-                      - label: "Caption (optional)"
-                        name: "caption"
-                        widget: "string"
-                        required: false
-                  - label: "Also show as a success story"
-                    name: "asStory"
-                    widget: "boolean"
-                    default: false
-                    required: false
-                    hint: "When on, this reflection and its photos also appear among the success stories on the Wall of Miracles, linked back to this event. Only turn it on if everyone pictured (and the families of any children) has approved."
               - label: "Related success stories"
                 name: "stories"
                 widget: "relation"
@@ -372,6 +334,37 @@ collections:
                 widget: "focusimage"
                 hint: "Optional. Choose the photo, then drag the box over the part that should always stay in view. Use only photos you have permission to share."
                 required: false
+              - label: "Also show as a success story"
+                name: "asStory"
+                widget: "boolean"
+                default: false
+                required: false
+                hint: "When on, this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection below. Only turn it on if everyone pictured (and the families of any children) has approved."
+              - label: "Reflection"
+                name: "reflection"
+                widget: "text"
+                required: false
+                hint: "Optional. A short personal note on what the event meant, in your own words. It shows in the story as A reflection."
+              - label: "Reflection written by"
+                name: "reflectionBy"
+                widget: "string"
+                required: false
+                hint: "For example Carly, Executive Director."
+              - label: "Story photos"
+                name: "photos"
+                widget: "list"
+                label_singular: "photo"
+                required: false
+                summary: "{{fields.caption}}"
+                hint: "Optional. Add as many photos as you like for the story. The main photo above is used as its cover."
+                fields:
+                  - label: "Photo"
+                    name: "photo"
+                    widget: "focusimage"
+                  - label: "Caption (optional)"
+                    name: "caption"
+                    widget: "string"
+                    required: false
               - label: "Show as the big Next up ticket"
                 name: "featured"
                 widget: "boolean"
@@ -435,44 +428,6 @@ collections:
                 widget: "text"
                 hint: "A sentence or two: who came, what you did, what it meant. Long recaps get a Read more link."
                 required: false
-              - label: "Reflections"
-                name: "reflections"
-                widget: "list"
-                label_singular: "reflection"
-                required: false
-                summary: "{{fields.by}} {{fields.text}}"
-                hint: "Optional. Press Add reflection to share what this event meant, in your own words. You can add more than one (for example from different people), each with its own photos."
-                fields:
-                  - label: "Reflection"
-                    name: "text"
-                    widget: "text"
-                    hint: "What the event meant, and what you will remember."
-                  - label: "Written by"
-                    name: "by"
-                    widget: "string"
-                    required: false
-                    hint: "For example Carly, Executive Director."
-                  - label: "Photos"
-                    name: "photos"
-                    widget: "list"
-                    label_singular: "photo"
-                    required: false
-                    summary: "{{fields.caption}}"
-                    hint: "Optional. Add as many photos as you like. Use only photos that everyone pictured has approved."
-                    fields:
-                      - label: "Photo"
-                        name: "photo"
-                        widget: "focusimage"
-                      - label: "Caption (optional)"
-                        name: "caption"
-                        widget: "string"
-                        required: false
-                  - label: "Also show as a success story"
-                    name: "asStory"
-                    widget: "boolean"
-                    default: false
-                    required: false
-                    hint: "When on, this reflection and its photos also appear among the success stories on the Wall of Miracles, linked back to this event. Only turn it on if everyone pictured (and the families of any children) has approved."
               - label: "Related success stories"
                 name: "stories"
                 widget: "relation"
@@ -489,6 +444,37 @@ collections:
                 widget: "focusimage"
                 hint: "Optional. Choose the photo, then drag the box over the part that should always stay in view. Use only photos you have permission to share."
                 required: false
+              - label: "Also show as a success story"
+                name: "asStory"
+                widget: "boolean"
+                default: false
+                required: false
+                hint: "When on, this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection below. Only turn it on if everyone pictured (and the families of any children) has approved."
+              - label: "Reflection"
+                name: "reflection"
+                widget: "text"
+                required: false
+                hint: "Optional. A short personal note on what the event meant, in your own words. It shows in the story as A reflection."
+              - label: "Reflection written by"
+                name: "reflectionBy"
+                widget: "string"
+                required: false
+                hint: "For example Carly, Executive Director."
+              - label: "Story photos"
+                name: "photos"
+                widget: "list"
+                label_singular: "photo"
+                required: false
+                summary: "{{fields.caption}}"
+                hint: "Optional. Add as many photos as you like for the story. The main photo above is used as its cover."
+                fields:
+                  - label: "Photo"
+                    name: "photo"
+                    widget: "focusimage"
+                  - label: "Caption (optional)"
+                    name: "caption"
+                    widget: "string"
+                    required: false
               - label: "Link"
                 name: "link"
                 widget: "string"

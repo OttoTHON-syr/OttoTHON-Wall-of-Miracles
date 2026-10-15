@@ -507,15 +507,11 @@ details.recap p{margin:0}
 .foot .logos a.gplate:hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 60%,transparent)}
 
 
-/* reflections, and links between past events and success stories */
+/* the reflection part of a story, and links between past events and success stories */
 .reflect{margin:4px 0 0;padding:12px 14px;background:color-mix(in srgb,#fff 60%,transparent);border-left:4px solid var(--acc,var(--mid));border-radius:0 12px 12px 0;font-family:var(--hand);color:#28456A}
 .reflect p{margin:0 0 6px;font-size:1.02rem}
 .reflect footer{font-weight:700;font-size:.9rem;text-align:right}
 .reflect-label{display:block;font-family:system-ui,sans-serif;font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#4C6B8F;margin-bottom:4px}
-details.reflect-more summary{cursor:pointer;list-style:none}
-details.reflect-more summary::-webkit-details-marker{display:none}
-details.reflect-more summary b{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-details.reflect-more[open] summary{display:none}
 .ev-stories{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.9rem}
 .ev-stories>span{font-weight:700}
 .story-link{border:2px solid #28456A;background:transparent;color:#28456A;border-radius:999px;padding:3px 12px;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer;text-align:left}
@@ -532,15 +528,13 @@ details.reflect-more[open] summary{display:none}
 .from-event .reflect-label{color:var(--ink2)}
 
 
-/* photo galleries (stories and reflections) */
+/* photo galleries (stories) */
 .gallery{display:grid;gap:22px 16px;grid-template-columns:repeat(2,minmax(0,1fr));margin:18px 0 8px;padding-top:8px}
 .g-item{position:relative;margin:0;background:#fff;padding:8px 8px 8px;border-radius:3px;box-shadow:0 8px 18px var(--shadow);transform:rotate(var(--pr,0deg));color:#28456A}
 .g-img{aspect-ratio:4/3;overflow:hidden;background:var(--soft)}
 .g-img img{display:block;width:100%;height:100%;object-fit:cover}
 .g-item figcaption{font-family:var(--hand);font-size:.95rem;padding:6px 4px 2px;text-align:center}
 .g-item .washi{width:64px;height:20px;margin-left:-32px;top:-11px}
-.refl{margin:0 0 18px}
-.story-by{margin:4px 0 0;font-weight:700;text-align:right}
 @media(max-width:520px){.gallery{grid-template-columns:minmax(0,1fr)}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

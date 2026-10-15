@@ -93,16 +93,13 @@ if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
     if (!Array.isArray(x.stories) || x.stories.some(t => typeof t !== 'string')) err(`${fname}[${i + 1}] "${x.title}": "stories" must be a list of story titles.`);
     else x.stories.forEach(t => { if (!storyTitles.has(t.trim().toLowerCase())) warn(`${fname}[${i + 1}] "${x.title}": the linked story "${t}" was not found. If you renamed it, pick it again.`); });
   }
-  if (x && x.reflections !== undefined) {
-    if (!Array.isArray(x.reflections)) err(`${fname}[${i + 1}] "${x.title}": "reflections" must be a list.`);
-    else x.reflections.forEach((r, j) => {
-      const w = `${fname}[${i + 1}] "${x.title}" reflection ${j + 1}`;
-      if (!r || typeof r !== 'object') return err(`${w}: not a reflection.`);
-      if (r.text !== undefined && typeof r.text !== 'string') err(`${w}: the reflection text must be text.`);
-      if (r.asStory === true && !String(r.text || '').trim()) err(`${w} is set to show as a success story but has no text.`);
-      if (r.asStory !== undefined && typeof r.asStory !== 'boolean') err(`${w}: "asStory" must be true or false.`);
-      (Array.isArray(r.photos) ? r.photos : []).forEach((p, k) => { if (!p || !p.photo) err(`${w} photo ${k + 1}: choose a photo or remove this row.`); else imageOk(`${w} photo ${k + 1}`, p.photo); });
-    });
+  if (x) {
+    const w = `${fname}[${i + 1}] "${x.title}"`;
+    if (x.asStory !== undefined && typeof x.asStory !== 'boolean') err(`${w}: "asStory" must be true or false.`);
+    for (const f of ['reflection', 'reflectionBy']) if (x[f] !== undefined && typeof x[f] !== 'string') err(`${w}: "${f}" must be text.`);
+    if (x.photos !== undefined && !Array.isArray(x.photos)) err(`${w}: "photos" must be a list.`);
+    (Array.isArray(x.photos) ? x.photos : []).forEach((p, k) => { if (!p || !p.photo) err(`${w} story photo ${k + 1}: choose a photo or remove this row.`); else imageOk(`${w} story photo ${k + 1}`, p.photo); });
+    if (x.asStory === true && x.published && !String(x.desc || '').trim() && !String(x.reflection || '').trim() && !x.photo && !(Array.isArray(x.photos) && x.photos.length)) err(`${w} is set to show as a success story but has no text and no photos.`);
   }
   if (x && x.category && !['fundraiser', 'meeting', 'social', 'community', 'other'].includes(x.category)) err(`${fname}[${i + 1}] "${x.title}": category must be fundraiser, meeting, social, community, or other.`);
 });
