@@ -151,7 +151,7 @@ function storiesHTML() {
   if (ui.cat !== 'All' && !cats.includes(ui.cat)) ui.cat = 'All';
   const shown = ui.cat === 'All' ? list : list.filter(s => s.category === ui.cat);
   const card = s => `<button class="scard" data-act="story" data-id="${s.id}">
-      <span class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="" style="${pos(s, 50)}">` : daisy()}</span>
+      <span class="sc-img">${(c => c ? `<img src="${esc(c.photo)}" alt="" style="${pos({focus: c.focus}, 50)}">` : daisy())(galleryOf(s)[0])}</span>
       <span class="sc-body"><span>${draftChip(s, 'stories')}${sampleChip(s)}<span class="chip">${esc(s.category)}</span>${(articlesOf(s).length || videoEmbed(s.video)) ? '<span class="chip news-chip">In the news</span>' : ''}</span><span class="sc-title">${esc(s.title)}</span><span class="sc-sum">${esc(s.summary)}</span><span class="sc-date">${fmt(s.date)}</span></span></button>`;
   return `<section class="sec" id="stories"><div class="sec-in">${secHead(T.nav.stories, T.storiesIntro)}
     ${cats.length > 1 ? `<div class="filters" role="group" aria-label="Filter stories">${['All', ...cats].map(c => `<button data-act="cat" data-c="${esc(c)}" aria-pressed="${c === ui.cat}">${esc(c)}</button>`).join('')}</div>` : ''}
@@ -268,16 +268,46 @@ const norm = t => String(t || '').trim().toLowerCase();
 const evId = e => 'ev-' + (e.date || '') + '-' + norm(e.title).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
 const storiesFor = e => { const want = (Array.isArray(e.stories) ? e.stories : []).map(norm); return live('stories').filter(s => want.includes(norm(s.title))); };
 const eventsForStory = s => live('events').filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date || '') && Array.isArray(e.stories) && e.stories.some(x => norm(x) === norm(s.title))).sort(byDate);
-function reflectHTML(e, full) {
-  const t = String(e.reflection || '').trim(); if (!t) return '';
-  const by = String(e.reflectionBy || '').trim();
-  const body = !full && t.length > 240
-    ? `<details class="reflect-more"><summary><span class="teaser">${esc(t.slice(0, 220).replace(/\s+\S*$/, ''))}… </span><b>Read more</b></summary>${paras(t)}</details>` : paras(t);
-  return `<blockquote class="reflect"><span class="reflect-label">A reflection</span>${body}${by ? `<footer>— ${esc(by)}</footer>` : ''}</blockquote>`;
+// ---------- photos, reflections, and reflections that also appear as success stories ----------
+// A photo list is [{photo, caption}]. Each photo path may end in #focus=x,y (written by the editor's focus box).
+const normPhotos = list => (Array.isArray(list) ? list : []).map(p => { const q = splitPhoto({photo: p && p.photo}); return {photo: imgOk(q.photo), focus: q.focus || (p && p.focus) || '', caption: String((p && p.caption) || '').trim()}; }).filter(p => p.photo);
+const galleryOf = s => [s.photo ? {photo: imgOk(s.photo), focus: s.focus, caption: ''} : null, ...normPhotos(s.photos)].filter(p => p && p.photo);
+const galleryHTML = items => !items.length ? '' : `<div class="gallery">${items.map((p, i) => `<figure class="g-item" style="--pr:${FRAME_TILT[i % 6]}deg"><span class="washi w${i % 4}" style="--tr:${TAPE_TILT[i % 6]}deg"></span><div class="g-img"><img src="${esc(p.photo)}" alt="${esc(p.caption)}" loading="lazy" decoding="async" style="${pos({focus: p.focus}, 50)}"></div>${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ''}</figure>`).join('')}</div>`;
+// an event can have several reflections, each with its own photos. (Older entries had one "reflection" and "reflectionBy".)
+const reflectionsOf = e => (Array.isArray(e.reflections) ? e.reflections : (e.reflection ? [{text: e.reflection, by: e.reflectionBy}] : []))
+  .map(r => ({text: String((r && r.text) || '').trim(), by: String((r && r.by) || '').trim(), photos: normPhotos(r && r.photos), asStory: !!(r && r.asStory === true)})).filter(r => r.text || r.photos.length);
+function reflectBlock(r, full) {
+  if (!r.text) return '';
+  const body = !full && r.text.length > 240
+    ? `<details class="reflect-more"><summary><span class="teaser">${esc(r.text.slice(0, 220).replace(/\s+\S*$/, ''))}… </span><b>Read more</b></summary>${paras(r.text)}</details>` : paras(r.text);
+  return `<blockquote class="reflect"><span class="reflect-label">A reflection</span>${body}${r.by ? `<footer>— ${esc(r.by)}</footer>` : ''}</blockquote>`;
+}
+// reflections switched on as "also show as a success story" become story cards on the Wall of Miracles
+function reflectionStories(events) {
+  const td = today(), out = [];
+  events.forEach(e => {
+    if (e.status !== 'published' || !/^\d{4}-\d{2}-\d{2}$/.test(e.date || '') || !(e.archive || e.date < td)) return;
+    reflectionsOf(e).forEach((r, i) => {
+      if (!r.asStory) return;
+      const first = r.by.split(',')[0].trim(), sentence = ((r.text.match(/^[^.!?]*[.!?]/) || [r.text])[0] || '').trim(), c = catOf(e);
+      out.push({id: `r-${e.id}-${i}`, status: 'published', approved: true, fromEvent: e, title: first ? `${e.title} — ${first}` : e.title,
+        category: c === 'fundraiser' ? 'Fundraiser' : 'Community', date: e.date, by: r.by, story: r.text || ' ',
+        summary: sentence.length > 140 ? sentence.slice(0, 137).replace(/\s+\S*$/, '') + '…' : sentence,
+        photo: r.photos[0] ? r.photos[0].photo : '', focus: r.photos[0] ? r.photos[0].focus : '', photos: r.photos.slice(1)});
+    });
+  });
+  return out;
 }
 function fromEventHTML(s) {
-  const evs = eventsForStory(s); if (!evs.length) return '';
-  return `<div class="from-event"><h4>From the event</h4>${evs.map(e => `<div class="fe"><a class="fe-link" href="events.html#${evId(e)}"><span class="fe-date">${fmt(e.date)}</span><strong>${esc(e.title)}</strong>${e.place ? `<span class="fe-place">${esc(e.place)}</span>` : ''}<span class="n-foot">See the event <span aria-hidden="true">→</span></span></a>${reflectHTML(e, true)}</div>`).join('')}</div>`;
+  const evs = s.fromEvent ? [s.fromEvent] : eventsForStory(s); if (!evs.length) return '';
+  return `<div class="from-event"><h4>From the event</h4>${evs.map(e => `<div class="fe"><a class="fe-link" href="events.html#${evId(e)}"><span class="fe-date">${fmt(e.date)}</span><strong>${esc(e.title)}</strong>${e.place ? `<span class="fe-place">${esc(e.place)}</span>` : ''}<span class="n-foot">See the event <span aria-hidden="true">→</span></span></a>${s.fromEvent ? '' : reflectionsOf(e).map(r => reflectBlock(r, true)).join('')}</div>`).join('')}</div>`;
+}
+function openReflection(id) {
+  const e = S.events.find(x => x.id === id), rs = e ? reflectionsOf(e) : []; if (!rs.length) return;
+  $('#dlg-body').innerHTML = `<span class="chip">${esc(CATS[catOf(e)])}</span><h3 id="dlg-title">${esc(e.title)}</h3><p class="hint" style="margin-top:0">${fmt(e.date)}${e.place ? ' · ' + esc(e.place) : ''}</p>
+    ${rs.map(r => `<div class="refl">${galleryHTML(r.photos)}${reflectBlock(r, true)}</div>`).join('')}
+    <div class="dlg-btns"><button class="btn primary" data-act="closedlg">Close</button></div>`;
+  $('#dlg').showModal();
 }
 function eventsHTML() {
   const T = S.text, td = today(), list = live('events').filter(e => /^\d{4}-\d{2}-\d{2}$/.test(e.date || ''));
@@ -304,11 +334,11 @@ function eventsHTML() {
     return `<details class="recap"><summary><span class="teaser">${esc(teaser)}… </span><b>Read more</b></summary><p>${esc(x)}</p></details>`;
   };
   const pastCard = (e, i) => { const c = catOf(e), q = parts(e), link = safeUrl(e.link), img = imgOk(e.photo);
-    const ss = storiesFor(e);
+    const ss = storiesFor(e), rs = reflectionsOf(e);
     return `<article class="pastc cat-${c}${img ? ' has-img' : ''}" id="${evId(e)}">${img ? evPhoto(e, i) : ''}<div class="pastc-top"><span class="pdate">${q.mo} ${q.day}</span>${chip(c)}</div>
-      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}${reflectHTML(e, false)}
+      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}
       ${ss.length ? `<div class="ev-stories"><span>Read the ${ss.length > 1 ? 'stories' : 'story'}:</span>${ss.map(x => `<button type="button" class="story-link" data-act="story" data-id="${x.id}">${esc(x.title)}</button>`).join('')}</div>` : ''}
-      ${link ? `<div class="ev-actions"><a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">See more</a></div>` : ''}</article>`; };
+      ${(rs.length || link) ? `<div class="ev-actions">${rs.length ? `<button type="button" class="btn sm" data-act="reflect" data-id="${e.id}">Read the reflection${rs.length > 1 ? 's' : ''}</button>` : ''}${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">See more</a>` : ''}</div>` : ''}</article>`; };
   const PAST_FIRST = 6, shownPast = ui.pastAll ? past : past.slice(0, PAST_FIRST);
   const pastHTML = [...new Set(past.map(e => e.date.slice(0, 4)))].map(y => {
     const items = shownPast.filter(e => e.date.slice(0, 4) === y);
@@ -432,8 +462,9 @@ function newsHTML(s) {
 }
 function openStory(id) {
   const s = S.stories.find(x => x.id === id); if (!s) return;
-  $('#dlg-body').innerHTML = `<div class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="" style="${pos(s, 50)}">` : daisy()}</div>
-    <span class="chip">${esc(s.category)}</span> ${sampleChip(s)}<h3 id="dlg-title">${esc(s.title)}</h3><p class="hint" style="margin-top:0">${fmt(s.date)}</p>${paras(s.story)}${fromEventHTML(s)}${newsHTML(s)}
+  const gal = galleryOf(s);
+  $('#dlg-body').innerHTML = `<div class="sc-img">${gal[0] ? `<img src="${esc(gal[0].photo)}" alt="" style="${pos({focus: gal[0].focus}, 50)}">` : daisy()}</div>
+    <span class="chip">${esc(s.category)}</span> ${sampleChip(s)}<h3 id="dlg-title">${esc(s.title)}</h3><p class="hint" style="margin-top:0">${fmt(s.date)}</p>${paras(s.story)}${s.by ? `<p class="story-by">— ${esc(s.by)}</p>` : ''}${galleryHTML(gal.slice(1))}${fromEventHTML(s)}${newsHTML(s)}
     <div class="dlg-btns"><button class="btn primary" data-act="closedlg">Close</button></div>`;
   $('#dlg').showModal();
 }
@@ -448,6 +479,7 @@ const ACT = {
   story: a => openStory(a.dataset.id),
   wedpick: a => { ui.wedI = +a.dataset.i; renderPublic(); },
   ics: a => addToCalendar(a.dataset.id),
+  reflect: a => openReflection(a.dataset.id),
   playvideo: a => {
     const src = a.dataset.src || '';
     if (!/^https:\/\/(www\.youtube-nocookie\.com\/embed\/|player\.vimeo\.com\/video\/)[\w?=&-]+$/.test(src)) return;
@@ -513,6 +545,7 @@ async function init() {
         heroPhoto: imgOk(g('photos').heroPhoto), wallPhoto: imgOk(g('photos').wallPhoto),
         stats: st.stats || [], impact: st.impact || [], nav: g('nav')})
     };
+    S.stories = S.stories.concat(reflectionStories(S.events));
     ['stories', 'wed', 'impact'].forEach(k => { if (!S.design.sections.some(x => x.key === k)) S.design.sections.push({key: k, show: true}); });
     document.body.insertAdjacentHTML('beforeend', '<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg-in" id="dlg-body"></div></dialog>');
     document.getElementById('dlg').addEventListener('click', e => { if (e.target === e.currentTarget || e.target.closest('.fe-link')) document.getElementById('dlg').close(); });
