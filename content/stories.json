@@ -69,6 +69,15 @@
       "photo": "assets/uploads/Paddles-for-a-purpose.jpg",
       "approved": true,
       "published": true
+    },
+    {
+      "category": "Community",
+      "approved": true,
+      "published": true,
+      "title": "Candlelight Vigil",
+      "date": "2026-10-05",
+      "summary": "A light for every life",
+      "story": "The community gathered to honor the lives of the children currently battling pediatric illness and those who have lost their lives to it.\n\nWe gathered to honor the children whose lives were taken too soon and to hold their families, loved ones, and memories close to our hearts.\n\nEach candle represents a life that mattered, a story that deserves to be remembered, and a light that will never be forgotten. \n\nAt our Candlelight Vigil we remember, honor, and celebrate the lives of these incredible children. "
     }
   ]
 }
