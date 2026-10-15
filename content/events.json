@@ -1,52 +1,15 @@
 {
   "items": [
     {
-      "title": "Team bonding night",
-      "date": "2026-11-03",
-      "place": "Location and time go here",
-      "desc": "Short description of the event and how to join.",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Fundraising push",
-      "date": "2026-11-17",
-      "place": "Location and time go here",
-      "desc": "Short description of the event and how to join.",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Spirit night",
-      "date": "2026-12-04",
-      "place": "Location and time go here",
-      "desc": "Short description of the event and how to join.",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Past fundraiser",
-      "date": "2026-09-08",
-      "place": "Location",
-      "desc": "A sentence or two recapping what happened.",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Past team event",
-      "date": "2026-08-04",
-      "place": "Location",
-      "desc": "A sentence or two recapping what happened.",
-      "link": "",
-      "published": false
-    },
-    {
-      "title": "Past kickoff",
-      "date": "2026-06-25",
-      "place": "Location",
-      "desc": "A sentence or two recapping what happened.",
-      "link": "",
-      "published": false
+      "place": "Goldstein Auditorium",
+      "time": "11:00 AM - 10:00 PM",
+      "featured": true,
+      "published": true,
+      "date": "2027-03-20",
+      "desc": "OttoTHON is a Dance Marathon fundraiser that lasts from 11 AM - 10 PM! All of the funds raised will benefit the children and families at Upstate Golisano Children's Hospital. The day will consist of food, dancing, fundraising, games, a parade to the hospital, guest speakers, interactions with kids from the hospital, and more!",
+      "photo": "assets/uploads/mainheader.jpeg",
+      "title": "OttoTHON 2027 - Main Event",
+      "category": "fundraiser"
     }
   ]
 }
