@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T17:49:28.015Z",
+  "updatedAt": "2026-10-15T21:33:02.854Z",
   "items": {
     "https://lnkd.in/p/gxYG_WV6": {
       "ok": true,
@@ -8,6 +8,22 @@
       "description": "This past weekend, OttoTHON's Steering Team had the opportunity to attend the Ignite Leadership Conference in Indianapolis! A conference where leaders from Dance Marathon programs across the country, attend recruitment and fundraising workshops, and learn…",
       "date": "",
       "fetchedAt": "2026-10-15T17:49:28.015Z"
+    },
+    "https://dailyorange.com/2026/03/ottothon-beach-theme-hospital-philanthropy/": {
+      "ok": true,
+      "title": "OttoTHON’s 10-hour, beach-themed day drives children’s hospital philanthropy",
+      "outlet": "The Daily Orange",
+      "description": "SU’s largest student-run philanthropic event, OttoTHON, held its 12th annual event this Saturday. For 10 hours, students engaged in activities like a parade and tug-of-war to raise funds for patients of Upstate Golisano Children’s Hospital.",
+      "date": "2026-03-30",
+      "fetchedAt": "2026-10-15T21:33:02.854Z"
+    },
+    "https://thenewshouse.com/campus-news/ottothon-celebrates-12th-year/": {
+      "ok": true,
+      "title": "Ottothon celebrates 12th year",
+      "outlet": "The NewsHouse",
+      "description": "The program is Syracuse University's largest student-run philanthropy event and raises money for children and families receiving care at Upstate Golisano Children's Hospital.",
+      "date": "2026-03-29",
+      "fetchedAt": "2026-10-15T21:33:02.854Z"
     }
   }
 }
