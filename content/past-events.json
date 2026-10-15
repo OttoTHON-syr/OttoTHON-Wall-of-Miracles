@@ -20,6 +20,29 @@
       "stories": [],
       "title": "Paddles for a Purpose",
       "category": "fundraiser"
+    },
+    {
+      "photos": [
+        {
+          "photo": "assets/uploads/main-event26.jpeg"
+        },
+        {
+          "photo": "assets/uploads/main-event26-2.jpeg"
+        },
+        {
+          "photo": "assets/uploads/main-event26-3.jpeg#focus=50,100"
+        }
+      ],
+      "asStory": true,
+      "place": "Goldstein Auditorium",
+      "reflection": "Participants of Ottothon dance during their fundraiser, ending the night having raised $115,182.76 for the children being treated at Upstate Golisano Children’s Hospital in Syracuse, NY.",
+      "published": true,
+      "date": "2026-03-28",
+      "desc": "OttoTHON is a Dance Marathon fundraiser that lasts from 11 AM - 10 PM! All of the funds raised will benefit the children and families at Upstate Golisano Children's Hospital. The day will consist of food, dancing, fundraising, games, a parade to the hospital, guest speakers, interactions with kids from the hospital, and more!\n\nAll participation at this event will count for any service hour requirements needed on campus/in Greek Life.",
+      "photo": "assets/uploads/26-total.jpg",
+      "title": "OttoTHON 2026",
+      "link": "https://thenewshouse.com/campus-news/ottothon-celebrates-12th-year/",
+      "category": "fundraiser"
     }
   ]
 }
