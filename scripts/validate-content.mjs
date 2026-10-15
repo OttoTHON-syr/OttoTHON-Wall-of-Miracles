@@ -31,6 +31,10 @@ function imageOk(where, v) {
     if (!m || +m[1] > 100 || +m[2] > 100) err(`${where}: the photo focus "#${frag}" is not valid. Use the focus box in the editor, or remove everything from the # onward.`);
     v = path;
   }
+  if (/^https:\/\/[^\s]+$/i.test(v)) {   // a picture hosted on another website (for example pasted with "Insert from URL")
+    let host = ''; try { host = new URL(v).hostname; } catch (e) { return err(`${where}: "${v}" is not a valid web address.`); }
+    return warn(`${where}: this photo is hosted on another website (${host}). It can change or disappear without notice. Upload a copy through the editor if you can.`);
+  }
   if (!/^assets\/[\w\-. /]+$/.test(v) || v.includes('..')) return err(`${where}: image path "${v}" must start with assets/ (use the Upload button in the editor).`);
   if (!existsSync(join(root, v))) err(`${where}: image "${v}" does not exist in the repository.`);
 }
@@ -100,6 +104,8 @@ if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
       if (!a || !/^https:\/\/\S+$/i.test(a.url || '')) err(`${w} article ${j + 1}: the article link must start with https://.`);
       else if (a.date && !dateOk(a.date)) err(`${w} article ${j + 1}: "${a.date}" is not a date like 2026-10-14.`);
     });
+    if (x.approved !== undefined && typeof x.approved !== 'boolean') err(`${w}: "approved" must be true or false.`);
+    if (x.asStory === true && x.published && x.approved !== true) warn(`${w} is set to show as a success story but family approval is not ticked, so the story stays hidden.`);
     if (x.asStory !== undefined && typeof x.asStory !== 'boolean') err(`${w}: "asStory" must be true or false.`);
     for (const f of ['reflection', 'reflectionBy']) if (x[f] !== undefined && typeof x[f] !== 'string') err(`${w}: "${f}" must be text.`);
     if (x.photos !== undefined && !Array.isArray(x.photos)) err(`${w}: "photos" must be a list.`);

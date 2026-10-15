@@ -38,11 +38,13 @@ For a TV or online clip, paste a **YouTube or Vimeo** link in **Video**. It show
 
 **Add a past event (to show under "Where we've been").** In the editor open **Past events**, then *Add*. Fill in the name, the date it happened, the type, the place, and a sentence or two about **what happened**. Add a photo if you have permission to share one (then drag the box to choose the crop). Turn **Show on the site** on and publish. Past events appear on the Events page newest first, grouped by year. The first six show, with a **Show all** button for the rest, and long recaps get a **Read more** link. You never have to move events yourself: anything added under **Events** moves to Where we've been on its own once its date passes. Use **Past events** for older events that were never on the site, or when you want a photo and recap.
 
-**Turn an event into a success story.** Open a past event (under **Past events**, or an older item under **Events**) and turn on **Also show as a success story**. The event then also appears on the Wall of Miracles, with its name, what happened, its photos, and a **reflection**. Fill in:
+**Turn an event into a success story.** Open a past event (under **Past events**, or an older item under **Events**), turn on **Also show as a success story**, and tick **Family consent and photo approval confirmed in writing**. Both are needed: without the consent box the story stays hidden. The event then also appears on the Wall of Miracles, with its name, what happened, its photos, and a **reflection**. Fill in:
 - **What happened** (the event's description): the story's main text.
 - **Reflection** and **Reflection written by**: a short personal note about what the event meant, for example from the Executive Director or a dancer. It shows in the story as "A reflection".
 - **Photo** (the cover) and **Story photos**: press **Add photo** as many times as you like, and drag the box to choose each crop. Add a caption if you want one.
-There is nothing else to set up. The event card gets a **Read the story** button, and the story links back to the event. Only turn it on if everyone pictured, and the families of any children, has approved.
+There is nothing else to set up. The event card gets a **Read the story** button, and the story links back to the event. Tick the consent box only if everyone pictured, and the families of any children, has approved.
+
+**About photos from other websites.** Choosing **Insert from URL** for a photo works, but the picture stays on the other website, so it can change or disappear. The content check only warns about this. When you can, download the picture and upload it through the editor instead.
 
 **Add more photos to a success story.** Open the story under **Success stories**. After the main photo, press **Add photo** under **More photos** as often as you like. The story's popup shows them as a taped-down gallery.
 

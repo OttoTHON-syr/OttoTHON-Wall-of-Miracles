@@ -123,6 +123,7 @@
     },
 
     imageUrl: function (src) {
+      if (/^https:\/\//i.test(src)) return src;                  // already a web address
       var a = '';
       try { if (this.props.getAsset) { var r = this.props.getAsset(src, this.props.field); a = r ? String(r) : ''; } } catch (e) {}
       if (/^(blob:|data:|https?:)/.test(a)) return a;           // a photo picked in this session, or hosted elsewhere

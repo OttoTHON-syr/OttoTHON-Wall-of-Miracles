@@ -282,7 +282,8 @@ function eventStories(events) {
   events.forEach(e => {
     if (e.status !== 'published' || !/^\d{4}-\d{2}-\d{2}$/.test(e.date || '') || !(e.archive || e.date < td)) return;
     const old = (Array.isArray(e.reflections) ? e.reflections : []).filter(r => r && (r.text || (r.photos || []).length)), first = old.find(r => r.text) || {};
-    if (!(e.asStory === true || old.some(r => r.asStory === true))) return;
+    // needs both toggles: show as a story, and family consent confirmed. (Older entries had one toggle that meant both.)
+    if (!((e.asStory === true && e.approved === true) || old.some(r => r.asStory === true))) return;
     const refl = String(e.reflection || first.text || '').trim(), by = String(e.reflectionBy || first.by || '').trim();
     const pics = [e.photo ? {photo: imgOk(e.photo), focus: e.focus, caption: ''} : null, ...normPhotos(e.photos), ...old.flatMap(r => normPhotos(r.photos))].filter(p => p && p.photo);
     const text = String(e.desc || '').trim(), lead = text || refl;

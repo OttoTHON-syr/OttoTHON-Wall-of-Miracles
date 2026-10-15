@@ -339,7 +339,13 @@ collections:
                 widget: "boolean"
                 default: false
                 required: false
-                hint: "When on, this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection below. Only turn it on if everyone pictured (and the families of any children) has approved."
+                hint: "When on (and the family consent box below is ticked), this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection."
+              - label: "Family consent and photo approval confirmed in writing"
+                name: "approved"
+                widget: "boolean"
+                default: false
+                required: false
+                hint: "Tick this only when everyone pictured, and the families of any children, has approved sharing the photos and story. The event does not appear as a success story until this is ticked."
               - label: "Reflection"
                 name: "reflection"
                 widget: "text"
@@ -478,7 +484,13 @@ collections:
                 widget: "boolean"
                 default: false
                 required: false
-                hint: "When on, this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection below. Only turn it on if everyone pictured (and the families of any children) has approved."
+                hint: "When on (and the family consent box below is ticked), this event also appears among the success stories on the Wall of Miracles: its name, what happened, its photos and the reflection."
+              - label: "Family consent and photo approval confirmed in writing"
+                name: "approved"
+                widget: "boolean"
+                default: false
+                required: false
+                hint: "Tick this only when everyone pictured, and the families of any children, has approved sharing the photos and story. The event does not appear as a success story until this is ticked."
               - label: "Reflection"
                 name: "reflection"
                 widget: "text"
