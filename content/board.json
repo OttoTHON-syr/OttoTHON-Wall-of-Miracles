@@ -5,7 +5,7 @@
       "bio": "",
       "name": "Carly Antolick",
       "published": true,
-      "photo": "assets/uploads/carly-anatolick.jpg",
+      "photo": "assets/uploads/carly-anatolick.jpg#focus=0,25",
       "role": "Executive Director",
       "focus": "left",
       "link": "",
@@ -17,7 +17,7 @@
       "bio": "",
       "name": "Isabelle Reed",
       "published": true,
-      "photo": "assets/uploads/isabelle-reed.jpg",
+      "photo": "assets/uploads/isabelle-reed.jpg#focus=0,25",
       "role": "Communication Director",
       "focus": "left",
       "link": "",
@@ -29,7 +29,7 @@
       "bio": "",
       "name": "Margaux Epter",
       "published": true,
-      "photo": "assets/uploads/margaux-epter.jpg",
+      "photo": "assets/uploads/margaux-epter.jpg#focus=0,25",
       "role": "Finance Director",
       "focus": "left",
       "link": "",
@@ -41,7 +41,7 @@
       "bio": "",
       "name": "Aaron Lenner",
       "published": true,
-      "photo": "assets/uploads/aaron-lenner.jpg",
+      "photo": "assets/uploads/aaron-lenner.jpg#focus=0,25",
       "role": "Membership Director",
       "focus": "left",
       "link": "",
@@ -53,7 +53,7 @@
       "bio": "",
       "name": "Abi Handel",
       "published": true,
-      "photo": "assets/uploads/abi-handel.jpg",
+      "photo": "assets/uploads/abi-handel.jpg#focus=0,25",
       "role": "Internal Events Director",
       "emailLabel": "internal.ottothon@gmail.com",
       "focus": "left",
@@ -77,7 +77,7 @@
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
-      "photo": "assets/uploads/rayna-gross.jpg",
+      "photo": "assets/uploads/rayna-gross.jpg#focus=0,25",
       "published": true
     },
     {
@@ -85,7 +85,7 @@
       "bio": "",
       "name": "Maddie Poynter",
       "published": true,
-      "photo": "assets/uploads/maddie-poynter.jpg",
+      "photo": "assets/uploads/maddie-poynter.jpg#focus=0,25",
       "role": "Family and Hospital Relations Chair",
       "focus": "left",
       "link": "",
@@ -96,7 +96,7 @@
       "bio": "",
       "name": "Maggie Armstrong",
       "published": true,
-      "photo": "assets/uploads/maggie-armstrong.jpg",
+      "photo": "assets/uploads/maggie-armstrong.jpg#focus=0,25",
       "role": "Morale Chair",
       "focus": "left",
       "link": "",
@@ -108,7 +108,7 @@
       "name": "Maggie Poulin",
       "role": "Morale Chair",
       "team": "Internal Events Team",
-      "photo": "assets/uploads/maggie-poulin.jpg",
+      "photo": "assets/uploads/maggie-poulin.jpg#focus=0,25",
       "focus": "left"
     },
     {
@@ -117,7 +117,7 @@
       "name": "Andrei Livingston",
       "role": "Analytics Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/andrei-livingston.jpg",
+      "photo": "assets/uploads/andrei-livingston.jpg#focus=0,25",
       "focus": "left"
     },
     {
@@ -126,7 +126,7 @@
       "name": "Dani Lawton",
       "role": "Fundraising Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/dani-lawton.jpg"
+      "photo": "assets/uploads/dani-lawton.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -134,7 +134,7 @@
       "name": "Sara Woodside",
       "role": "Fundraising Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/sara-woodside.jpg"
+      "photo": "assets/uploads/sara-woodside.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -149,7 +149,7 @@
       "name": "Anastasia Romanyk",
       "role": "Community Relations Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/anastasia-romanyk.jpg",
+      "photo": "assets/uploads/anastasia-romanyk.jpg#focus=0,25",
       "focus": "left"
     },
     {
@@ -158,7 +158,7 @@
       "name": "Kate Schmidt",
       "role": "Community Relations Chair",
       "team": "Finance Team",
-      "photo": "assets/uploads/kate-schmidt.jpg",
+      "photo": "assets/uploads/kate-schmidt.jpg#focus=0,25",
       "focus": "left"
     },
     {
@@ -167,7 +167,7 @@
       "name": "Ella Dimitriadis",
       "role": "General Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/ella-dimitriadis.jpg"
+      "photo": "assets/uploads/ella-dimitriadis.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -175,7 +175,7 @@
       "name": "Ryan Ludwig",
       "role": "General Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/ryan-ludwig.jpg"
+      "photo": "assets/uploads/ryan-ludwig.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -190,7 +190,7 @@
       "name": "Erica Cuciti",
       "role": "General Body Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/erica-cuciti.jpg"
+      "photo": "assets/uploads/erica-cuciti.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -198,7 +198,7 @@
       "name": "Carmen Lee-Bennett",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/carmen-lee-bennett.jpg",
+      "photo": "assets/uploads/carmen-lee-bennett.jpg#focus=8,25",
       "focus": "left"
     },
     {
@@ -207,7 +207,7 @@
       "name": "Jay Slaven",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "photo": "assets/uploads/jay-slaven.jpg"
+      "photo": "assets/uploads/jay-slaven.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -222,7 +222,7 @@
       "name": "Avery Fox",
       "role": "Visual Media Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/avery-fox.jpg"
+      "photo": "assets/uploads/avery-fox.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -230,7 +230,7 @@
       "name": "Lizzy Weiler",
       "role": "Graphic Design Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/lizzy-weiler.jpg"
+      "photo": "assets/uploads/lizzy-weiler.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -238,7 +238,7 @@
       "name": "Gabi Robayo",
       "role": "Graphic Design Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/gabi-robayo.jpg",
+      "photo": "assets/uploads/gabi-robayo.jpg#focus=0,25",
       "focus": "left"
     },
     {
@@ -254,7 +254,7 @@
       "name": "London Goodman",
       "role": "Alumni Relations Chair",
       "team": "Communications Team",
-      "photo": "assets/uploads/london-goodman.jpg"
+      "photo": "assets/uploads/london-goodman.jpg#focus=0,25"
     }
   ]
 }
