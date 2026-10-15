@@ -8,7 +8,7 @@
       "photo": "assets/uploads/carly-anatolick.jpg#focus=0,25",
       "role": "Executive Director",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/carlyantolick/donate",
       "email": "ottothon@gmail.com",
       "team": ""
     },
@@ -20,7 +20,7 @@
       "photo": "assets/uploads/isabelle-reed.jpg#focus=0,25",
       "role": "Communication Director",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1311517/donate",
       "email": "ottothon.communications@gmail.com",
       "team": "Communications Team"
     },
@@ -31,8 +31,9 @@
       "published": true,
       "photo": "assets/uploads/margaux-epter.jpg#focus=0,25",
       "role": "Finance Director",
+      "emailLabel": "",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/Margaux-Epter/donate",
       "email": "ottothon.internalfinance@gmail.com",
       "team": "Finance Team"
     },
@@ -44,7 +45,7 @@
       "photo": "assets/uploads/aaron-lenner.jpg#focus=0,25",
       "role": "Membership Director",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1311674/donate",
       "email": "ottothon.membership@gmail.com",
       "team": "Membership Team"
     },
@@ -57,7 +58,7 @@
       "role": "Internal Events Director",
       "emailLabel": "",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1311669/donate",
       "email": "internal.ottothon@gmail.com",
       "team": "Internal Events Team"
     },
@@ -68,7 +69,7 @@
       "published": true,
       "photo": "assets/uploads/zahra-jarrell.jpg#focus=0,25",
       "role": "Events and Operations Chair",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1316180/donate",
       "email": "ottothon.operations@gmail.com",
       "team": "Internal Events Team"
     },
@@ -79,7 +80,7 @@
       "published": true,
       "photo": "assets/uploads/rayna-gross.jpg#focus=0,25",
       "role": "Events and Operations Chair",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1311518/donate",
       "email": "ottothon.operations@gmail.com",
       "team": "Internal Events Team"
     },
@@ -91,7 +92,7 @@
       "photo": "assets/uploads/maddie-poynter.jpg#focus=0,25",
       "role": "Family and Hospital Relations Chair",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/1315346/donate",
       "email": "ottothon.hospitalrelations@gmail.com",
       "team": "Internal Events Team"
     },
@@ -103,29 +104,31 @@
       "photo": "assets/uploads/maggie-armstrong.jpg#focus=0,25",
       "role": "Morale Chair",
       "focus": "left",
-      "link": "",
+      "link": "https://events.dancemarathon.com/participants/Maggie-Armstrong/donate",
       "email": "ottothon.morale@gmail.com",
       "team": "Internal Events Team"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Maggie Poulin",
-      "role": "Morale Chair",
-      "team": "Internal Events Team",
+      "published": true,
       "photo": "assets/uploads/maggie-poulin.jpg#focus=0,25",
+      "role": "Morale Chair",
       "focus": "left",
-      "email": "ottothon.morale@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/Maggie-Poulin/donate",
+      "email": "ottothon.morale@gmail.com",
+      "team": "Internal Events Team"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Andrei Livingston",
-      "role": "Analytics Chair",
-      "team": "Finance Team",
+      "published": true,
       "photo": "assets/uploads/andrei-livingston.jpg#focus=0,25",
+      "role": "Analytics Chair",
       "focus": "left",
-      "email": "ottothon.analytics@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/1312461/donate",
+      "email": "ottothon.analytics@gmail.com",
+      "team": "Finance Team"
     },
     {
       "tier": "team",
@@ -134,7 +137,8 @@
       "role": "Fundraising Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/dani-lawton.jpg#focus=0,25",
-      "email": "ottothon.fundraising@gmail.com"
+      "email": "ottothon.fundraising@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/Danielle-Lawton-2026/donate"
     },
     {
       "tier": "team",
@@ -143,7 +147,8 @@
       "role": "Fundraising Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/sara-woodside.jpg#focus=0,25",
-      "email": "ottothon.fundraising@gmail.com"
+      "email": "ottothon.fundraising@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311604/donate"
     },
     {
       "tier": "team",
@@ -152,27 +157,30 @@
       "role": "Partnership Chair",
       "team": "Finance Team",
       "photo": "assets/uploads/wray-zhou.jpg#focus=0,25",
-      "email": "ottothon.sponsorship@gmail.com"
+      "email": "ottothon.sponsorship@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311560/donate"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Anastasia Romanyk",
-      "role": "Community Relations Chair",
-      "team": "Finance Team",
+      "published": true,
       "photo": "assets/uploads/anastasia-romanyk.jpg#focus=0,25",
+      "role": "Community Relations Chair",
       "focus": "left",
-      "email": "ottothon.communityrelations@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/1311862/donate",
+      "email": "ottothon.communityrelations@gmail.com",
+      "team": "Finance Team"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Kate Schmidt",
-      "role": "Community Relations Chair",
-      "team": "Finance Team",
+      "published": true,
       "photo": "assets/uploads/kate-schmidt.jpg#focus=0,25",
+      "role": "Community Relations Chair",
       "focus": "left",
-      "email": "ottothon.communityrelations@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/1312155/donate",
+      "email": "ottothon.communityrelations@gmail.com",
+      "team": "Finance Team"
     },
     {
       "tier": "team",
@@ -181,7 +189,8 @@
       "role": "General Recruitment Chair",
       "team": "Membership Team",
       "photo": "assets/uploads/ella-dimitriadis.jpg#focus=0,25",
-      "email": "ottothon.recruitment@gmail.com"
+      "email": "ottothon.recruitment@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311559/donate"
     },
     {
       "tier": "team",
@@ -190,7 +199,8 @@
       "role": "General Recruitment Chair",
       "team": "Membership Team",
       "photo": "assets/uploads/ryan-ludwig.jpg#focus=0,25",
-      "email": "ottothon.recruitment@gmail.com"
+      "email": "ottothon.recruitment@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311653/donate"
     },
     {
       "tier": "team",
@@ -199,26 +209,30 @@
       "role": "Team Captain Chair",
       "team": "Membership Team",
       "photo": "assets/uploads/lulu-boone.jpg#focus=0,25",
-      "email": "ottothon.teamcaptains@gmail.com"
+      "email": "ottothon.teamcaptains@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311510/donate"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Erica Cuciti",
-      "role": "General Body Chair",
-      "team": "Membership Team",
+      "published": true,
       "photo": "assets/uploads/erica-cuciti.jpg#focus=0,25",
-      "email": "ottothon.generalbody@gmail.com"
+      "role": "General Body Chair",
+      "emailLabel": "",
+      "link": "https://events.dancemarathon.com/participants/1311575/donate",
+      "email": "ottothon.generalbody@gmail.com",
+      "team": "Membership Team"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Carmen Lee-Bennett",
-      "role": "First-Year Recruitment Chair",
-      "team": "Membership Team",
+      "published": true,
       "photo": "assets/uploads/carmen-lee-bennett.jpg#focus=8,25",
+      "role": "First-Year Recruitment Chair",
       "focus": "left",
-      "email": "ottothon.freshmanrecruit@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/1311505/donate",
+      "email": "ottothon.freshmanrecruit@gmail.com",
+      "team": "Membership Team"
     },
     {
       "tier": "team",
@@ -227,7 +241,8 @@
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
       "photo": "assets/uploads/jay-slaven.jpg#focus=0,25",
-      "email": "ottothon.freshmanrecruit@gmail.com"
+      "email": "ottothon.freshmanrecruit@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/jayslaven/donate"
     },
     {
       "tier": "team",
@@ -235,7 +250,8 @@
       "name": "Brynn Wisniewski",
       "role": "First-Year Recruitment Chair",
       "team": "Membership Team",
-      "email": "ottothon.freshmanrecruit@gmail.com"
+      "email": "ottothon.freshmanrecruit@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/Brynn-Wisniewski/donate"
     },
     {
       "tier": "team",
@@ -244,7 +260,8 @@
       "role": "Visual Media Chair",
       "team": "Communications Team",
       "photo": "assets/uploads/avery-fox.jpg#focus=0,25",
-      "email": "ottothon.visualmedia@gmail.com"
+      "email": "ottothon.visualmedia@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311513/donate"
     },
     {
       "tier": "team",
@@ -253,17 +270,19 @@
       "role": "Graphic Design Chair",
       "team": "Communications Team",
       "photo": "assets/uploads/lizzy-weiler.jpg#focus=0,25",
-      "email": "ottothon.marketing@gmail.com"
+      "email": "ottothon.marketing@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/Lizzy-Weiler/donate"
     },
     {
       "tier": "team",
-      "published": true,
       "name": "Gabi Robayo",
-      "role": "Graphic Design Chair",
-      "team": "Communications Team",
+      "published": true,
       "photo": "assets/uploads/gabi-robayo.jpg#focus=0,25",
+      "role": "Graphic Design Chair",
       "focus": "left",
-      "email": "ottothon.marketing@gmail.com"
+      "link": "https://events.dancemarathon.com/participants/GabiRobayo/donate",
+      "email": "ottothon.marketing@gmail.com",
+      "team": "Communications Team"
     },
     {
       "tier": "team",
@@ -272,7 +291,8 @@
       "role": "Social Media Chair",
       "team": "Communications Team",
       "photo": "assets/uploads/adam-paliana.jpg#focus=0,25",
-      "email": "ottothon.socialmedia@gmail.com"
+      "email": "ottothon.socialmedia@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/1311514/donate"
     },
     {
       "tier": "team",
@@ -281,7 +301,8 @@
       "role": "Alumni Relations Chair",
       "team": "Communications Team",
       "photo": "assets/uploads/london-goodman.jpg#focus=0,25",
-      "email": "alumnirelations.ottothon@gmail.com"
+      "email": "alumnirelations.ottothon@gmail.com",
+      "link": "https://events.dancemarathon.com/participants/London_cuseforkids/donate"
     }
   ]
 }
