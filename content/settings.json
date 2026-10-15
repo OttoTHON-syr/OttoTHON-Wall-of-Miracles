@@ -78,8 +78,8 @@
     "mainDesc": "Our dance marathon, the culmination of a full year of fundraising. Food, performances, games, and the moment we finally reveal the total."
   },
   "links": {
-    "donateUrl": "",
-    "registerUrl": "",
+    "donateUrl": "https://events.dancemarathon.com/ottothon2027#",
+    "registerUrl": "https://events.dancemarathon.com/index.cfm?fuseaction=register.start&eventID=7327&success=donordrive.event",
     "email": "ottothon@gmail.com"
   },
   "footer": {
