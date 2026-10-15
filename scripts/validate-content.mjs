@@ -42,9 +42,13 @@ const LISTS = {
   wednesdays: {req: ['title', 'author', 'body', 'date'], dates: ['date']},
   board:      {req: ['name', 'role'], images: ['photo'], urls: ['link']},
   events:     {req: ['title', 'date'], dates: ['date'], urls: ['link'], images: ['photo']},
+  'past-events': {req: ['title', 'date'], dates: ['date'], urls: ['link'], images: ['photo']},
   ways:       {req: ['title'], urls: ['link']},
   faq:        {req: ['question', 'answer']}
 };
+// the same video links the website knows how to embed
+const VIDEO_OK = [/^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?(?:[^#]*&)?v=[\w-]{6,15}/i, /^https:\/\/youtu\.be\/[\w-]{6,15}/i, /^https:\/\/(?:www\.)?youtube\.com\/(?:embed|shorts|live)\/[\w-]{6,15}/i,
+  /^https:\/\/(?:www\.)?vimeo\.com\/\d{5,12}/i, /^https:\/\/player\.vimeo\.com\/video\/\d{5,12}/i];
 let unapproved = 0;
 for (const [name, rule] of Object.entries(LISTS)) {
   const data = read(name); if (!data) continue;
@@ -61,6 +65,14 @@ for (const [name, rule] of Object.entries(LISTS)) {
     for (const f of rule.dates || []) if (x.published && !dateOk(x[f])) err(`${where}.${f}: "${x[f]}" is not a date like 2026-10-14.`);
     if (x.published) for (const f of rule.req) if (!isStr(x[f]) || !x[f].trim()) err(`${where} is published but "${f}" is empty.`);
     if (name === 'stories' && x.published && !CATEGORIES.includes(x.category)) warn(`${where}: category "${x.category}" is not one of ${CATEGORIES.join(', ')}.`);
+    if (name === 'stories') {
+      if (x.articles !== undefined && !Array.isArray(x.articles)) err(`${where}.articles must be a list.`);
+      (Array.isArray(x.articles) ? x.articles : []).forEach((a, j) => {
+        if (!a || !/^https:\/\/\S+$/i.test(a.url || '')) err(`${where}.articles[${j + 1}]: the article link must start with https://.`);
+        else if (a.date && !dateOk(a.date)) err(`${where}.articles[${j + 1}].date: "${a.date}" is not a date like 2026-10-14.`);
+      });
+      if (x.video && !VIDEO_OK.some(re => re.test(String(x.video).trim()))) err(`${where}.video: "${x.video}" is not a YouTube or Vimeo link. Only those can play on the page. Put other sites under News articles.`);
+    }
     if (rule.consent) {
       if (typeof x.approved !== 'boolean') err(`${where}: "approved" must be true or false.`);
       if (x.published && !x.approved) warn(`${where} is marked "show" but family approval is not ticked, so it stays hidden.`);
@@ -71,10 +83,12 @@ for (const [name, rule] of Object.entries(LISTS)) {
 if (unapproved) warn(`${unapproved} kid/story entries are not approved. This repository is public, so anything saved here can be read by anyone. Only enter a child's story after the family approves.`);
 
 // ---- event categories ----
-const evs = read('events');
+for (const fname of ['events', 'past-events']) {
+const evs = read(fname);
 if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
-  if (x && x.category && !['fundraiser', 'meeting', 'social', 'community', 'other'].includes(x.category)) err(`events[${i + 1}] "${x.title}": category must be fundraiser, meeting, social, community, or other.`);
+  if (x && x.category && !['fundraiser', 'meeting', 'social', 'community', 'other'].includes(x.category)) err(`${fname}[${i + 1}] "${x.title}": category must be fundraiser, meeting, social, community, or other.`);
 });
+}
 
 // ---- board layout fields ----
 const board = read('board');
@@ -86,6 +100,12 @@ if (board && Array.isArray(board.items)) {
     if (x.email && !/^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(x.email)) err(`${where}: email "${x.email}" does not look like an email address.`);
     if (x.published && x.tier === 'team' && !String(x.team || '').trim()) warn(`${where} is a team member with no team, so they are listed under "More of the team".`);
   });
+}
+
+// ---- news link previews (written by scripts/fetch-previews.mjs; optional) ----
+if (existsSync(join(root, 'content', 'article-previews.json'))) {
+  const pv = read('article-previews');
+  if (pv && (typeof pv.items !== 'object' || pv.items === null || Array.isArray(pv.items))) err('content/article-previews.json must have an "items" object. Re-run the previews workflow.');
 }
 
 // ---- settings ----

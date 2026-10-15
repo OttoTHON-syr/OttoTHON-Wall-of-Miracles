@@ -21,6 +21,7 @@ cloudflare/editor-auth/   Small sign-in helper that lets Google-signed-in editor
 admin/focus-widget.js   Adds the draggable photo focus box to the editor's photo fields
 scripts/validate-content.mjs   Checks content before each deploy
 scripts/sync-events.mjs        Copies OttoTHON events from the campus calendar feed (runs daily)
+scripts/fetch-previews.mjs     Looks up headlines for the news links on stories (runs when stories change)
 .github/workflows/static.yml   Deploys to GitHub Pages
 ```
 
@@ -35,6 +36,7 @@ The page shells never change. To change what the site says, you change a file in
 | `content/board.json` | Executive board, in the order shown |
 | `content/events.json` | Events (they sort into upcoming and past by date) |
 | `content/events-feed.json` | OttoTHON events copied from the campus calendar every day. Written by a script, so do not edit it by hand |
+| `content/article-previews.json` | Headlines and summaries for news links, written by a script. Do not edit by hand |
 | `content/ways.json` | The cards on Get involved |
 | `content/faq.json` | FAQ questions and answers |
 
@@ -53,6 +55,10 @@ The page shells never change. To change what the site says, you change a file in
 - The feed only looks about three months ahead. The script remembers finished events (up to 60) so "Where we've been" fills up over time. An upcoming event that disappears from the feed is treated as cancelled and removed.
 - Events you add by hand in the editor win over synced ones with the same title and date. To hide a synced event, add the same title and date by hand and turn **Show on the site** off.
 - Try it locally: `node scripts/sync-events.mjs` (or `--file saved-feed.xml` to test with a saved copy).
+
+## News coverage on stories
+
+Each story can list news articles and one YouTube or Vimeo video. Most news sites refuse to be framed, so articles show as link cards instead. `.github/workflows/fetch-previews.yml` runs `scripts/fetch-previews.mjs` whenever `content/stories.json` changes (and weekly, to retry failures). It reads only each page's own preview tags (headline, site name, date, summary), never article text or pictures, refuses private network addresses, and saves the result to `content/article-previews.json`. Anything a site blocks falls back to a plain card, and an editor can type the headline by hand. The page's security policy allows frames only from `youtube-nocookie.com` and `player.vimeo.com`, and a video loads only after the visitor presses Watch.
 
 ## Run it on your computer
 

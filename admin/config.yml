@@ -85,7 +85,7 @@ collections:
               - label: "Category"
                 name: "category"
                 widget: "select"
-                options: ["Hospital moments", "Family", "Community"]
+                options: ["Hospital moments", "Family", "Community", "Fundraiser"]
                 default: "Community"
               - label: "Date of the moment"
                 name: "date"
@@ -107,6 +107,39 @@ collections:
                 widget: "focusimage"
                 hint: "Choose the photo, then drag the box that appears over the part that should always stay in view. Use only photos the family approved."
                 required: false
+              - label: "News articles"
+                name: "articles"
+                widget: "list"
+                required: false
+                summary: "{{fields.outlet}} {{fields.url}}"
+                hint: "Paste a link to each news article about this story. The headline, outlet and a short summary are filled in automatically about a minute after you publish. You can type a headline or outlet yourself to override them."
+                fields:
+                  - label: "Article link"
+                    name: "url"
+                    widget: "string"
+                    hint: "Must start with https://"
+                  - label: "Headline (optional)"
+                    name: "title"
+                    widget: "string"
+                    required: false
+                    hint: "Leave empty to use the article's own headline."
+                  - label: "Outlet (optional)"
+                    name: "outlet"
+                    widget: "string"
+                    required: false
+                    hint: "For example Syracuse.com. Leave empty to fill in automatically."
+                  - label: "Date (optional)"
+                    name: "date"
+                    widget: "datetime"
+                    date_format: "YYYY-MM-DD"
+                    time_format: false
+                    format: "YYYY-MM-DD"
+                    required: false
+              - label: "Video (optional)"
+                name: "video"
+                widget: "string"
+                required: false
+                hint: "A YouTube or Vimeo link, for example a news clip. It plays right on the story when someone presses Watch. Other sites can't be embedded, so use News articles for those."
               - label: "Family consent and photo approval confirmed in writing"
                 name: "approved"
                 widget: "boolean"
@@ -285,6 +318,68 @@ collections:
                 name: "link"
                 widget: "string"
                 hint: "Optional. Full web address (https://…)."
+                required: false
+              - label: "Show on the site"
+                name: "published"
+                widget: "boolean"
+                hint: "Turn off to hide this without deleting it."
+                default: false
+  - name: past-events
+    label: "Past events"
+    description: "Add events that already happened, with a photo and a short recap. They appear under Where we’ve been on the Events page, newest first and grouped by year. You do not need to move events here: events added under Events move to Where we’ve been by themselves after their date."
+    files:
+      - name: past-events
+        label: "Past events"
+        file: content/past-events.json
+        fields:
+          - label: "Past events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} ({{fields.date}})"
+            fields:
+              - label: "Event name"
+                name: "title"
+                widget: "string"
+              - label: "Date it happened"
+                name: "date"
+                widget: "datetime"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: "Type of event"
+                name: "category"
+                widget: "select"
+                options:
+                  - label: "Fundraiser (yellow)"
+                    value: "fundraiser"
+                  - label: "Meeting (blue)"
+                    value: "meeting"
+                  - label: "Social (pink)"
+                    value: "social"
+                  - label: "Community (green)"
+                    value: "community"
+                  - label: "Other (lavender)"
+                    value: "other"
+                default: "other"
+                hint: "Sets the card color and icon."
+              - label: "Place"
+                name: "place"
+                widget: "string"
+                required: false
+              - label: "What happened"
+                name: "desc"
+                widget: "text"
+                hint: "A sentence or two: who came, what you did, what it meant. Long recaps get a Read more link."
+                required: false
+              - label: "Photo"
+                name: "photo"
+                widget: "focusimage"
+                hint: "Optional. Choose the photo, then drag the box over the part that should always stay in view. Use only photos you have permission to share."
+                required: false
+              - label: "Link"
+                name: "link"
+                widget: "string"
+                hint: "Optional. A full web address (https://…) for photos, a recap post, or more details."
                 required: false
               - label: "Show on the site"
                 name: "published"

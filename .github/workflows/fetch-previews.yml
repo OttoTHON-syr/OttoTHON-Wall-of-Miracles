@@ -1,0 +1,49 @@
+# When news links are added to a story, this looks up each article's headline, outlet, date and a short
+# summary and saves them to content/article-previews.json, then redeploys. It also retries links that
+# could not be read once a week. Run it by hand any time: Actions > "Fetch news link previews" > Run workflow.
+name: Fetch news link previews
+
+on:
+  push:
+    branches: ["main"]
+    paths: ["content/stories.json"]
+  schedule:
+    - cron: '23 9 * * 1'   # Mondays, to retry any links that failed
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to save the previews file
+  actions: write    # to start the deploy (pushes made by this workflow do not start it on their own)
+
+concurrency:
+  group: fetch-previews
+  cancel-in-progress: false
+
+jobs:
+  previews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node (no packages are installed)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Look up the news links
+        run: node scripts/fetch-previews.mjs
+      - name: Check content
+        run: node scripts/validate-content.mjs
+      - name: Save and redeploy if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(git status --porcelain content/article-previews.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add content/article-previews.json
+            git commit -m "Update news link previews"
+            git push
+            gh workflow run static.yml --ref main
+          else
+            echo "No changes to save."
+          fi

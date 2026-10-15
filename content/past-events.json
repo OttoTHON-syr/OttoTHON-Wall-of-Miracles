@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "title": "Sample: Paint & Sip Night",
+      "date": "2026-02-22",
+      "category": "social",
+      "place": "Schine Student Center",
+      "desc": "Write a sentence or two about what happened, who came, and what it meant. Add a photo if you have permission to share one.",
+      "photo": "",
+      "link": "",
+      "published": false
+    },
+    {
+      "title": "Sample: Valentine's Fundraiser",
+      "date": "2026-02-14",
+      "category": "fundraiser",
+      "place": "Marshall Street",
+      "desc": "Past events show newest first, grouped by year. Delete these samples once you have added real ones.",
+      "photo": "",
+      "link": "",
+      "published": false
+    }
+  ]
+}
