@@ -40,6 +40,8 @@ For a TV or online clip, paste a **YouTube or Vimeo** link in **Video**. It show
 
 **Make the events update right now.** On GitHub, open the *Actions* tab, choose *Sync OttoTHON events*, then *Run workflow*.
 
+**Change where the Upstate Golisano links go.** The hospital's logo in the footer, the "Visit Upstate Golisano Children's Hospital" button on About, and the first mention of the hospital's name in each paragraph all link to the hospital's website. To point them somewhere else, open *Words and links, Links and contact, Upstate Golisano Children's Hospital link* and paste a new address (starting with `https://`). Leave it empty to use https://www.upstate.edu/gch/, or type `none` to turn the links off.
+
 **Add the Donate and Register buttons.** *Words, links and appearance*, then *Links and contact*. Paste the full web addresses (they start with `https://`). The buttons stay hidden until you do.
 
 **Change the colors or fonts.** *Words, links and appearance*, then *Appearance*. Pick a color theme and font. Nothing else needs touching.

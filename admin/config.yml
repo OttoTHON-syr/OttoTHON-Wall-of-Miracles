@@ -468,6 +468,11 @@ collections:
                 widget: "string"
                 hint: "Full web address (https://…)."
                 required: false
+              - label: "Upstate Golisano Children’s Hospital link"
+                name: "hospitalUrl"
+                widget: "string"
+                required: false
+                hint: "Where the hospital's logo and name link to. Leave empty to use the hospital's own site (https://www.upstate.edu/gch/). Type none to turn these links off."
               - label: "Contact email"
                 name: "email"
                 widget: "string"

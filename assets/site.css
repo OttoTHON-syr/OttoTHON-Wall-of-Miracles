@@ -496,4 +496,14 @@ details.recap p{margin:0}
 .vid-play small{font-weight:600;font-size:.82rem;opacity:.8}
 .news-chip{background:var(--yolk);color:#3b2f00}
 
+
+/* links to Upstate Golisano Children's Hospital */
+.inline-link{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.inline-link:hover{text-decoration-thickness:2px}
+.plate-logo{display:inline-block;max-width:100%}
+.plate .btn{border-color:#28456A;color:#28456A;margin-top:12px}
+.plate .btn:hover{background:#C7E0F1}
+.foot .logos a.gplate{display:inline-block}
+.foot .logos a.gplate:hover{box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 60%,transparent)}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

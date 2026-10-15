@@ -13,7 +13,13 @@ const ui = {turn: 0, cat: 'All', wedI: 0, preview: false, page: document.body.da
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const paras = t => String(t || '').split(/\n\s*\n/).filter(x => x.trim()).map(p => `<p>${esc(p.trim()).replace(/\n/g, '<br>')}</p>`).join('');
+// The hospital's website. Mentions of its name become links (the first mention in each block of text).
+// Set under Words and links; type "none" there to turn the links off.
+const HOSP_DEFAULT = 'https://www.upstate.edu/gch/';
+let HOSP = HOSP_DEFAULT;
+const linkHosp = html => !HOSP ? html : html.replace(/Upstate Golisano(?: Children(?:’|&#39;|')s Hospital)?/, m => `<a class="inline-link" href="${esc(HOSP)}" target="_blank" rel="noopener noreferrer">${m}</a>`);
+const rich = t => linkHosp(esc(t));
+const paras = t => { let done = false; return String(t || '').split(/\n\s*\n/).filter(x => x.trim()).map(p => { let h = esc(p.trim()).replace(/\n/g, '<br>'); if (!done && HOSP && h !== (h = linkHosp(h))) done = true; return `<p>${h}</p>`; }).join(''); };
 const safeUrl = u => /^(https?:\/\/|mailto:)/i.test((u || '').trim()) ? u.trim() : '';
 const pad = n => String(n).padStart(2, '0');
 const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
@@ -121,7 +127,7 @@ function renderHero() {
     </div></div>`;
   }
   return `<section class="hero" id="top"><div class="hero-grid">
-    <div class="hero-title"><h1>${esc(T.heroTitle)}</h1><p class="lede">${esc(T.heroSub)}</p></div>${wheel}${tag}</div>${decor}</section>`;
+    <div class="hero-title"><h1>${esc(T.heroTitle)}</h1><p class="lede">${rich(T.heroSub)}</p></div>${wheel}${tag}</div>${decor}</section>`;
 }
 function updateWheel() {
   const kids = live('kids'), n = kids.length; if (!n || !$('#wheel')) return;
@@ -332,7 +338,7 @@ function aboutHTML() {
   const T = S.text;
   return `<section class="sec" id="about"><div class="sec-in">${secHead(T.nav.about, T.aboutIntro)}
     <div class="about-grid"><div>${paras(T.aboutBody)}<h3>${esc(T.whoTitle)}</h3>${paras(T.whoBody)}<h3>${esc(T.cmnTitle)}</h3>${paras(T.cmnBody)}</div>
-      <div><div class="plate"><img src="${IMG.golisano}" alt="Upstate Golisano Children’s Hospital"><h3>${esc(T.partnerTitle)}</h3><p>${esc(T.partnerBody)}</p></div></div></div></div></section>`;
+      <div><div class="plate">${HOSP ? `<a class="plate-logo" href="${esc(HOSP)}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="${IMG.golisano}" alt=""></a>` : `<img src="${IMG.golisano}" alt="Upstate Golisano Children’s Hospital">`}<h3>${esc(T.partnerTitle)}</h3><p>${esc(T.partnerBody)}</p>${HOSP ? `<a class="btn sm" href="${esc(HOSP)}" target="_blank" rel="noopener noreferrer">Visit Upstate Golisano Children’s Hospital</a>` : ''}</div></div></div></div></section>`;
 }
 const SECS = {stories: storiesHTML, wed: wedHTML, impact: impactHTML, board: boardHTML, events: eventsHTML, involve: involveHTML, about: aboutHTML};
 const SLUG = {home: 'index.html', events: 'events.html', wall: 'wall-of-miracles.html', involve: 'get-involved.html', about: 'about.html', board: 'meet-the-team.html'};
@@ -340,11 +346,11 @@ const polaroid = (photo, caption) => `<figure class="polaroid"><span class="tape
 function homeHTML() {
   const T = S.text, st = (T.stats || []).filter(x => x.n && x.l), kid = live('kids').find(k => k.photo);
   const td = today(), up = live('events').filter(e => e.date >= td).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 3);
-  return `<section class="home-hero"><div class="hh-in"><div><h1>${esc(T.homeTitle)}</h1><p class="kick">${esc(T.homeKicker)}</p><p>${esc(T.homeIntro)}</p><a class="btn primary" href="about.html">Learn more</a></div>
+  return `<section class="home-hero"><div class="hh-in"><div><h1>${esc(T.homeTitle)}</h1><p class="kick">${esc(T.homeKicker)}</p><p>${rich(T.homeIntro)}</p><a class="btn primary" href="about.html">Learn more</a></div>
       ${polaroid(T.heroPhoto, T.homeCaption)}</div>
       <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C240 70 480 0 720 22 S1200 60 1440 14 L1440 60 L0 60Z" fill="var(--bg)"/></svg></section>
     <div class="flowers" aria-hidden="true">${[0, 1, 2, 3, 4].map(i => `<span style="transform:rotate(${i * 19}deg)">${daisy()}</span>`).join('')}</div>
-    <section class="mission"><div class="sec-in"><h2>${esc(T.missionTitle)}</h2><p>${esc(T.missionBody)}</p>
+    <section class="mission"><div class="sec-in"><h2>${esc(T.missionTitle)}</h2><p>${rich(T.missionBody)}</p>
       ${st.length ? `<div class="big-stats">${st.map(x => `<div><b>${esc(x.n)}</b><span>${esc(x.l)}</span></div>`).join('')}</div>` : ''}
       ${T.revealNote ? `<p class="note">${esc(T.revealNote)}</p>` : ''}</div></section>
     <section class="sec-in" style="padding-bottom:20px"><div class="wall-banner"><div><p class="quote-card">${esc(T.wallQuote)}</p><h2>${esc(T.wallTitle)}</h2><p>${esc(T.wallBody)}</p><a class="btn" href="wall-of-miracles.html">Visit the Wall of Miracles</a></div>
@@ -373,9 +379,9 @@ function renderPublic() {
       <nav class="links" aria-label="Main">${links}${donate}</nav></div></header>
     <main>${pageHTML(page)}</main>
     <footer class="foot"><div class="foot-in"><p class="cta-line">${esc(T.ctaLine)}</p>
-      <div class="logos"><img class="logo-tile" src="${IMG.logo}" alt="OttoTHON"><span class="gplate"><img src="${IMG.golisano}" alt="Upstate Golisano Children’s Hospital"></span></div>
+      <div class="logos"><img class="logo-tile" src="${IMG.logo}" alt="OttoTHON">${HOSP ? `<a class="gplate" href="${esc(HOSP)}" target="_blank" rel="noopener noreferrer" aria-label="Upstate Golisano Children’s Hospital website (opens in a new tab)"><img src="${IMG.golisano}" alt="Upstate Golisano Children’s Hospital"></a>` : `<span class="gplate"><img src="${IMG.golisano}" alt="Upstate Golisano Children’s Hospital"></span>`}</div>
       <div class="fbtns">${donateUrl ? `<a class="btn light" href="${esc(donateUrl)}" target="_blank" rel="noopener">Donate</a>` : ''}<a class="btn" href="get-involved.html">Get involved</a></div>
-      <p>${esc(T.about)}</p>${T.email ? `<p>Questions? <a href="mailto:${esc(T.email)}">${esc(T.email)}</a></p>` : ''}
+      <p>${rich(T.about)}</p>${T.email ? `<p>Questions? <a href="mailto:${esc(T.email)}">${esc(T.email)}</a></p>` : ''}
       <div class="flinks">${links}</div><small>${esc(T.footer)} <a href="admin/">Team sign-in</a></small></div></footer>`;
   window.scrollTo(0, y);
 }
@@ -476,6 +482,7 @@ async function init() {
     let previews = {};
     try { const r = await fetch('content/article-previews.json', {cache: 'no-cache'}); if (r.ok) { const j = await r.json(); previews = (j && j.items) || {}; } } catch (e) { /* keep going without it */ }
     const g = k => st[k] || {};
+    { const v = String(g('links').hospitalUrl || '').trim(); HOSP = v.toLowerCase() === 'none' ? '' : (httpsUrl(v) || HOSP_DEFAULT); }
     S = {
       kids: toItems(kids, 'k'), stories: toItems(stories, 's'), wed: toItems(wed, 'w'), board: toItems(board, 'b'),
       events: mergeEvents(toItems(events, 'e').concat(archive), feed), previews, ways: toItems(ways, 'a'), faq: toItems(faq, 'f'),

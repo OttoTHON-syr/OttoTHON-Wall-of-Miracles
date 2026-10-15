@@ -120,6 +120,7 @@ if (s) {
     for (const sec of s.theme.wallSections || []) if (!SECTIONS.includes(sec.key)) err(`settings.theme.wallSections has unknown section "${sec.key}".`);
   }
   if (s.links) {
+    if (s.links.hospitalUrl && String(s.links.hospitalUrl).toLowerCase() !== 'none' && !/^https:\/\/\S+$/i.test(s.links.hospitalUrl)) err('settings.links.hospitalUrl must start with https:// (or be empty, or none).');
     for (const f of ['donateUrl', 'registerUrl']) if (!urlOk(s.links[f])) err(`settings.links.${f} must start with https://.`);
     if (!s.links.donateUrl) warn('The Donate link is empty, so Donate buttons are hidden.');
     if (!s.links.registerUrl) warn('The Register link is empty, so Register buttons are hidden.');
