@@ -35,7 +35,7 @@ const LISTS = {
   stories:    {req: ['title', 'story', 'date'], images: ['photo'], consent: true, dates: ['date']},
   wednesdays: {req: ['title', 'author', 'body', 'date'], dates: ['date']},
   board:      {req: ['name', 'role'], images: ['photo'], urls: ['link']},
-  events:     {req: ['title', 'date'], dates: ['date'], urls: ['link']},
+  events:     {req: ['title', 'date'], dates: ['date'], urls: ['link'], images: ['photo']},
   ways:       {req: ['title'], urls: ['link']},
   faq:        {req: ['question', 'answer']}
 };
@@ -48,6 +48,7 @@ for (const [name, rule] of Object.entries(LISTS)) {
     if (!x || typeof x !== 'object') return err(`${where}: not an entry.`);
     if (typeof x.published !== 'boolean') err(`${where}: "published" must be true or false.`);
     for (const f of rule.images || []) imageOk(`${where}.${f}`, x[f]);
+    if (rule.images) for (const f of ['focusX', 'focusY']) if (x[f] !== undefined && x[f] !== '' && x[f] !== null && !(Number.isFinite(Number(x[f])) && Number(x[f]) >= 0 && Number(x[f]) <= 100)) err(`${where}.${f}: "${x[f]}" must be a number from 0 to 100.`);
     for (const f of rule.urls || []) if (!urlOk(x[f])) err(`${where}.${f}: "${x[f]}" must start with https:// (or mailto:).`);
     for (const f of rule.dates || []) if (x.published && !dateOk(x[f])) err(`${where}.${f}: "${x[f]}" is not a date like 2026-10-14.`);
     if (x.published) for (const f of rule.req) if (!isStr(x[f]) || !x[f].trim()) err(`${where} is published but "${f}" is empty.`);
@@ -60,6 +61,12 @@ for (const [name, rule] of Object.entries(LISTS)) {
   });
 }
 if (unapproved) warn(`${unapproved} kid/story entries are not approved. This repository is public, so anything saved here can be read by anyone. Only enter a child's story after the family approves.`);
+
+// ---- event categories ----
+const evs = read('events');
+if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
+  if (x && x.category && !['fundraiser', 'meeting', 'social', 'community', 'other'].includes(x.category)) err(`events[${i + 1}] "${x.title}": category must be fundraiser, meeting, social, community, or other.`);
+});
 
 // ---- board layout fields ----
 const board = read('board');

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Photo focus tool · OttoTHON</title>
+<style>
+  :root{color-scheme:light dark;--bg:#FBF6E9;--card:#fff;--ink:#28456A;--ink2:#4C6B8F;--line:#C7E0F1;--acc:#15BDEE}
+  @media(prefers-color-scheme:dark){:root{--bg:#10203a;--card:#1b3150;--ink:#EAF3FB;--ink2:#A9BFD8;--line:#2d4b73}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,-apple-system,'Segoe UI',sans-serif}
+  main{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+  h1{margin:0 0 6px;font-size:2rem}
+  p{margin:0 0 12px}
+  .hint{color:var(--ink2);font-size:.95rem}
+  .card{background:var(--card);border-radius:18px;padding:20px;margin:18px 0;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+  .btn,label.pick{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 18px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+  .btn:hover,label.pick:hover{background:var(--line)}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  input[type=file]{position:absolute;opacity:0;width:1px;height:1px}
+  label.pick:focus-within{outline:3px solid var(--acc);outline-offset:3px}
+  fieldset{border:0;padding:0;margin:0 0 6px}
+  legend{font-weight:700;margin-bottom:6px}
+  .shapes{display:flex;gap:8px;flex-wrap:wrap}
+  .shapes label{display:inline-flex;gap:6px;align-items:center;border:2px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:600}
+  .shapes label:has(input:checked){border-color:var(--ink);background:var(--line)}
+  #stage{display:flex;justify-content:center}
+  #wrap{position:relative;display:inline-block;max-width:100%;line-height:0;overflow:hidden;border-radius:6px;touch-action:none;user-select:none;-webkit-user-select:none}
+  #img{display:block;max-width:100%;max-height:70vh;height:auto;width:auto}
+  #box{position:absolute;border:3px solid #fff;outline:2px solid var(--acc);box-shadow:0 0 0 9999px rgba(10,20,40,.55);cursor:grab;border-radius:2px}
+  #box:active{cursor:grabbing}
+  #box:focus-visible{outline:4px solid #F4C84B}
+  #box::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+  .nums{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0}
+  .num{border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+  .num b{display:block;font-size:2.2rem;line-height:1.1}
+  .num span{color:var(--ink2);font-size:.92rem}
+  .num .btn{margin-top:8px;min-height:34px;padding:4px 14px;font-size:.9rem}
+  .previews{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;margin-top:8px}
+  .pv{width:120px;background:center/cover no-repeat;border-radius:6px;border:3px solid #fff;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+  .pv.circle{border-radius:50%}
+  figure{margin:0;text-align:center;font-size:.85rem;color:var(--ink2)}
+  figure .pv{margin:0 auto 4px}
+  .note{background:var(--line);border-radius:10px;padding:8px 12px;font-size:.92rem;margin:10px 0 0}
+  #drop{border:2px dashed var(--line);border-radius:18px;padding:30px;text-align:center}
+  #drop.over{border-color:var(--ink);background:var(--line)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Photo focus tool</h1>
+  <p class="hint">Photos are cropped to fit a frame. This tool lets you choose which part of the photo stays in view. Nothing is uploaded: the photo stays in your browser.</p>
+
+  <div class="card">
+    <ol class="hint" style="margin:0 0 14px;padding-left:20px">
+      <li>Choose the photo (the same one you uploaded in the editor).</li>
+      <li>Drag the box over the part that should show. Arrow keys nudge it too.</li>
+      <li>Copy the two numbers into <b>Photo focus</b> on that person or event in the editor.</li>
+    </ol>
+    <div id="drop"><label class="pick">Choose a photo<input type="file" id="file" accept="image/*"></label><p class="hint" style="margin:10px 0 0">or drop a photo here</p></div>
+  </div>
+
+  <div id="work" hidden>
+    <div class="card">
+      <fieldset><legend>Preview the box as</legend>
+        <div class="shapes">
+          <label><input type="radio" name="shape" value="1" checked>Square</label>
+          <label><input type="radio" name="shape" value="0.8">Portrait (tall)</label>
+          <label><input type="radio" name="shape" value="1.3333333">Landscape (wide)</label>
+        </div>
+      </fieldset>
+      <p class="hint">The box shows what will be visible in that frame. It only moves along the direction where the photo has extra room.</p>
+      <div id="stage"><div id="wrap"><img id="img" alt="Your photo"><div id="box" tabindex="0" role="application" aria-label="Focus box. Drag it, or use the arrow keys."></div></div></div>
+      <p class="note" id="note" hidden></p>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 4px;font-size:1.25rem">Your numbers</h2>
+      <div class="nums">
+        <div class="num"><span>Photo focus: left to right</span><b id="ox">50</b><button class="btn" type="button" data-copy="ox">Copy</button></div>
+        <div class="num"><span>Photo focus: top to bottom</span><b id="oy">25</b><button class="btn" type="button" data-copy="oy">Copy</button></div>
+      </div>
+      <p class="hint" id="copied" role="status" aria-live="polite" style="min-height:1.5em"></p>
+      <h3 style="margin:10px 0 0;font-size:1rem">How it will look</h3>
+      <div class="previews">
+        <figure><div class="pv" id="p-sq" style="aspect-ratio:1/1"></div>Square</figure>
+        <figure><div class="pv" id="p-po" style="aspect-ratio:4/5"></div>Portrait</figure>
+        <figure><div class="pv" id="p-la" style="aspect-ratio:4/3;width:160px"></div>Landscape</figure>
+        <figure><div class="pv circle" id="p-ci" style="aspect-ratio:1/1;width:90px"></div>Round (kids wheel)</figure>
+      </div>
+      <p style="margin-top:14px"><button class="btn" type="button" id="reset">Reset to the default</button></p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var img = $('#img'), box = $('#box'), wrap = $('#wrap'), work = $('#work'), note = $('#note');
+  var fx = 50, fy = 25, ratio = 1, bw = 0, bh = 0, dw = 0, dh = 0, url = null;
+  var DEFAULT_X = 50, DEFAULT_Y = 25;
+  var clamp = function (v) { return Math.max(0, Math.min(100, v)); };
+
+  function load(file) {
+    if (!file || !/^image\//.test(file.type)) return;
+    if (url) URL.revokeObjectURL(url);
+    url = URL.createObjectURL(file);
+    img.onload = function () { work.hidden = false; fx = DEFAULT_X; fy = DEFAULT_Y; layout(); work.scrollIntoView({behavior: 'smooth', block: 'start'}); };
+    img.src = url;
+  }
+  // Same maths the website uses: with object-fit "cover", focus X% means
+  // (box left) / (photo width - box width), and the same for Y.
+  function layout() {
+    dw = img.clientWidth; dh = img.clientHeight;
+    if (!dw || !dh) return;
+    var ir = dw / dh;
+    if (ir > ratio) { bh = dh; bw = bh * ratio; } else { bw = dw; bh = bw / ratio; }
+    box.style.width = bw + 'px'; box.style.height = bh + 'px';
+    place();
+    var freeX = dw - bw > 1, freeY = dh - bh > 1;
+    note.hidden = freeX && freeY;
+    note.textContent = !freeX && !freeY ? 'This photo already fits this frame exactly, so there is nothing to move.' :
+      !freeX ? 'In this frame the photo is only cropped top and bottom, so only the top to bottom number matters.' :
+      'In this frame the photo is only cropped on the sides, so only the left to right number matters.';
+    update();
+  }
+  function place() {
+    box.style.left = ((dw - bw) * fx / 100) + 'px';
+    box.style.top = ((dh - bh) * fy / 100) + 'px';
+  }
+  function update() {
+    $('#ox').textContent = Math.round(fx); $('#oy').textContent = Math.round(fy);
+    var bg = 'url("' + url + '")', pos = fx + '% ' + fy + '%';
+    ['p-sq', 'p-po', 'p-la', 'p-ci'].forEach(function (id) { var e = $('#' + id); e.style.backgroundImage = bg; e.style.backgroundPosition = pos; });
+  }
+  function moveTo(left, top) {
+    var mx = dw - bw, my = dh - bh;
+    if (mx > 1) fx = clamp(left / mx * 100);
+    if (my > 1) fy = clamp(top / my * 100);
+    place(); update();
+  }
+
+  // dragging (mouse, touch and pen)
+  var drag = null;
+  box.addEventListener('pointerdown', function (e) {
+    var r = box.getBoundingClientRect();
+    drag = {dx: e.clientX - r.left, dy: e.clientY - r.top};
+    box.setPointerCapture(e.pointerId); box.focus(); e.preventDefault();
+  });
+  box.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var r = wrap.getBoundingClientRect();
+    moveTo(e.clientX - r.left - drag.dx, e.clientY - r.top - drag.dy);
+  });
+  var stop = function () { drag = null; };
+  box.addEventListener('pointerup', stop); box.addEventListener('pointercancel', stop);
+  // clicking the photo centres the box on that spot
+  wrap.addEventListener('pointerdown', function (e) {
+    if (e.target !== img) return;
+    var r = wrap.getBoundingClientRect();
+    moveTo(e.clientX - r.left - bw / 2, e.clientY - r.top - bh / 2);
+  });
+  // keyboard
+  box.addEventListener('keydown', function (e) {
+    var step = e.shiftKey ? 5 : 1, k = e.key;
+    if (k === 'ArrowLeft') fx = clamp(fx - step); else if (k === 'ArrowRight') fx = clamp(fx + step);
+    else if (k === 'ArrowUp') fy = clamp(fy - step); else if (k === 'ArrowDown') fy = clamp(fy + step); else return;
+    e.preventDefault(); place(); update();
+  });
+
+  document.querySelectorAll('input[name=shape]').forEach(function (r) {
+    r.addEventListener('change', function () { ratio = parseFloat(r.value); layout(); });
+  });
+  window.addEventListener('resize', function () { if (!work.hidden) layout(); });
+
+  $('#file').addEventListener('change', function (e) { load(e.target.files[0]); });
+  var drop = $('#drop');
+  ['dragenter', 'dragover'].forEach(function (t) { document.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { document.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  document.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); });
+
+  $('#reset').addEventListener('click', function () { fx = DEFAULT_X; fy = DEFAULT_Y; place(); update(); });
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = $('#' + b.dataset.copy).textContent;
+      var done = function () { $('#copied').textContent = 'Copied ' + v + '. Paste it into the editor.'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () { $('#copied').textContent = 'Type ' + v + ' into the editor.'; });
+      else $('#copied').textContent = 'Type ' + v + ' into the editor.';
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -68,8 +68,13 @@ const live = c => S[c].filter(x => isLive(x, c));
 const byDate = (a, b) => (b.date || '').localeCompare(a.date || '');
 const notLive = () => false;
 
-const photoOrInitial = (name, photo) => photo ? `<img src="${esc(imgOk(photo))}" alt="">` : `<span class="ini">${esc((name || '?').trim().charAt(0).toUpperCase())}</span>`;
-const medal = (name, photo) => `<span class="med-in">${daisy()}<span class="ph">${photoOrInitial(name, photo)}</span></span>`;
+// Photo focus: where the crop is centred, as percentages (0 = left/top edge, 100 = right/bottom edge).
+// focusX / focusY come from the Photo Focus Tool. Older entries used focus = left | center | right.
+const FOCUS = {left: '22%', center: '50%', right: '78%'};
+const pct = v => (v === '' || v == null || Number.isNaN(+v)) ? null : Math.min(100, Math.max(0, +v));
+const pos = (item, dy = 25) => { const it = item || {}; const x = pct(it.focusX) ?? (FOCUS[it.focus] ? parseFloat(FOCUS[it.focus]) : 50), y = pct(it.focusY) ?? dy; return `object-position:${x}% ${y}%`; };
+const photoOrInitial = (name, photo, item) => photo ? `<img src="${esc(imgOk(photo))}" alt="" style="${pos(item)}">` : `<span class="ini">${esc((name || '?').trim().charAt(0).toUpperCase())}</span>`;
+const medal = (name, photo, item) => `<span class="med-in">${daisy()}<span class="ph">${photoOrInitial(name, photo, item)}</span></span>`;
 const secHead = (title, intro) => `<header class="sec-head">${daisy('h-daisy')}<div><h2>${esc(title)}</h2><p>${esc(intro)}</p></div></header>`;
 const draftChip = (x, c) => (ui.preview && notLive(x, c)) ? `<span class="chip warn">${x.status === 'draft' ? 'Draft' : 'Scheduled'}</span> ` : '';
 const sampleChip = x => x.sample ? `<span class="chip warn">Sample</span> ` : '';
@@ -88,9 +93,9 @@ function renderHero() {
     const step = 360 / n, sel = mod(ui.turn, n), k = kids[sel];
     wheel = `<div class="hero-wheel"><div class="wheel" id="wheel" style="--n:${n}" role="group" aria-label="Miracle kids. Use the arrow keys to turn the wheel.">
       <div class="ring" style="--r:${ui.turn * step}">
-        ${kids.map((x, i) => `<button class="med${i === sel ? ' active' : ''}" style="--a:${i * step}" data-act="pick" data-i="${i}" aria-label="Show ${esc(x.name)}" aria-current="${i === sel}">${medal(x.name, x.photo)}</button>`).join('')}
+        ${kids.map((x, i) => `<button class="med${i === sel ? ' active' : ''}" style="--a:${i * step}" data-act="pick" data-i="${i}" aria-label="Show ${esc(x.name)}" aria-current="${i === sel}">${medal(x.name, x.photo, x)}</button>`).join('')}
       </div>
-      <div class="hub"><div class="hub-in"><div class="hub-daisy" id="hub-pic">${daisy()}<span class="ph">${photoOrInitial(k.name, k.photo)}</span></div><div class="hub-name" id="hub-name">${esc(k.name)}</div></div></div>
+      <div class="hub"><div class="hub-in"><div class="hub-daisy" id="hub-pic">${daisy()}<span class="ph">${photoOrInitial(k.name, k.photo, k)}</span></div><div class="hub-name" id="hub-name">${esc(k.name)}</div></div></div>
     </div></div>`;
     tag = `<div class="hero-tag"><div class="tag-wrap">
       <svg class="tag-string" viewBox="0 0 120 80" aria-hidden="true"><path d="M82 73 C82 46,40 34,16 0" fill="none" stroke="var(--ink2)" stroke-width="2"/><path d="M82 73 C82 50,104 34,116 8" fill="none" stroke="var(--ink2)" stroke-width="2"/></svg>
@@ -107,7 +112,7 @@ function updateWheel() {
   $('.ring').style.setProperty('--r', ui.turn * (360 / n));
   $$('.med').forEach((b, i) => { b.classList.toggle('active', i === sel); b.setAttribute('aria-current', i === sel); });
   $('#hub-name').textContent = k.name;
-  $('#hub-pic').innerHTML = `${daisy()}<span class="ph">${photoOrInitial(k.name, k.photo)}</span>`;
+  $('#hub-pic').innerHTML = `${daisy()}<span class="ph">${photoOrInitial(k.name, k.photo, k)}</span>`;
   const t = $('#tag'); t.innerHTML = tagInner(k); t.classList.remove('swap'); void t.offsetWidth; t.classList.add('swap');
   $('#cnt').textContent = `${sel + 1} of ${n}`;
 }
@@ -121,7 +126,7 @@ function storiesHTML() {
   if (ui.cat !== 'All' && !cats.includes(ui.cat)) ui.cat = 'All';
   const shown = ui.cat === 'All' ? list : list.filter(s => s.category === ui.cat);
   const card = s => `<button class="scard" data-act="story" data-id="${s.id}">
-      <span class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="">` : daisy()}</span>
+      <span class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="" style="${pos(s, 50)}">` : daisy()}</span>
       <span class="sc-body"><span>${draftChip(s, 'stories')}${sampleChip(s)}<span class="chip">${esc(s.category)}</span></span><span class="sc-title">${esc(s.title)}</span><span class="sc-sum">${esc(s.summary)}</span><span class="sc-date">${fmt(s.date)}</span></span></button>`;
   return `<section class="sec" id="stories"><div class="sec-in">${secHead(T.nav.stories, T.storiesIntro)}
     ${cats.length > 1 ? `<div class="filters" role="group" aria-label="Filter stories">${['All', ...cats].map(c => `<button data-act="cat" data-c="${esc(c)}" aria-pressed="${c === ui.cat}">${esc(c)}</button>`).join('')}</div>` : ''}
@@ -134,7 +139,7 @@ function wedHTML() {
   ui.wedI = Math.min(ui.wedI, list.length - 1);
   const p = list[ui.wedI], m = S.board.find(b => b.name === p.author), why = (T.whyList || '').split('\n').map(x => x.trim()).filter(Boolean);
   return `<section class="sec" id="wed"><div class="sec-in">${secHead(T.nav.wed, T.wedIntro)}
-    <div class="wed"><article class="post"><div class="who">${daisy()}<span class="ph">${photoOrInitial(p.author, m && m.photo)}</span></div>
+    <div class="wed"><article class="post"><div class="who">${daisy()}<span class="ph">${photoOrInitial(p.author, m && m.photo, m)}</span></div>
       <div>${draftChip(p, 'wed')}${sampleChip(p)}<h3>${esc(p.title)}</h3><p class="by">${esc(p.author)}${m && m.role ? `, ${esc(m.role)}` : ''} on ${fmtLong(p.date)}</p>${paras(p.body)}</div></article>
       <div><ul class="earlier" aria-label="Other Why Wednesdays">${list.map((x, i) => `<li><button data-act="wedpick" data-i="${i}" aria-pressed="${i === ui.wedI}"><b>${esc(x.title)}</b><small>${esc(x.author)}, ${fmt(x.date)}</small></button></li>`).join('')}</ul>
       ${why.length ? `<div class="why-box"><h3>Why they do it</h3><ul class="why-list">${why.map(w => `<li>${daisy()}${esc(w)}</li>`).join('')}</ul></div>` : ''}</div>
@@ -146,7 +151,6 @@ const tierOf = b => ['executive', 'director', 'team'].includes(b.tier) ? b.tier
   : /executive director/i.test(b.role || '') ? 'executive' : /director/i.test(b.role || '') ? 'director' : 'team';
 const BOUQUET = 'assets/img/daisy-bouquet.png';
 const bouquet = cls => S.design.daisies ? `<img class="bq ${cls}" src="${BOUQUET}" alt="" aria-hidden="true">` : '';
-const FOCUS = {left: '22%', center: '50%', right: '78%'};
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 const TAPE_TILT = [-5, 3, -3, 6, -6, 2], FRAME_TILT = [-1.2, 1, -.6, 1.4, -1, .7];
 // A taped-down photo: white frame, washi tape on top, a daisy placeholder until a photo is added.
@@ -155,8 +159,8 @@ function tapedPhoto(b, i, extra = '') {
   const tape = wide
     ? `<span class="washi w${n % 4} left" style="--tr:-38deg"></span><span class="washi w${(n + 1) % 4} right" style="--tr:36deg"></span>`
     : `<span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg;--tx:${[0, -18, 14, 0, 18, -12][n]}px"></span>`;
-  const inner = img ? `<img src="${esc(img)}" alt="">` : `<span class="polo-ph">${daisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
-  return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg;--fx:${FOCUS[b.focus] || '50%'}">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
+  const inner = img ? `<img src="${esc(img)}" alt="" style="${pos(b)}">` : `<span class="polo-ph">${daisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
+  return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
 }
 function personText(b) {
   const link = safeUrl(b.link), bio = String(b.bio || '').trim(), name = String(b.name || '').trim();
@@ -200,17 +204,87 @@ function impactHTML() {
     ${st.length ? `<div class="stats-pub">${st.map(x => `<div class="sp"><b>${esc(x.n)}</b><span>${esc(x.l)}</span></div>`).join('')}</div>` : ''}
     ${T.revealNote ? `<p class="note">${esc(T.revealNote)}</p>` : ''}</div></section>`;
 }
+// ---------- Events page: a scrapbook of tickets and calendar pages ----------
+const EV_TEXT = {eventsTitle: 'Upcoming Events', eventsTagline: 'Good things are always on the schedule.', eventsNote: 'same mission. bigger impact.',
+  nextLabel: 'Next up', upcomingLabel: 'Upcoming events', pastTitle: 'Where we’ve been', pastIntro: 'Past events that made a difference',
+  pastThanks: 'Thank you to everyone who showed up, gave back, and made these moments possible.'};
+const CATS = {fundraiser: 'Fundraiser', meeting: 'Meeting', social: 'Social', community: 'Community', other: 'Event'};
+function catOf(e) {
+  if (CATS[e.category]) return e.category;
+  const t = `${e.title || ''} ${e.feedCategory || ''}`;
+  if (/meeting|general body|captains|committee/i.test(t)) return 'meeting';
+  if (/fundrais|sale|bake|raffle|donat|pie |marathon|walk|dance/i.test(t)) return 'fundraiser';
+  if (/volunt|communit|service|hospital|golisano|visit/i.test(t)) return 'community';
+  if (/social|party|mixer|reveal|night|game|bonding|trivia|paint/i.test(t)) return 'social';
+  return 'other';
+}
+const svg = d => `<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICON = {
+  fundraiser: svg('<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>'),
+  meeting: svg('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.5 0 4 2 4 5"/>'),
+  social: svg('<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>'),
+  community: svg('<path d="M4 11l8-7 8 7v9H4z"/><path d="M10 20v-6h4v6"/>'),
+  other: svg('<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'),
+  clock: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  pin: svg('<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/>'),
+  cal: svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')
+};
+const parts = e => { const d = dt(e.date); return {wk: d.toLocaleDateString('en-US', {weekday: 'short'}).toUpperCase(), mo: d.toLocaleDateString('en-US', {month: 'short'}).toUpperCase(), day: d.getDate()}; };
+const daysUntil = e => Math.round((dt(e.date) - dt(today())) / 864e5);
+const inDays = n => n <= 0 ? 'TODAY!' : n === 1 ? 'TOMORROW!' : `IN ${n} DAYS!`;
+const chip = c => `<span class="catchip">${ICON[c]}${CATS[c]}</span>`;
+const rows = e => `${e.time ? `<p class="ev-row">${ICON.clock}<span>${esc(e.time)}</span></p>` : ''}${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}`;
+function evPhoto(e, i) {
+  const img = imgOk(e.photo), n = i % 6;
+  return `<figure class="polo ev-polo" style="--pr:${FRAME_TILT[n]}deg"><span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg"></span><div class="polo-img">${img ? `<img src="${esc(img)}" alt="" style="${pos(e, 50)}">` : `<span class="polo-ph">${daisy()}</span>`}</div></figure>`;
+}
 function eventsHTML() {
-  const T = S.text, list = live('events'), td = today(), reg = safeUrl(T.registerUrl);
+  const T = S.text, td = today(), list = live('events');
   const up = list.filter(e => e.date >= td).sort((a, b) => a.date.localeCompare(b.date)), past = list.filter(e => e.date < td).sort(byDate);
-  const row = (e, isPast) => { const d = dt(e.date), l = safeUrl(e.link);
-    return `<li class="ev"><div class="ev-date"><b>${d.getDate()}</b><span>${d.toLocaleDateString('en-US', {month: 'short'})}${isPast ? ' ' + d.getFullYear() : ''}</span></div>
-      <div>${draftChip(e, 'events')}${sampleChip(e)}<h4>${esc(e.title)}</h4>${e.place ? `<div class="where">${esc(e.place)}</div>` : ''}${e.desc ? `<p>${esc(e.desc)}</p>` : ''}${l ? `<a class="btn sm" href="${esc(l)}" target="_blank" rel="noopener">Details</a>` : ''}</div></li>`; };
-  return `<section class="sec" id="events"><div class="sec-in">${secHead(T.nav.events, T.eventsIntro)}
-    <div class="ev-main"><div><h3>${esc(T.mainTitle)}</h3><p>${esc(T.mainPlace)}</p></div><p>${esc(T.mainDesc)}</p>${reg ? `<a class="btn" href="${esc(reg)}" target="_blank" rel="noopener">Register</a>` : ''}</div>
-    <h3 class="ev-h">Mark your calendar</h3>
-    ${up.length ? `<ul class="ev-list">${up.map(e => row(e, false)).join('')}</ul>` : `<div class="empty" style="margin-bottom:34px">No upcoming events yet.</div>`}
-    ${past.length ? `<h3 class="ev-h">Where we’ve been</h3><ul class="ev-list">${past.map(e => row(e, true)).join('')}</ul>` : ''}</div></section>`;
+  const next = up.find(e => e.featured === true) || up[0], rest = up.filter(e => e !== next);
+  const stars = `<svg class="evp-doodle" viewBox="0 0 200 60" aria-hidden="true"><g fill="none" stroke="var(--blue-ink)" stroke-width="3" stroke-linecap="round"><path d="M10 12l16 6M6 30l18 1M12 48l15-8"/><path d="M178 12l-14 8M184 30l-16 1M176 46l-14-8"/></g><path d="M100 4l3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1z" fill="var(--yolk)"/></svg>`;
+  const ticket = !next ? '' : (() => {
+    const c = catOf(next), q = parts(next), link = safeUrl(next.link);
+    return `<article class="ticket cat-${c}"><span class="tape-label">${esc(T.nextLabel)}</span>
+      <div class="tk-main">${evPhoto(next, 0)}<div class="tk-text">${chip(c)}<h2>${draftChip(next, 'events')}${sampleChip(next)}${esc(next.title)}</h2>${rows(next)}${next.desc ? `<p class="ev-desc">${esc(next.desc)}</p>` : ''}
+        ${link ? `<div class="ev-actions"><a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Details</a></div>` : ''}<p class="admit">♡ ADMIT ONE ♡</p></div></div>
+      <div class="tk-stub"><div class="wk">${q.wk}</div><div class="mo">${q.mo}</div><div class="dy">${q.day}</div><div class="in">${inDays(daysUntil(next))}</div>
+        <button class="btn cal-btn" data-act="ics" data-id="${next.id}">${ICON.cal}Add to Calendar</button></div></article>`;
+  })();
+  const card = (e, i) => { const c = catOf(e), q = parts(e), link = safeUrl(e.link), img = imgOk(e.photo);
+    return `<article class="evc cat-${c}${img ? ' has-img' : ''}">${img ? evPhoto(e, i + 1) : ''}
+      <div class="evc-body">${chip(c)}<h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${rows(e)}${e.desc ? `<p class="ev-desc">${esc(e.desc)}</p>` : ''}
+        <div class="ev-actions"><button class="btn sm" data-act="ics" data-id="${e.id}">Add to calendar</button>${link ? `<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Details</a>` : ''}</div></div>
+      <div class="cal"><span class="washi w${(i + 2) % 4}" style="--tr:${TAPE_TILT[(i + 3) % 6]}deg"></span><b>${q.mo}</b><strong>${q.day}</strong>${daisy('cal-daisy')}</div></article>`; };
+  const mini = e => { const q = parts(e); return `<li class="mini"><span class="mini-d"><b>${q.mo}</b><strong>${q.day}</strong></span><span class="mini-t">${esc(e.title)}</span><span class="mini-h" aria-hidden="true">♡</span></li>`; };
+  return `<section class="evp"><div class="sec-in">
+    <header class="evp-hero">${stars}<h1 class="evp-title">${esc(T.eventsTitle)}</h1><p class="evp-tag">${esc(T.eventsTagline)} ♡</p><p class="evp-intro">${esc(T.eventsIntro)}</p>
+      <div class="evp-flower" aria-hidden="true">${daisy()}</div><p class="evp-note">${esc(T.eventsNote)} ♡</p></header>
+    ${ticket}
+    <h2 class="tape-label big">${esc(T.upcomingLabel)} ♡</h2>
+    ${rest.length ? `<div class="evc-grid">${rest.map(card).join('')}</div>` : `<div class="empty">${next ? 'More events are on the way.' : 'No upcoming events yet. Check back soon.'}</div>`}
+    ${past.length ? `<div class="past"><div class="past-head"><h2 class="tape-label big">${esc(T.pastTitle)} ♡</h2><p class="past-intro">${esc(T.pastIntro)} ♡</p></div>
+      <ul class="mini-row">${past.slice(0, 10).map(mini).join('')}</ul><p class="past-thanks">${esc(T.pastThanks)} ♡</p></div>` : ''}
+  </div></section>`;
+}
+// "Add to calendar": builds a calendar file in the browser (opens in Apple Calendar, Outlook, Google Calendar)
+function icsText(e) {
+  const f = x => x.replace(/[-:]/g, '').replace(/\.\d+/, ''), ics = t => String(t || '').replace(/[\\;,]/g, m => '\\' + m).replace(/\n/g, '\\n');
+  const ymdc = e.date.replace(/-/g, '');
+  let when;
+  if (e.start) when = `DTSTART:${f(e.start)}\r\n${e.end ? `DTEND:${f(e.end)}` : ''}`;
+  else {
+    const t = [...String(e.time || '').matchAll(/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/gi)].map(m => { let h = +m[1] % 12; if (/pm/i.test(m[3])) h += 12; return String(h).padStart(2, '0') + (m[2] || '00') + '00'; });
+    if (t.length) when = `DTSTART:${ymdc}T${t[0]}\r\nDTEND:${ymdc}T${t[1] || String((+t[0].slice(0, 2) + 1) % 24).padStart(2, '0') + t[0].slice(2)}`;
+    else { const n = dt(e.date); n.setDate(n.getDate() + 1); when = `DTSTART;VALUE=DATE:${ymdc}\r\nDTEND;VALUE=DATE:${ymd(n).replace(/-/g, '')}`; }
+  }
+  return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//OttoTHON//Events//EN', 'BEGIN:VEVENT', `UID:${ymdc}-${(e.title || 'event').replace(/\W+/g, '-').toLowerCase()}@ottothon`,
+    `DTSTAMP:${f(new Date().toISOString())}`, when.replace(/\r\n$/, ''), `SUMMARY:${ics(e.title)}`, `LOCATION:${ics(e.place)}`, `DESCRIPTION:${ics(e.desc)}`, 'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n') + '\r\n';
+}
+function addToCalendar(id) {
+  const e = S.events.find(x => x.id === id); if (!e) return;
+  const url = URL.createObjectURL(new Blob([icsText(e)], {type: 'text/calendar;charset=utf-8'})), a = document.createElement('a');
+  a.href = url; a.download = `${(e.title || 'event').replace(/\W+/g, '-').toLowerCase()}.ics`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 function involveHTML() {
   const T = S.text, ways = live('ways'), faq = live('faq').filter(f => f.answer || ui.preview), reg = safeUrl(T.registerUrl);
@@ -244,7 +318,7 @@ function homeHTML() {
     <section class="sec-in" style="padding-bottom:20px"><div class="wall-banner"><div><p class="quote-card">${esc(T.wallQuote)}</p><h2>${esc(T.wallTitle)}</h2><p>${esc(T.wallBody)}</p><a class="btn" href="wall-of-miracles.html">Visit the Wall of Miracles</a></div>
       ${polaroid(T.wallPhoto || (kid && kid.photo), 'miracle kid')}</div></section>
     <section class="up"><div class="sec-in">${secHead(T.upcomingTitle, T.upcomingIntro)}
-      ${up.length ? `<div class="up-grid">${up.map(e => { const d = dt(e.date); return `<article class="up-card"><div class="d">${d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</div><h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<div class="where">${esc(e.place)}</div>` : ''}${e.desc ? `<p>${esc(e.desc)}</p>` : ''}</article>`; }).join('')}</div>` : `<div class="empty" style="margin-bottom:26px">New events are on the way.</div>`}
+      ${up.length ? `<div class="up-grid">${up.map(e => { const d = dt(e.date); return `<article class="up-card"><div class="d">${d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</div><h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${[e.time, e.place].filter(Boolean).length ? `<div class="where">${esc([e.time, e.place].filter(Boolean).join(' · '))}</div>` : ''}${e.desc ? `<p>${esc(e.desc)}</p>` : ''}</article>`; }).join('')}</div>` : `<div class="empty" style="margin-bottom:26px">New events are on the way.</div>`}
       <a class="btn" href="events.html">See all events</a></div></section>`;
 }
 function pageHTML(page) {
@@ -275,7 +349,7 @@ function renderPublic() {
 }
 function openStory(id) {
   const s = S.stories.find(x => x.id === id); if (!s) return;
-  $('#dlg-body').innerHTML = `<div class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="">` : daisy()}</div>
+  $('#dlg-body').innerHTML = `<div class="sc-img">${s.photo ? `<img src="${esc(imgOk(s.photo))}" alt="" style="${pos(s, 50)}">` : daisy()}</div>
     <span class="chip">${esc(s.category)}</span> ${sampleChip(s)}<h3 id="dlg-title">${esc(s.title)}</h3><p class="hint" style="margin-top:0">${fmt(s.date)}</p>${paras(s.story)}
     <div class="dlg-btns"><button class="btn primary" data-act="closedlg">Close</button></div>`;
   $('#dlg').showModal();
@@ -290,6 +364,7 @@ const ACT = {
   cat: a => { ui.cat = a.dataset.c; renderPublic(); },
   story: a => openStory(a.dataset.id),
   wedpick: a => { ui.wedI = +a.dataset.i; renderPublic(); },
+  ics: a => addToCalendar(a.dataset.id),
   closedlg: () => document.getElementById('dlg').close()
 };
 document.addEventListener('click', e => { const a = e.target.closest('[data-act]'); if (a && ACT[a.dataset.act]) ACT[a.dataset.act](a); });
@@ -313,7 +388,8 @@ function mergeEvents(manual, feed) {
   const seen = new Set(manual.map(e => evKey(e.title, e.date)));
   const synced = feed.filter(f => f && f.title && /^\d{4}-\d{2}-\d{2}$/.test(f.date || '') && !seen.has(evKey(f.title, f.date)))
     .map((f, i) => ({id: 'y' + i, status: 'published', fromFeed: true, title: f.title, date: f.date,
-      place: [f.timeLabel, f.place].filter(Boolean).join(' · '), desc: f.desc || '', link: /^https:\/\//.test(f.link || '') ? f.link : ''}));
+      time: f.timeLabel || '', place: f.place || '', start: f.start || '', end: f.end || '', category: f.category || '', feedCategory: f.feedCategory || '',
+      desc: f.desc || '', link: /^https:\/\//.test(f.link || '') ? f.link : ''}));
   return [...manual, ...synced];
 }
 const toItems = (o, prefix) => ((o && o.items) || []).map((x, i) => ({...x, id: prefix + i, status: x.published === true ? 'published' : 'draft'}));
@@ -330,7 +406,7 @@ async function init() {
       events: mergeEvents(toItems(events, 'e'), feed), ways: toItems(ways, 'a'), faq: toItems(faq, 'f'),
       design: {photoFrame: g('theme').photoFrame, palette: g('theme').palette, font: g('theme').font, daisies: g('theme').daisies !== false, storyLayout: g('theme').storyLayout || 'rail',
         sections: (g('theme').wallSections || []).filter(x => ['stories', 'wed', 'impact'].includes(x.key))},
-      text: Object.assign({}, g('home'), g('wall'), g('team'), g('events'), g('involve'), g('about'), g('footer'), {
+      text: Object.assign({}, EV_TEXT, g('home'), g('wall'), g('team'), g('events'), g('involve'), g('about'), g('footer'), {
         donateUrl: g('links').donateUrl || '', registerUrl: g('links').registerUrl || '', email: g('links').email || '',
         heroPhoto: imgOk(g('photos').heroPhoto), wallPhoto: imgOk(g('photos').wallPhoto),
         stats: st.stats || [], impact: st.impact || [], nav: g('nav')})

@@ -55,6 +55,16 @@ function timeLabel(start, end) {
   return sameDay && e ? `${s} – ${e}` : s;
 }
 
+// ---------- category (drives the color and icon on the Events page) ----------
+function categorize(title, feedCats) {
+  const text = `${title} ${feedCats.join(' ')}`;
+  if (/meeting|general body|captains|committee/i.test(text)) return 'meeting';
+  if (/fundrais|sale|bake|raffle|donat|pie |marathon|walk|dance/i.test(text)) return 'fundraiser';
+  if (/volunt|communit|service|hospital|golisano|visit/i.test(text)) return 'community';
+  if (/social|party|mixer|reveal|night|game|bonding|trivia|paint/i.test(text)) return 'social';
+  return 'other';
+}
+
 // ---------- parse ----------
 export function parseFeed(xml) {
   if (!/<rss[\s>]/.test(xml)) throw new Error('That does not look like an RSS feed.');
@@ -71,6 +81,7 @@ export function parseFeed(xml) {
     out.push({
       id: tag(item, 'guid') || link || `${title}|${start.toISOString()}`,
       title, date: localDate(start), start: start.toISOString(), end: end && !Number.isNaN(end.getTime()) ? end.toISOString() : '',
+      category: categorize(title, tags(item, 'category')), feedCategory: tags(item, 'category').join(', '),
       timeLabel: timeLabel(start, end && !Number.isNaN(end.getTime()) ? end : null),
       place: tag(item, 'location').replace(/\s+/g, ' ').trim(),
       desc: description(item),

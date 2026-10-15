@@ -56,6 +56,24 @@ collections:
                 widget: "image"
                 hint: "Use only photos the family approved."
                 required: false
+              - label: "Photo focus: left to right"
+                name: "focusX"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
+              - label: "Photo focus: top to bottom"
+                name: "focusY"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Family consent and photo approval confirmed in writing"
                 name: "approved"
                 widget: "boolean"
@@ -107,6 +125,24 @@ collections:
                 widget: "image"
                 hint: "Use only photos the family approved."
                 required: false
+              - label: "Photo focus: left to right"
+                name: "focusX"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
+              - label: "Photo focus: top to bottom"
+                name: "focusY"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Family consent and photo approval confirmed in writing"
                 name: "approved"
                 widget: "boolean"
@@ -202,19 +238,6 @@ collections:
                 widget: "string"
                 hint: "Optional. Leave empty and the button says Email plus their first name, which updates on its own if you change their name. Type here to use your own words, for example Email Communications."
                 required: false
-              - label: "Photo focus"
-                name: "focus"
-                widget: "select"
-                options:
-                  - label: "Center"
-                    value: "center"
-                  - label: "Person is on the left of the photo"
-                    value: "left"
-                  - label: "Person is on the right of the photo"
-                    value: "right"
-                default: "center"
-                hint: "Photos are cropped to a frame. If someone is cut off, say which side of the photo they are on."
-                required: false
               - label: "Donate link"
                 name: "link"
                 widget: "string"
@@ -225,6 +248,24 @@ collections:
                 widget: "image"
                 hint: "Any shape works. The photo is cropped to the frame chosen under Appearance, so keep faces toward the middle (or use Photo focus below)."
                 required: false
+              - label: "Photo focus: left to right"
+                name: "focusX"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
+              - label: "Photo focus: top to bottom"
+                name: "focusY"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
               - label: "Show on the site"
                 name: "published"
                 widget: "boolean"
@@ -232,7 +273,7 @@ collections:
                 default: true
   - name: events
     label: "Events"
-    description: "Events you add by hand. OttoTHON events from the campus calendar are copied in automatically every day (you do not need to add those). To hide one of those, add it here with the same title and date and turn Show on the site off. Events move from Mark your calendar to Where we’ve been on their own after their date."
+    description: "Events you add by hand. OttoTHON events from the campus calendar are copied in automatically every day (you do not need to add those). To hide one of those, add it here with the same title and date and turn Show on the site off. Events move from Upcoming events to Where we’ve been on their own after their date."
     files:
       - name: events
         label: "Events"
@@ -252,14 +293,65 @@ collections:
                 date_format: "YYYY-MM-DD"
                 time_format: false
                 format: "YYYY-MM-DD"
-              - label: "Location and time"
+              - label: "Type of event"
+                name: "category"
+                widget: "select"
+                options:
+                  - label: "Fundraiser (yellow)"
+                    value: "fundraiser"
+                  - label: "Meeting (blue)"
+                    value: "meeting"
+                  - label: "Social (pink)"
+                    value: "social"
+                  - label: "Community (green)"
+                    value: "community"
+                  - label: "Other (lavender)"
+                    value: "other"
+                default: "other"
+                hint: "Sets the card color and icon."
+              - label: "Time"
+                name: "time"
+                widget: "string"
+                hint: "For example 7:00 PM – 8:00 PM. Used for the Add to Calendar button, so keep this format."
+                required: false
+              - label: "Place"
                 name: "place"
                 widget: "string"
+                hint: "For example Schine Student Center, Room 304."
                 required: false
               - label: "Description"
                 name: "desc"
                 widget: "text"
                 hint: "For a past event, say what happened."
+                required: false
+              - label: "Photo or flyer"
+                name: "photo"
+                widget: "image"
+                hint: "Optional. Shows as a taped-down photo on the card. Use only photos you have permission to share."
+                required: false
+              - label: "Photo focus: left to right"
+                name: "focusX"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the left edge of the photo, 100 is the right edge. Find the number with the Photo Focus Tool (this site's address plus /admin/focus.html). Leave empty for the middle."
+              - label: "Photo focus: top to bottom"
+                name: "focusY"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                step: 1
+                required: false
+                hint: "0 is the top of the photo, 100 is the bottom. Leave empty to use the default (a little above the middle, so faces stay in frame)."
+              - label: "Show as the big Next up ticket"
+                name: "featured"
+                widget: "boolean"
+                default: false
+                hint: "Pin this event as the big ticket at the top, for example the main event. If none is pinned, the soonest event is used."
                 required: false
               - label: "Details link"
                 name: "link"
@@ -477,15 +569,38 @@ collections:
               - label: "Intro"
                 name: "eventsIntro"
                 widget: "text"
-              - label: "Main event name"
-                name: "mainTitle"
+              - label: "Page title"
+                name: "eventsTitle"
                 widget: "string"
-              - label: "Main event place"
-                name: "mainPlace"
+                required: false
+              - label: "Tagline (handwritten line under the title)"
+                name: "eventsTagline"
                 widget: "string"
-              - label: "Main event description"
-                name: "mainDesc"
+                required: false
+              - label: "Handwritten note (top right)"
+                name: "eventsNote"
+                widget: "string"
+                required: false
+              - label: "Label on the big ticket"
+                name: "nextLabel"
+                widget: "string"
+                required: false
+              - label: "Label above the event cards"
+                name: "upcomingLabel"
+                widget: "string"
+                required: false
+              - label: "Past events heading"
+                name: "pastTitle"
+                widget: "string"
+                required: false
+              - label: "Past events subtitle"
+                name: "pastIntro"
+                widget: "string"
+                required: false
+              - label: "Thank-you note (bottom right)"
+                name: "pastThanks"
                 widget: "text"
+                required: false
           - label: "Get involved page"
             name: "involve"
             widget: "object"
