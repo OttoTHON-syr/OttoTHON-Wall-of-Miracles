@@ -67,7 +67,7 @@
       "team": "Internal Events Team",
       "bio": "",
       "link": "",
-      "photo": "",
+      "photo": "assets/uploads/zahra-jarrell.jpg#focus=0,25",
       "published": true
     },
     {
@@ -141,7 +141,8 @@
       "published": true,
       "name": "Wray Zhou",
       "role": "Partnership Chair",
-      "team": "Finance Team"
+      "team": "Finance Team",
+      "photo": "assets/uploads/wray-zhou.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -182,7 +183,8 @@
       "published": true,
       "name": "Lulu Boone",
       "role": "Team Captain Chair",
-      "team": "Membership Team"
+      "team": "Membership Team",
+      "photo": "assets/uploads/lulu-boone.jpg#focus=0,25"
     },
     {
       "tier": "team",
@@ -246,7 +248,8 @@
       "published": true,
       "name": "Adam Paliana",
       "role": "Social Media Chair",
-      "team": "Communications Team"
+      "team": "Communications Team",
+      "photo": "assets/uploads/adam-paliana.jpg#focus=0,25"
     },
     {
       "tier": "team",
