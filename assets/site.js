@@ -5,6 +5,8 @@
    ===================================================================== */
 'use strict';
 const IMG = {logo: 'assets/img/ottothon-logo.jpg', golisano: 'assets/img/golisano-logo.svg'};
+const NEWDAISY = 'assts/img/stemless-daisy.png';
+const newDaisy = cls => S.design.daisies ? `<img class="bq ${cls}" src="${NEWDAISY}" alt="" aria-hidden="true">` : '';
 const imgOk = u => /^(assets\/[\w\-. \/]+|https:\/\/)/i.test(u || '') && !/\.\./.test(u) ? u : '';
 document.body.insertAdjacentHTML('afterbegin', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="defs"></defs></svg>');
 let S;
@@ -97,8 +99,8 @@ const pos = (item, dy = 25) => {
   return `object-position:${x}% ${y}%`;
 };
 const photoOrInitial = (name, photo, item) => photo ? `<img src="${esc(imgOk(photo))}" alt="" style="${pos(item)}">` : `<span class="ini">${esc((name || '?').trim().charAt(0).toUpperCase())}</span>`;
-const medal = (name, photo, item) => `<span class="med-in">${daisy()}<span class="ph">${photoOrInitial(name, photo, item)}</span></span>`;
-const secHead = (title, intro) => `<header class="sec-head">${daisy('h-daisy')}<div><h2>${esc(title)}</h2><p>${esc(intro)}</p></div></header>`;
+const medal = (name, photo, item) => `<span class="med-in">${newDaisy()}<span class="ph">${photoOrInitial(name, photo, item)}</span></span>`;
+const secHead = (title, intro) => `<header class="sec-head">${newDaisy('h-daisy')}<div><h2>${esc(title)}</h2><p>${esc(intro)}</p></div></header>`;
 const draftChip = (x, c) => (ui.preview && notLive(x, c)) ? `<span class="chip warn">${x.status === 'draft' ? 'Draft' : 'Scheduled'}</span> ` : '';
 const sampleChip = x => x.sample ? `<span class="chip warn">Sample</span> ` : '';
 
@@ -182,7 +184,7 @@ function tapedPhoto(b, i, extra = '') {
   const tape = wide
     ? `<span class="washi w${n % 4} left" style="--tr:-38deg"></span><span class="washi w${(n + 1) % 4} right" style="--tr:36deg"></span>`
     : `<span class="washi w${n % 4}" style="--tr:${TAPE_TILT[n]}deg;--tx:${[0, -18, 14, 0, 18, -12][n]}px"></span>`;
-  const inner = img ? `<img src="${esc(img)}" alt="" style="${pos(b)}">` : `<span class="polo-ph">${daisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
+  const inner = img ? `<img src="${esc(img)}" alt="" style="${pos(b)}">` : `<span class="polo-ph">${newDaisy()}<span class="ini">${esc((b.name || '?').trim().charAt(0).toUpperCase())}</span></span>`;
   return `<figure class="polo ${extra}" style="--pr:${FRAME_TILT[n]}deg">${tape}<div class="polo-img">${inner}</div>${extra.includes('cap') ? '__CAP__' : ''}</figure>`;
 }
 function personText(b) {
