@@ -537,4 +537,14 @@ details.recap p{margin:0}
 .g-item .washi{width:64px;height:20px;margin-left:-32px;top:-11px}
 @media(max-width:520px){.gallery{grid-template-columns:minmax(0,1fr)}}
 
+
+/* news links on a past event card */
+.ev-news{display:flex;flex-direction:column;gap:6px;margin-top:2px}
+.ev-news-label{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#4C6B8F}
+.ev-news-link{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 8px;align-items:center;padding:8px 12px;border:2px solid #28456A;border-radius:12px;color:#28456A;text-decoration:none;background:color-mix(in srgb,#fff 55%,transparent)}
+.ev-news-link b{grid-column:1;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#4C6B8F}
+.ev-news-link span{grid-column:1;font-family:var(--hand-title);line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ev-news-link i{grid-column:2;grid-row:1/3;font-style:normal;font-weight:800}
+.ev-news-link:hover,.ev-news-link:focus-visible{background:#fff}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

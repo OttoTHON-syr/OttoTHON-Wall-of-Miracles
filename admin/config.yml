@@ -365,6 +365,35 @@ collections:
                     name: "caption"
                     widget: "string"
                     required: false
+              - label: "News articles"
+                name: "articles"
+                widget: "list"
+                label_singular: "article"
+                required: false
+                summary: "{{fields.outlet}} {{fields.url}}"
+                hint: "Optional. Paste a link to each news article about this event, as many as you like. The headline, outlet and a short summary are filled in automatically about a minute after you publish. If the event is also shown as a success story, the articles appear there too."
+                fields:
+                  - label: "Article link"
+                    name: "url"
+                    widget: "string"
+                    hint: "Must start with https://"
+                  - label: "Headline (optional)"
+                    name: "title"
+                    widget: "string"
+                    required: false
+                    hint: "Leave empty to use the article's own headline."
+                  - label: "Outlet (optional)"
+                    name: "outlet"
+                    widget: "string"
+                    required: false
+                    hint: "For example Syracuse.com. Leave empty to fill in automatically."
+                  - label: "Date (optional)"
+                    name: "date"
+                    widget: "datetime"
+                    date_format: "YYYY-MM-DD"
+                    time_format: false
+                    format: "YYYY-MM-DD"
+                    required: false
               - label: "Show as the big Next up ticket"
                 name: "featured"
                 widget: "boolean"
@@ -474,6 +503,35 @@ collections:
                   - label: "Caption (optional)"
                     name: "caption"
                     widget: "string"
+                    required: false
+              - label: "News articles"
+                name: "articles"
+                widget: "list"
+                label_singular: "article"
+                required: false
+                summary: "{{fields.outlet}} {{fields.url}}"
+                hint: "Optional. Paste a link to each news article about this event, as many as you like. The headline, outlet and a short summary are filled in automatically about a minute after you publish. If the event is also shown as a success story, the articles appear there too."
+                fields:
+                  - label: "Article link"
+                    name: "url"
+                    widget: "string"
+                    hint: "Must start with https://"
+                  - label: "Headline (optional)"
+                    name: "title"
+                    widget: "string"
+                    required: false
+                    hint: "Leave empty to use the article's own headline."
+                  - label: "Outlet (optional)"
+                    name: "outlet"
+                    widget: "string"
+                    required: false
+                    hint: "For example Syracuse.com. Leave empty to fill in automatically."
+                  - label: "Date (optional)"
+                    name: "date"
+                    widget: "datetime"
+                    date_format: "YYYY-MM-DD"
+                    time_format: false
+                    format: "YYYY-MM-DD"
                     required: false
               - label: "Link"
                 name: "link"

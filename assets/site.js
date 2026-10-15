@@ -286,10 +286,10 @@ function eventStories(events) {
     const refl = String(e.reflection || first.text || '').trim(), by = String(e.reflectionBy || first.by || '').trim();
     const pics = [e.photo ? {photo: imgOk(e.photo), focus: e.focus, caption: ''} : null, ...normPhotos(e.photos), ...old.flatMap(r => normPhotos(r.photos))].filter(p => p && p.photo);
     const text = String(e.desc || '').trim(), lead = text || refl;
-    if (!lead && !pics.length) return;
+    if (!lead && !pics.length && !articlesOf(e).length) return;
     const sentence = ((lead.match(/^[^.!?]*[.!?]/) || [lead])[0] || '').trim();
     out.push({id: `ev-story-${e.id}`, status: 'published', approved: true, fromEvent: e, title: e.title, category: catOf(e) === 'fundraiser' ? 'Fundraiser' : 'Community', date: e.date,
-      story: text || ' ', reflection: refl, by, summary: sentence.length > 140 ? sentence.slice(0, 137).replace(/\s+\S*$/, '') + '…' : sentence,
+      articles: Array.isArray(e.articles) ? e.articles : [], story: text || ' ', reflection: refl, by, summary: sentence.length > 140 ? sentence.slice(0, 137).replace(/\s+\S*$/, '') + '…' : sentence,
       photo: pics[0] ? pics[0].photo : '', focus: pics[0] ? pics[0].focus : '', photos: pics.slice(1)});
   });
   return out;
@@ -322,10 +322,18 @@ function eventsHTML() {
     const teaser = x.slice(0, 180).replace(/\s+\S*$/, '');
     return `<details class="recap"><summary><span class="teaser">${esc(teaser)}… </span><b>Read more</b></summary><p>${esc(x)}</p></details>`;
   };
+  // news links on an event: compact links (outlet and headline), filled in by the previews job
+  const eventNews = e => {
+    const arts = articlesOf(e); if (!arts.length) return '';
+    return `<div class="ev-news"><span class="ev-news-label">In the news</span>${arts.map(a => {
+      const info = (S.previews && S.previews[a.url]) || {}, ok = info.ok === true, host = hostOf(a.url);
+      const title = String(a.title || '').trim() || (ok && info.title) || host, outlet = String(a.outlet || '').trim() || (ok && info.outlet) || host;
+      return `<a class="ev-news-link" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer"><b>${esc(outlet)}</b><span>${esc(title)}</span><i aria-hidden="true">↗</i></a>`; }).join('')}</div>`;
+  };
   const pastCard = (e, i) => { const c = catOf(e), q = parts(e), link = safeUrl(e.link), img = imgOk(e.photo);
     const ss = storiesFor(e);
     return `<article class="pastc cat-${c}${img ? ' has-img' : ''}" id="${evId(e)}">${img ? evPhoto(e, i) : ''}<div class="pastc-top"><span class="pdate">${q.mo} ${q.day}</span>${chip(c)}</div>
-      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}
+      <h3>${draftChip(e, 'events')}${sampleChip(e)}${esc(e.title)}</h3>${e.place ? `<p class="ev-row">${ICON.pin}<span>${esc(e.place)}</span></p>` : ''}${recap(e.desc)}${eventNews(e)}
       ${ss.length ? `<div class="ev-stories"><span>Read the ${ss.length > 1 ? 'stories' : 'story'}:</span>${ss.map(x => `<button type="button" class="story-link" data-act="story" data-id="${x.id}">${esc(x.title)}</button>`).join('')}</div>` : ''}
       ${link ? `<div class="ev-actions"><a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">See more</a></div>` : ''}</article>`; };
   const PAST_FIRST = 6, shownPast = ui.pastAll ? past : past.slice(0, PAST_FIRST);

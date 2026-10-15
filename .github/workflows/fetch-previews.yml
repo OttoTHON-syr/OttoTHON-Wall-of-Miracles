@@ -1,4 +1,4 @@
-# When news links are added to a story, this looks up each article's headline, outlet, date and a short
+# When news links are added to a story or an event, this looks up each article's headline, outlet, date and a short
 # summary and saves them to content/article-previews.json, then redeploys. It also retries links that
 # could not be read once a week. Run it by hand any time: Actions > "Fetch news link previews" > Run workflow.
 name: Fetch news link previews
@@ -6,7 +6,7 @@ name: Fetch news link previews
 on:
   push:
     branches: ["main"]
-    paths: ["content/stories.json"]
+    paths: ["content/stories.json", "content/events.json", "content/past-events.json"]
   schedule:
     - cron: '23 9 * * 1'   # Mondays, to retry any links that failed
   workflow_dispatch:

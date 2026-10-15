@@ -1,4 +1,4 @@
-// Looks up the headline, outlet, date and a short summary for every news link on a published story,
+// Looks up the headline, outlet, date and a short summary for every news link on a published story or event,
 // and saves them to content/article-previews.json so the site can show a link card. No dependencies.
 //
 //   node scripts/fetch-previews.mjs            fetch anything new (and retry failures older than a week)
@@ -15,7 +15,8 @@ import { isIP } from 'node:net';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const arg = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : null; };
-const STORIES = arg('--stories') || join(root, 'content', 'stories.json');
+// news links can be on success stories, past events and events (add --files a.json,b.json to point it elsewhere, for tests)
+const FILES = (arg('--files') || ['stories', 'past-events', 'events'].map(n => join(root, 'content', n + '.json')).join(',')).split(',');
 const OUT = arg('--out') || join(root, 'content', 'article-previews.json');
 const FORCE = args.includes('--force');
 const NOW = arg('--now') ? new Date(arg('--now')) : new Date();
@@ -86,9 +87,9 @@ async function fetchHead(u) {
 }
 
 async function main() {
-  const stories = existsSync(STORIES) ? JSON.parse(readFileSync(STORIES, 'utf8')) : {items: []};
-  const wanted = [...new Set((stories.items || []).filter(s => s && s.published === true)
-    .flatMap(s => (Array.isArray(s.articles) ? s.articles : [])).map(a => String((a && a.url) || '').trim()).filter(u => /^https?:\/\/\S+$/i.test(u)))];
+  const lists = FILES.filter(f => existsSync(f)).map(f => JSON.parse(readFileSync(f, 'utf8')));
+  const wanted = [...new Set(lists.flatMap(l => (l.items || []).filter(x => x && x.published === true)
+    .flatMap(x => (Array.isArray(x.articles) ? x.articles : [])).map(a => String((a && a.url) || '').trim()).filter(u => /^https?:\/\/\S+$/i.test(u))))];
   const old = existsSync(OUT) ? (JSON.parse(readFileSync(OUT, 'utf8')).items || {}) : {};
   const items = {};
   let fetched = 0, failed = 0;

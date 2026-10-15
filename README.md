@@ -56,9 +56,9 @@ The page shells never change. To change what the site says, you change a file in
 - Events you add by hand in the editor win over synced ones with the same title and date. To hide a synced event, add the same title and date by hand and turn **Show on the site** off.
 - Try it locally: `node scripts/sync-events.mjs` (or `--file saved-feed.xml` to test with a saved copy).
 
-## News coverage on stories
+## News coverage on stories and events
 
-Each story can list news articles and one YouTube or Vimeo video. Most news sites refuse to be framed, so articles show as link cards instead. `.github/workflows/fetch-previews.yml` runs `scripts/fetch-previews.mjs` whenever `content/stories.json` changes (and weekly, to retry failures). It reads only each page's own preview tags (headline, site name, date, summary), never article text or pictures, refuses private network addresses, and saves the result to `content/article-previews.json`. Anything a site blocks falls back to a plain card, and an editor can type the headline by hand. The page's security policy allows frames only from `youtube-nocookie.com` and `player.vimeo.com`, and a video loads only after the visitor presses Watch.
+Each story can list news articles and one YouTube or Vimeo video, and each event can list news articles (they carry over to the success story made from the event). Most news sites refuse to be framed, so articles show as link cards instead. `.github/workflows/fetch-previews.yml` runs `scripts/fetch-previews.mjs` whenever `content/stories.json`, `content/events.json` or `content/past-events.json` changes (and weekly, to retry failures). It reads only each page's own preview tags (headline, site name, date, summary), never article text or pictures, refuses private network addresses, and saves the result to `content/article-previews.json`. Anything a site blocks falls back to a plain card, and an editor can type the headline by hand. The page's security policy allows frames only from `youtube-nocookie.com` and `player.vimeo.com`, and a video loads only after the visitor presses Watch.
 
 ## Run it on your computer
 

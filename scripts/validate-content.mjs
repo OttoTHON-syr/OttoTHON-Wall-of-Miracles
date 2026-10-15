@@ -95,6 +95,11 @@ if (evs && Array.isArray(evs.items)) evs.items.forEach((x, i) => {
   }
   if (x) {
     const w = `${fname}[${i + 1}] "${x.title}"`;
+    if (x.articles !== undefined && !Array.isArray(x.articles)) err(`${w}: "articles" must be a list.`);
+    (Array.isArray(x.articles) ? x.articles : []).forEach((a, j) => {
+      if (!a || !/^https:\/\/\S+$/i.test(a.url || '')) err(`${w} article ${j + 1}: the article link must start with https://.`);
+      else if (a.date && !dateOk(a.date)) err(`${w} article ${j + 1}: "${a.date}" is not a date like 2026-10-14.`);
+    });
     if (x.asStory !== undefined && typeof x.asStory !== 'boolean') err(`${w}: "asStory" must be true or false.`);
     for (const f of ['reflection', 'reflectionBy']) if (x[f] !== undefined && typeof x[f] !== 'string') err(`${w}: "${f}" must be text.`);
     if (x.photos !== undefined && !Array.isArray(x.photos)) err(`${w}: "photos" must be a list.`);
