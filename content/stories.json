@@ -59,6 +59,16 @@
       "photo": "",
       "approved": false,
       "published": false
+    },
+    {
+      "title": "Paddles for a Purpose",
+      "category": "Fundraiser",
+      "date": "2026-09-13",
+      "summary": "Students and supporters joined together for Paddles for a Purpose!",
+      "story": "Paddles for a Purpose was OttoTHON's first-ever pickleball tournament. Held in a round-robin style competition accompanied by a fun-filled raffle generously donated by our sponsors, we were proud to raise $2,089 in support of Upstate Golisano Children's Hospital!",
+      "photo": "assets/uploads/Paddles-for-a-purpose.jpg",
+      "approved": true,
+      "published": true
     }
   ]
 }

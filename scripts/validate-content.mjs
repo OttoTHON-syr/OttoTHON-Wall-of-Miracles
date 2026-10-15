@@ -12,7 +12,7 @@ const err = m => errors.push(m), warn = m => warnings.push(m);
 const PALETTES = ['classic', 'powder', 'hydrangea', 'seaglass', 'lavender'];
 const FONTS = ['lookbook', 'soft', 'clean'];
 const SECTIONS = ['stories', 'wed', 'impact'];
-const CATEGORIES = ['Hospital moments', 'Family', 'Community'];
+const CATEGORIES = ['Hospital moments', 'Family', 'Community', 'Fundraiser'];
 
 function read(name) {
   const path = join(root, 'content', `${name}.json`);

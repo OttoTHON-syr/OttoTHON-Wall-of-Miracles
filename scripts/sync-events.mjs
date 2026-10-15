@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const FEED_URL = 'https://cuseactivities.syr.edu/events.rss';
+const FEED_URL = 'https://cuseactivities.syr.edu/organization/ottothon-at-syracuse-university/events.rss';
 const MATCH = /ottothon/i;               // matches the host name or the organizer email
 const TIME_ZONE = 'America/New_York';
 const KEEP_PAST = 60;                    // how many finished events to remember for "Where we've been"
