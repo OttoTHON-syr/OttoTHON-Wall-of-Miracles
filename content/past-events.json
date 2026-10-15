@@ -41,7 +41,15 @@
       "desc": "OttoTHON is a Dance Marathon fundraiser that lasts from 11 AM - 10 PM! All of the funds raised will benefit the children and families at Upstate Golisano Children's Hospital. The day will consist of food, dancing, fundraising, games, a parade to the hospital, guest speakers, interactions with kids from the hospital, and more!\n\nAll participation at this event will count for any service hour requirements needed on campus/in Greek Life.",
       "photo": "assets/uploads/26-total.jpg",
       "title": "OttoTHON 2026",
-      "link": "https://thenewshouse.com/campus-news/ottothon-celebrates-12th-year/",
+      "link": "",
+      "articles": [
+        {
+          "url": "https://dailyorange.com/2026/03/ottothon-beach-theme-hospital-philanthropy/"
+        },
+        {
+          "url": "https://thenewshouse.com/campus-news/ottothon-celebrates-12th-year/"
+        }
+      ],
       "category": "fundraiser"
     }
   ]
