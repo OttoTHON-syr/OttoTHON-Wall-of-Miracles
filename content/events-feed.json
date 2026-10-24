@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-15T14:10:24.054Z",
+  "syncedAt": "2026-10-24T13:20:23.601Z",
   "source": "https://cuseactivities.syr.edu/organization/ottothon-at-syracuse-university/events.rss",
   "items": [
     {
@@ -129,6 +129,20 @@
       "host": "OttoTHON at Syracuse University"
     },
     {
+      "id": "https://cuseactivities.syr.edu/event/12920241",
+      "title": "Team Captains Meeting",
+      "date": "2026-11-12",
+      "start": "2026-11-13T00:00:00.000Z",
+      "end": "2026-11-13T01:00:00.000Z",
+      "category": "meeting",
+      "feedCategory": "Fundraising",
+      "timeLabel": "7:00 PM – 8:00 PM",
+      "place": "HALL OF LANGUAGES 205",
+      "desc": "Biweekly Team Captains meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12920241",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
       "id": "https://cuseactivities.syr.edu/event/12761101",
       "title": "OttoTHON Full-Team Meeting",
       "date": "2026-11-15",
@@ -224,6 +238,20 @@
       "place": "HALL OF LANGUAGES 214",
       "desc": "OttoTHON's General Body is a group of students dedicated to serving the children and families at Upstate Golisano Children's Hospital year-round through event planning, fundraising, and outreach efforts. The biweekly General Body Meetings will be used for team bonding, planning, and communication of important information. We invite students to join the General Body year-round! If you have any…",
       "link": "https://cuseactivities.syr.edu/event/12716918",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
+      "id": "https://cuseactivities.syr.edu/event/12920242",
+      "title": "Team Captains Meeting",
+      "date": "2026-12-03",
+      "start": "2026-12-04T00:00:00.000Z",
+      "end": "2026-12-04T01:00:00.000Z",
+      "category": "meeting",
+      "feedCategory": "Fundraising",
+      "timeLabel": "7:00 PM – 8:00 PM",
+      "place": "HALL OF LANGUAGES 205",
+      "desc": "Biweekly Team Captains meetings.",
+      "link": "https://cuseactivities.syr.edu/event/12920242",
       "host": "OttoTHON at Syracuse University"
     },
     {
