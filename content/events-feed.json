@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-10-24T13:20:23.601Z",
+  "syncedAt": "2026-10-29T16:07:36.353Z",
   "source": "https://cuseactivities.syr.edu/organization/ottothon-at-syracuse-university/events.rss",
   "items": [
     {
@@ -140,6 +140,20 @@
       "place": "HALL OF LANGUAGES 205",
       "desc": "Biweekly Team Captains meetings.",
       "link": "https://cuseactivities.syr.edu/event/12920241",
+      "host": "OttoTHON at Syracuse University"
+    },
+    {
+      "id": "https://cuseactivities.syr.edu/event/12937104",
+      "title": "The Miracle Runway: An Evening of Dreams",
+      "date": "2026-11-13",
+      "start": "2026-11-13T23:30:00.000Z",
+      "end": "2026-11-14T01:30:00.000Z",
+      "category": "fundraiser",
+      "feedCategory": "Fundraising, Benefit, Fundraising and Philanthropy",
+      "timeLabel": "6:30 PM – 8:30 PM",
+      "place": "SCHINE STUDENT CENTER 304ABC",
+      "desc": "An elegant evening celebrating OttoTHON’s Miracle Kids at Upstate Golisano Children’s Hospital, their individuality, their dreams, and the community that supports them.",
+      "link": "https://cuseactivities.syr.edu/event/12937104",
       "host": "OttoTHON at Syracuse University"
     },
     {
